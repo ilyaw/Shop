@@ -99,13 +99,10 @@
 		09D7FD3B2758FF83000A98C9 /* Shop */ = {
 			isa = PBXGroup;
 			children = (
-				09D7FD3C2758FF83000A98C9 /* AppDelegate.swift */,
-				09D7FD3E2758FF83000A98C9 /* SceneDelegate.swift */,
-				09D7FD402758FF83000A98C9 /* ViewController.swift */,
-				09D7FD422758FF83000A98C9 /* Main.storyboard */,
-				09D7FD452758FF85000A98C9 /* Assets.xcassets */,
-				09D7FD472758FF85000A98C9 /* LaunchScreen.storyboard */,
-				09D7FD4A2758FF85000A98C9 /* Info.plist */,
+				09D7FD6F27590AEE000A98C9 /* Core */,
+				09D7FD6E27590ADC000A98C9 /* Resources */,
+				09D7FD6D27590AB8000A98C9 /* Environments */,
+				09D7FD6C27590AB1000A98C9 /* App */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -125,6 +122,73 @@
 				09D7FD5F2758FF85000A98C9 /* ShopUITestsLaunchTests.swift */,
 			);
 			path = ShopUITests;
+			sourceTree = "<group>";
+		};
+		09D7FD6C27590AB1000A98C9 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				09D7FD3C2758FF83000A98C9 /* AppDelegate.swift */,
+				09D7FD3E2758FF83000A98C9 /* SceneDelegate.swift */,
+				09D7FD7327590B14000A98C9 /* Flows */,
+				09D7FD7227590B0B000A98C9 /* Assembly */,
+				09D7FD7127590B04000A98C9 /* Entity */,
+				09D7FD7027590AFC000A98C9 /* BusinessLogic */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		09D7FD6D27590AB8000A98C9 /* Environments */ = {
+			isa = PBXGroup;
+			children = (
+				09D7FD4A2758FF85000A98C9 /* Info.plist */,
+			);
+			path = Environments;
+			sourceTree = "<group>";
+		};
+		09D7FD6E27590ADC000A98C9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				09D7FD452758FF85000A98C9 /* Assets.xcassets */,
+				09D7FD472758FF85000A98C9 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		09D7FD6F27590AEE000A98C9 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		09D7FD7027590AFC000A98C9 /* BusinessLogic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BusinessLogic;
+			sourceTree = "<group>";
+		};
+		09D7FD7127590B04000A98C9 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		09D7FD7227590B0B000A98C9 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		09D7FD7327590B14000A98C9 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				09D7FD402758FF83000A98C9 /* ViewController.swift */,
+				09D7FD422758FF83000A98C9 /* Main.storyboard */,
+			);
+			path = Flows;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
