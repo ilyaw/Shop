@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09B7FF80275D077F000E1B5F /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B7FF7F275D077F000E1B5F /* MainPresenter.swift */; };
+		09B7FF80275D077F000E1B5F /* AuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B7FF7F275D077F000E1B5F /* AuthPresenter.swift */; };
 		09B7FF83275D12D4000E1B5F /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B7FF82275D12D4000E1B5F /* MainBuilder.swift */; };
 		09B7FF86275D141C000E1B5F /* AppStartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B7FF85275D141C000E1B5F /* AppStartManager.swift */; };
 		09B7FF8A275D40EC000E1B5F /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B7FF89275D40EC000E1B5F /* UIViewController + Extension.swift */; };
 		09D7FD3D2758FF83000A98C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D7FD3C2758FF83000A98C9 /* AppDelegate.swift */; };
 		09D7FD3F2758FF83000A98C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D7FD3E2758FF83000A98C9 /* SceneDelegate.swift */; };
-		09D7FD412758FF83000A98C9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D7FD402758FF83000A98C9 /* MainViewController.swift */; };
+		09D7FD412758FF83000A98C9 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D7FD402758FF83000A98C9 /* AuthViewController.swift */; };
 		09D7FD462758FF85000A98C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09D7FD452758FF85000A98C9 /* Assets.xcassets */; };
 		09D7FD492758FF85000A98C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D7FD472758FF85000A98C9 /* LaunchScreen.storyboard */; };
 		09D7FD542758FF85000A98C9 /* ShopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D7FD532758FF85000A98C9 /* ShopTests.swift */; };
@@ -50,14 +50,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		09B7FF7F275D077F000E1B5F /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		09B7FF7F275D077F000E1B5F /* AuthPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPresenter.swift; sourceTree = "<group>"; };
 		09B7FF82275D12D4000E1B5F /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 		09B7FF85275D141C000E1B5F /* AppStartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartManager.swift; sourceTree = "<group>"; };
 		09B7FF89275D40EC000E1B5F /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		09D7FD392758FF83000A98C9 /* Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09D7FD3C2758FF83000A98C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09D7FD3E2758FF83000A98C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		09D7FD402758FF83000A98C9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		09D7FD402758FF83000A98C9 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		09D7FD452758FF85000A98C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09D7FD482758FF85000A98C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09D7FD4A2758FF85000A98C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -252,7 +252,7 @@
 		09D7FD7327590B14000A98C9 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				09D7FDBA275D0614000A98C9 /* Main */,
+				09D7FDBA275D0614000A98C9 /* Auth */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -282,24 +282,24 @@
 		09D7FDB9275D05B7000A98C9 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				09B7FF7F275D077F000E1B5F /* MainPresenter.swift */,
+				09B7FF7F275D077F000E1B5F /* AuthPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		09D7FDBA275D0614000A98C9 /* Main */ = {
+		09D7FDBA275D0614000A98C9 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				09D7FDB9275D05B7000A98C9 /* Presenter */,
 				09D7FDBB275D0632000A98C9 /* Controller */,
 			);
-			path = Main;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		09D7FDBB275D0632000A98C9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				09D7FD402758FF83000A98C9 /* MainViewController.swift */,
+				09D7FD402758FF83000A98C9 /* AuthViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -447,9 +447,9 @@
 				09D7FDAA275CDD01000A98C9 /* RequestRouter.swift in Sources */,
 				09D7FDA8275CDCEF000A98C9 /* AbstractRequestFactory.swift in Sources */,
 				09D7FDA4275CDCC7000A98C9 /* ErrorParser.swift in Sources */,
-				09B7FF80275D077F000E1B5F /* MainPresenter.swift in Sources */,
+				09B7FF80275D077F000E1B5F /* AuthPresenter.swift in Sources */,
 				09D7FDA6275CDCD4000A98C9 /* ResponseCodable.swift in Sources */,
-				09D7FD412758FF83000A98C9 /* MainViewController.swift in Sources */,
+				09D7FD412758FF83000A98C9 /* AuthViewController.swift in Sources */,
 				09D7FDAF275CDDBF000A98C9 /* Auth.swift in Sources */,
 				09B7FF86275D141C000E1B5F /* AppStartManager.swift in Sources */,
 				09D7FDAD275CDDB2000A98C9 /* AuthRequestFactory.swift in Sources */,

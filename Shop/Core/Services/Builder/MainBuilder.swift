@@ -9,9 +9,9 @@ import UIKit
 
 class MainBuilder {
     static func build() -> (UIViewController & MainViewInput) {
-        let presenter = MainPresenter()
+        let presenter = AuthPresenter()
         let requestFactory = RequestFactory()
-        let viewController = MainViewController(presenter: presenter,
+        let viewController = AuthViewController(presenter: presenter,
                                                 requestFactory: requestFactory)
         presenter.viewInput = viewController
         

@@ -1,5 +1,5 @@
 //
-//  MainPresenter.swift
+//  AuthPresenter.swift
 //  Shop
 //
 //  Created by Ilya on 05.12.2021.
@@ -18,7 +18,7 @@ protocol MainViewOutput {
     func auth(userName: String, password: String)
 }
 
-class MainPresenter {
+class AuthPresenter {
     weak var viewInput: (UIViewController & MainViewInput)?
     
     private func requestAuth(userName: String,
@@ -50,7 +50,7 @@ class MainPresenter {
     }
 }
 
-extension MainPresenter: MainViewOutput {
+extension AuthPresenter: MainViewOutput {
     func auth(userName: String, password: String) {
         showActivityIndicator(isShow: true)
         

@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  AuthViewController.swift
 //  Shop
 //
 //  Created by Ilya on 02.12.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class AuthViewController: UIViewController {
     
     var presenter: MainViewOutput
     var requestFactory: RequestFactory
@@ -45,7 +45,7 @@ class MainViewController: UIViewController {
 
 // MARK: MainViewInput
 
-extension MainViewController: MainViewInput {
+extension AuthViewController: MainViewInput {
     
     func showError(error: Error) {
         showAlert(with: error.localizedDescription)
@@ -67,10 +67,10 @@ struct MainProvider: PreviewProvider {
     
     struct ContainerView: UIViewControllerRepresentable {
         
-        let viewController = MainViewController(presenter: MainPresenter(),
+        let viewController = AuthViewController(presenter: AuthPresenter(),
                                                 requestFactory: RequestFactory())
         
-        func makeUIViewController(context: UIViewControllerRepresentableContext<MainProvider.ContainerView>) -> MainViewController {
+        func makeUIViewController(context: UIViewControllerRepresentableContext<MainProvider.ContainerView>) -> AuthViewController {
             return viewController
         }
         
