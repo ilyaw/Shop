@@ -8,11 +8,10 @@
 import Foundation
 import Alamofire
 
-class Auth: AbstractRequestFactory {
+class Auth: StoreBaseURL, AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
-    let baseUrl = URL(string: "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/")!
     
     init(errorParser: AbstractErrorParser,
          sessionManager: Session,
@@ -24,8 +23,16 @@ class Auth: AbstractRequestFactory {
 }
 
 extension Auth: AuthRequestFactory {
-    func login(userName: String, password: String, completionHandler: @escaping (AFDataResponse<LoginResult>) -> Void) {
-        let requestModel = Login(baseUrl: baseUrl, login: userName, password: password)
+    func login(userName: String,
+               password: String,
+               completionHandler: @escaping (AFDataResponse<LoginResult>) -> Void) {
+        let requestModel = Login(baseUrl: url, login: userName, password: password)
+        self.request(request: requestModel, completionHandler: completionHandler)
+    }
+    
+    func logout(userId: Int,
+                completionHandler: @escaping (AFDataResponse<LogoutResult>) -> Void) {
+        let requestModel = Logout(baseUrl: url, userId: userId)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
@@ -42,6 +49,19 @@ extension Auth {
             return [
                 "username": login,
                 "password": password
+            ]
+        }
+    }
+    
+    struct Logout: RequestRouter {
+        var baseUrl: URL
+        var method: HTTPMethod = .get
+        var path: String = "logout.json"
+        
+        let userId: Int
+        var parameters: Parameters? {
+            return [
+                "id_user": userId
             ]
         }
     }

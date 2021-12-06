@@ -18,10 +18,10 @@ class AuthViewController: UIViewController {
         return view
     }()
     
-    init(presenter: MainViewOutput,
-         requestFactory: RequestFactory) {
+    init(presenter: MainViewOutput, requestFactory: RequestFactory) {
         self.presenter = presenter
         self.requestFactory = requestFactory
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -31,6 +31,7 @@ class AuthViewController: UIViewController {
         setupUI()
         
         presenter.auth(userName: "Somebody", password: "mypassword")
+        presenter.logout(userId: 123)
     }
     
     func setupUI() {
@@ -51,8 +52,12 @@ extension AuthViewController: MainViewInput {
         showAlert(with: error.localizedDescription)
     }
     
-    func showResult(result: LoginResult) {
+    func showLoginResult(result: LoginResult) {
         showAlert(with: "Hello, \(result.user.name)!" )
+    }
+    
+    func showLogoutResult(result: LogoutResult) {
+        showAlert(with: "Logout result is \(result.result)" )
     }
 }
 
@@ -75,7 +80,6 @@ struct MainProvider: PreviewProvider {
         }
         
         func updateUIViewController(_ uiViewController: MainProvider.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<MainProvider.ContainerView>) {
-            
         }
     }
 }
