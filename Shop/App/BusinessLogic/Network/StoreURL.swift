@@ -7,12 +7,7 @@
 
 import Foundation
 
-
-protocol StoreBaseURL {
-    var url: URL { get }
-}
-
-extension StoreBaseURL {
+class StoreBaseURL {
     var url: URL {
         URL(string: "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/")!
     }

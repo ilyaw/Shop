@@ -25,9 +25,9 @@ class RequestFactory {
         return Auth(errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
 
-    func makeLogoutRequestFactory() -> AuthRequestFactory {
+    func makeUserRequestFactory() -> UserRequestFactory {
         let errorParser = makeErrorParser()
-        return Auth(errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+        return ProfileUser(errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
     
     func makeErrorParser() -> AbstractErrorParser {

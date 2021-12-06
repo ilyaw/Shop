@@ -22,6 +22,8 @@ class Auth: StoreBaseURL, AbstractRequestFactory {
     }
 }
 
+// MARK: AuthRequestFactory
+
 extension Auth: AuthRequestFactory {
     func login(userName: String,
                password: String,
@@ -66,4 +68,3 @@ extension Auth {
         }
     }
 }
-
