@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "ED42764E-48CD-4F60-977F-90B0218953FE",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Shop.xcodeproj",
+        "identifier" : "09D7FD582758FF85000A98C9",
+        "name" : "ShopUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
