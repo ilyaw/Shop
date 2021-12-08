@@ -15,8 +15,7 @@ class AuthRequestTests: XCTestCase {
     var authRequest: AuthRequestFactory!
     
     override func setUpWithError() throws {
-        let requestFactory = RequestFactory()
-        authRequest = requestFactory.makeAuthRequestFatory()
+        authRequest = RequestFactory().makeAuthRequestFatory()
     }
     
     override func tearDownWithError() throws {
