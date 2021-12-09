@@ -25,7 +25,7 @@ class AuthRequestTests: XCTestCase {
     func testAuth() throws {
         
         let expressionLoginResultStub = LoginResult(result: 1,
-                                                    user: User(id: 123,
+                                                    user: UserResult(id: 123,
                                                                login: "geekbrains",
                                                                name: "John",
                                                                lastname: "Doe"))

@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  ProfileResult.swift
 //  Shop
 //
 //  Created by Ilya on 05.12.2021.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Profile: Codable {
+struct ProfileResult: Codable {
     let userId: Int
     let login: String
     let password: String

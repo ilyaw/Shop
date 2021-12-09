@@ -30,6 +30,11 @@ class RequestFactory {
         return ProfileUser(errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
     
+    func makeProductRequestFactory() -> ProductRequestFactory {
+        let errorParser = makeErrorParser()
+        return ProductShop(errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+    }
+    
     func makeErrorParser() -> AbstractErrorParser {
         return ErrorParser()
     }

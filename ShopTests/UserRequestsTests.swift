@@ -41,7 +41,6 @@ class UserRequestsTests: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 10.0)
-        
     }
     
     func testChange() {
@@ -62,11 +61,10 @@ class UserRequestsTests: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 10.0)
-        
     }
     
-    func generateProfile() -> Profile {
-        Profile(userId: 123,
+    func generateProfile() -> ProfileResult {
+        ProfileResult(userId: 123,
                 login: "Somebody",
                 password: "mypassword",
                 email: "some@some.ru",
