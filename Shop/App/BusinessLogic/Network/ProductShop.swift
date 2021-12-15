@@ -12,7 +12,7 @@ class ProductShop: BaseStoreRequest {
     private struct CatalogRequest: RequestRouter {
         let baseUrl: URL
         let method: HTTPMethod = .get
-        let path: String = "catalogData.json"
+        let path: String = "catalog"
         
         let numberPage: Int
         let categoryId: Int
@@ -27,7 +27,7 @@ class ProductShop: BaseStoreRequest {
     private struct ProductRequest: RequestRouter {
         let baseUrl: URL
         let method: HTTPMethod = .get
-        let path: String = "getGoodById.json"
+        let path: String = "product"
         
         let productId: Int
         var parameters: Parameters? {
@@ -41,12 +41,15 @@ class ProductShop: BaseStoreRequest {
 // MARK: ProductRequestFactory
 
 extension ProductShop: ProductRequestFactory {
-    func getCatalog(numberPage: Int, categoryId: Int, completionHandler: @escaping (AFDataResponse<[CatalogResult.Product]>) -> Void) {
+    func getCatalog(numberPage: Int,
+                    categoryId: Int,
+                    completionHandler: @escaping (AFDataResponse<CatalogResult>) -> Void) {
         let catalogData = CatalogRequest(baseUrl: url, numberPage: numberPage, categoryId: categoryId)
         self.request(request: catalogData, completionHandler: completionHandler)
     }
     
-    func getProductById(productId: Int, completionHandler: @escaping (AFDataResponse<ProductResult>) -> Void) {
+    func getProductById(productId: Int,
+                        completionHandler: @escaping (AFDataResponse<ProductResult>) -> Void) {
         let product = ProductRequest(baseUrl: url, productId: productId)
         self.request(request: product, completionHandler: completionHandler)
     }

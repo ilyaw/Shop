@@ -11,7 +11,7 @@ import Alamofire
 class BaseStoreRequest: AbstractRequestFactory {
     
     var url: URL {
-        URL(string: "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/")!
+        URL(string: "https://secret-everglades-22465.herokuapp.com/")!
     }
     
     let errorParser: AbstractErrorParser
