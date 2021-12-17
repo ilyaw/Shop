@@ -35,8 +35,8 @@ class AuthViewController: UIViewController {
         
         // TODO: Позже вынесу в отдельный класс
         
+        // MARK: User Request
         let userRequest = requestFactory.makeUserRequestFactory()
-        
         let profileModel = generateProfile()
         
         userRequest.register(for: profileModel) { response in
@@ -56,12 +56,34 @@ class AuthViewController: UIViewController {
                 print("Error change: \(error.localizedDescription)")
             }
         }
+        
+        // MARK: Product Request
+        
+        let productRequest = requestFactory.makeProductRequestFactory()
+        
+        productRequest.getCatalog(numberPage: 1, categoryId: 1) { response in
+            switch response.result {
+            case .success(let catalog):
+               let _ = catalog.map { print("\($0.productName) за \($0.price) руб.") }
+            case .failure(let error):
+                print("Error getCatalog: \(error.localizedDescription)")
+            }
+        }
+        
+        productRequest.getProductById(productId: 123) { response in
+            switch response.result {
+            case .success(let product):
+                print("Продукт: \(product.productName)\nОписание: \(product.productDescription)")
+            case .failure(let error):
+                print("Error getProductById: \(error.localizedDescription)")
+            }
+        }
     }
     
     // TODO: Позже вынесу в отдельный класс
     
-    private func generateProfile() -> Profile {
-        Profile(userId: 123,
+    private func generateProfile() -> ProfileResult {
+        ProfileResult(userId: 123,
                 login: "Somebody",
                 password: "mypassword",
                 email: "some@some.ru",

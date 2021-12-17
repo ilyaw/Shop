@@ -11,6 +11,12 @@ final class AppStartManager {
     
     private var window: UIWindow?
     
+    private lazy var configuredNavigationController: UINavigationController = {
+        let navVC = UINavigationController()
+        navVC.navigationBar.prefersLargeTitles = true
+        return navVC
+    }()
+    
     init(windowScene: UIWindowScene) {
         self.window = UIWindow(windowScene: windowScene)
     }
@@ -26,10 +32,4 @@ final class AppStartManager {
         window?.rootViewController = navVC
         window?.makeKeyAndVisible()
     }
-    
-    private lazy var configuredNavigationController: UINavigationController = {
-        let navVC = UINavigationController()
-        navVC.navigationBar.prefersLargeTitles = true
-        return navVC
-    }()
 }

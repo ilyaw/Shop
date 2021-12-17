@@ -1,0 +1,35 @@
+{
+  "configurations" : [
+    {
+      "id" : "BEC4B35C-2E84-41F2-88EA-4739B8AEC2D3",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Shop.xcodeproj",
+      "identifier" : "09D7FD382758FF83000A98C9",
+      "name" : "Shop"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Shop.xcodeproj",
+        "identifier" : "09D7FD4E2758FF85000A98C9",
+        "name" : "ShopTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Shop.xcodeproj",
+        "identifier" : "09D7FD582758FF85000A98C9",
+        "name" : "ShopUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
