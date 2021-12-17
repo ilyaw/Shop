@@ -24,7 +24,7 @@ class UserRequestsTests: XCTestCase {
     
     func testRegister() {
         
-        let expressionRegisterUserResultStub = RegisterUserResult(result: 1,
+        let expressionRegisterUserResultStub = DefaultResult(result: 1,
                                                                   userMessage: "Регистрация прошла успешно!")
         let profile = generateProfile()
         
@@ -67,12 +67,12 @@ class UserRequestsTests: XCTestCase {
     
     func generateProfile() -> ProfileResult {
         ProfileResult(userId: 123,
-                login: "Somebody",
-                password: "mypassword",
-                email: "some@some.ru",
-                gender: "m",
-                creditCard: "9872389-2424-234224-234",
-                bio: "This is good! I think I will switch to another language")
+                      login: "Somebody",
+                      password: "mypassword",
+                      email: "some@some.ru",
+                      gender: "m",
+                      creditCard: "9872389-2424-234224-234",
+                      bio: "This is good! I think I will switch to another language")
     }
     
 }

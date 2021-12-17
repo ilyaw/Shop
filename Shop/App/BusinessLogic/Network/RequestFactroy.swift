@@ -35,6 +35,12 @@ class RequestFactory {
         return ProductShop(errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
     
+    func makeFeedbackRequestFactory() -> FeedbackRequestFactory {
+        let errorParser = makeErrorParser()
+        return ProductFeedback(errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+    }
+    
+    
     func makeErrorParser() -> AbstractErrorParser {
         return ErrorParser()
     }
