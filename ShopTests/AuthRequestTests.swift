@@ -10,7 +10,7 @@ import XCTest
 
 class AuthRequestTests: XCTestCase {
     
-    let expectation = XCTestExpectation(description: "Download https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/")
+    let expectation = XCTestExpectation(description: "Download https://secret-everglades-22465.herokuapp.com/")
     
     var authRequest: AuthRequestFactory!
     
@@ -26,9 +26,9 @@ class AuthRequestTests: XCTestCase {
         
         let expressionLoginResultStub = LoginResult(result: 1,
                                                     user: UserResult(id: 123,
-                                                               login: "geekbrains",
-                                                               name: "John",
-                                                               lastname: "Doe"))
+                                                                     login: "geekbrains",
+                                                                     firstName: "John",
+                                                                     lastName: "Doe"))
         
         authRequest.login(userName: "Somebody", password: "mypassword") { (response) in
             switch response.result {

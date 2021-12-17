@@ -25,6 +25,7 @@
 		09B7FF83275D12D4000E1B5F /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B7FF82275D12D4000E1B5F /* MainBuilder.swift */; };
 		09B7FF86275D141C000E1B5F /* AppStartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B7FF85275D141C000E1B5F /* AppStartManager.swift */; };
 		09B7FF8A275D40EC000E1B5F /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B7FF89275D40EC000E1B5F /* UIViewController + Extension.swift */; };
+		09D5DBA6276A33A90072252C /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D5DBA5276A33A90072252C /* Product.swift */; };
 		09D7FD3D2758FF83000A98C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D7FD3C2758FF83000A98C9 /* AppDelegate.swift */; };
 		09D7FD3F2758FF83000A98C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D7FD3E2758FF83000A98C9 /* SceneDelegate.swift */; };
 		09D7FD412758FF83000A98C9 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D7FD402758FF83000A98C9 /* AuthViewController.swift */; };
@@ -84,6 +85,7 @@
 		09B7FF82275D12D4000E1B5F /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 		09B7FF85275D141C000E1B5F /* AppStartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartManager.swift; sourceTree = "<group>"; };
 		09B7FF89275D40EC000E1B5F /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
+		09D5DBA5276A33A90072252C /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		09D7FD392758FF83000A98C9 /* Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09D7FD3C2758FF83000A98C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09D7FD3E2758FF83000A98C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				099B34E7275E618700D8D8D3 /* UserResult.swift */,
 				0929747827613A5C00ABF4A2 /* CatalogResult.swift */,
 				0929747C27613C1300ABF4A2 /* ProductResult.swift */,
+				09D5DBA5276A33A90072252C /* Product.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				091A1DDB275E00E300E62B25 /* BaseStoreRequest.swift in Sources */,
 				0929747B27613BDD00ABF4A2 /* ProductRequestFactory.swift in Sources */,
 				09D7FD412758FF83000A98C9 /* AuthViewController.swift in Sources */,
+				09D5DBA6276A33A90072252C /* Product.swift in Sources */,
 				09D7FDAF275CDDBF000A98C9 /* Auth.swift in Sources */,
 				091A1DD9275DF8FF00E62B25 /* ProfileUser.swift in Sources */,
 				09B7FF86275D141C000E1B5F /* AppStartManager.swift in Sources */,

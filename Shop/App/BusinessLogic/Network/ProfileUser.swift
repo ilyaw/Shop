@@ -11,19 +11,19 @@ import Alamofire
 class ProfileUser: BaseStoreRequest {
     private struct UserRequest: RequestRouter {
         let baseUrl: URL
-        let method: HTTPMethod = .get
+        let method: HTTPMethod = .post
         let path: String
         
         let profile: ProfileResult
         
         var parameters: Parameters? {
             return [
-                "username": profile.login,
+                "userName": profile.login,
                 "password": profile.password,
-                "id_user": profile.userId,
+                "userId": profile.userId,
                 "email": profile.email,
                 "gender": profile.gender,
-                "credit_card": profile.creditCard,
+                "creditCard": profile.creditCard,
                 "bio": profile.bio
             ]
         }
@@ -34,12 +34,12 @@ class ProfileUser: BaseStoreRequest {
 
 extension ProfileUser: UserRequestFactory {
     func register(for user: ProfileResult, completionHandler: @escaping (AFDataResponse<RegisterUserResult>) -> Void) {
-        let registerRequest = UserRequest(baseUrl: url, path: "registerUser.json", profile: user)
+        let registerRequest = UserRequest(baseUrl: url, path: "register", profile: user)
         self.request(request: registerRequest, completionHandler: completionHandler)
     }
     
     func change(for user: ProfileResult, completionHandler: @escaping (AFDataResponse<ChangeUserDataResult>) -> Void) {
-        let changeRequest = UserRequest(baseUrl: url, path: "changeUserData.json", profile: user)
+        let changeRequest = UserRequest(baseUrl: url, path: "change", profile: user)
         self.request(request: changeRequest, completionHandler: completionHandler)
     }
 }

@@ -59,25 +59,25 @@ class AuthViewController: UIViewController {
         
         // MARK: Product Request
         
-        let productRequest = requestFactory.makeProductRequestFactory()
-        
-        productRequest.getCatalog(numberPage: 1, categoryId: 1) { response in
-            switch response.result {
-            case .success(let catalog):
-               let _ = catalog.map { print("\($0.productName) за \($0.price) руб.") }
-            case .failure(let error):
-                print("Error getCatalog: \(error.localizedDescription)")
-            }
-        }
-        
-        productRequest.getProductById(productId: 123) { response in
-            switch response.result {
-            case .success(let product):
-                print("Продукт: \(product.productName)\nОписание: \(product.productDescription)")
-            case .failure(let error):
-                print("Error getProductById: \(error.localizedDescription)")
-            }
-        }
+//        let productRequest = requestFactory.makeProductRequestFactory()
+//        
+//        productRequest.getCatalog(numberPage: 1, categoryId: 1) { response in
+//            switch response.result {
+//            case .success(let catalog):
+//               let _ = catalog.map { print("\($0.productName) за \($0.price) руб.") }
+//            case .failure(let error):
+//                print("Error getCatalog: \(error.localizedDescription)")
+//            }
+//        }
+//        
+//        productRequest.getProductById(productId: 123) { response in
+//            switch response.result {
+//            case .success(let product):
+//                print("Продукт: \(product.productName)\nОписание: \(product.productDescription)")
+//            case .failure(let error):
+//                print("Error getProductById: \(error.localizedDescription)")
+//            }
+//        }
     }
     
     // TODO: Позже вынесу в отдельный класс
@@ -111,7 +111,7 @@ extension AuthViewController: MainViewInput {
     }
     
     func showLoginResult(result: LoginResult) {
-        showAlert(with: "Hello, \(result.user.name)!" )
+        showAlert(with: "Hello, \(result.user.firstName)!" )
     }
     
     func showLogoutResult(result: LogoutResult) {

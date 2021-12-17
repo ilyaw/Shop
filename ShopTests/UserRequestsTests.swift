@@ -10,7 +10,7 @@ import XCTest
 
 class UserRequestsTests: XCTestCase {
     
-    let expectation = XCTestExpectation(description: "Download https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/")
+    let expectation = XCTestExpectation(description: "Download https://secret-everglades-22465.herokuapp.com/")
     
     var userRequest: UserRequestFactory!
     
@@ -47,12 +47,14 @@ class UserRequestsTests: XCTestCase {
         
         let profile = generateProfile()
         
-        let expressionChangeUserDataResultStub = ChangeUserDataResult(result: 1)
+        let expressionChangeUserDataResultStub = ChangeUserDataResult(result: 1,
+                                                                      userMessage: "Данные успешно изменены")
         
         userRequest.change(for: profile) { response in
             switch response.result {
             case .success(let change):
                 XCTAssertEqual(change.result, expressionChangeUserDataResultStub.result)
+                XCTAssertEqual(change.userMessage, expressionChangeUserDataResultStub.userMessage)
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }

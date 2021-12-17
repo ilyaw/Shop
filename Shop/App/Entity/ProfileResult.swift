@@ -17,12 +17,12 @@ struct ProfileResult: Codable {
     let bio: String
     
     enum CodingKeys: String, CodingKey {
-        case userId = "id_user"
-        case login = "username"
+        case userId = "userId"
+        case login = "userName"
         case password = "password"
         case email = "email"
         case gender = "gender"
-        case creditCard = "credit_card"
+        case creditCard = "creditCard"
         case bio = "bio"
     }
 }

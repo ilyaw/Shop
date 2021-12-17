@@ -11,8 +11,8 @@ import Alamofire
 class Auth: BaseStoreRequest {
     private struct Login: RequestRouter {
         let baseUrl: URL
-        let method: HTTPMethod = .get
-        let path: String = "login.json"
+        let method: HTTPMethod = .post
+        let path: String = "login"
         
         let login: String
         let password: String
@@ -26,8 +26,8 @@ class Auth: BaseStoreRequest {
     
     private struct Logout: RequestRouter {
         var baseUrl: URL
-        var method: HTTPMethod = .get
-        var path: String = "logout.json"
+        var method: HTTPMethod = .post
+        var path: String = "logout"
         
         let userId: Int
         var parameters: Parameters? {
