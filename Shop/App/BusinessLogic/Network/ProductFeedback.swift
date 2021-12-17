@@ -67,7 +67,7 @@ extension ProductFeedback: FeedbackRequestFactory {
     func addFeedback(text: String,
                      userId: Int,
                      productId: Int,
-                     completionHandler: @escaping (AFDataResponse<FeedbackResult>) -> Void) {
+                     completionHandler: @escaping (AFDataResponse<DefaultResult>) -> Void) {
         let addFeedbackRequest = AddFeedbackRequest(baseUrl: url,
                                                     text: text,
                                                     userId: userId,
@@ -77,7 +77,7 @@ extension ProductFeedback: FeedbackRequestFactory {
     
     func removeFeedback(feedbackId: Int,
                         userId: Int,
-                        completionHandler: @escaping (AFDataResponse<FeedbackResult>) -> Void) {
+                        completionHandler: @escaping (AFDataResponse<DefaultResult>) -> Void) {
         let removeFeedbackRequest = RemoveFeedbackRequest(baseUrl: url,
                                                           feedbackId: feedbackId,
                                                           userId: userId)

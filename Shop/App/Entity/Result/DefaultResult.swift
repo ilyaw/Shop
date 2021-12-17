@@ -9,6 +9,6 @@ import Foundation
 
 struct DefaultResult: Codable {
     let result: Int
-    let userMessage: String
+    var userMessage: String? = nil
     var errorMessage: String? = nil
 }

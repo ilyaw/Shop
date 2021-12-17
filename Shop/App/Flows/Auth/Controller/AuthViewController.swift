@@ -30,32 +30,32 @@ class AuthViewController: UIViewController {
         
         setupUI()
         
-        presenter.auth(userName: "Somebody", password: "mypassword")
-        presenter.logout(userId: 123)
-        
-        // TODO: Позже вынесу в отдельный класс
-        
-        // MARK: User Request
-        let userRequest = requestFactory.makeUserRequestFactory()
-        let profileModel = generateProfile()
-        
-        userRequest.register(for: profileModel) { response in
-            switch response.result {
-            case .success(let register):
-                print("Регистрация: \(register.userMessage)")
-            case .failure(let error):
-                print("Error register: \(error.localizedDescription)")
-            }
-        }
-        
-        userRequest.change(for: profileModel) { response in
-            switch response.result {
-            case .success(let change):
-                print("Change: \(change.result)")
-            case .failure(let error):
-                print("Error change: \(error.localizedDescription)")
-            }
-        }
+//        presenter.auth(userName: "Somebody", password: "mypassword")
+//        presenter.logout(userId: 123)
+//
+//        // TODO: Позже вынесу в отдельный класс
+//
+//        // MARK: User Request
+//        let userRequest = requestFactory.makeUserRequestFactory()
+//        let profileModel = generateProfile()
+//
+//        userRequest.register(for: profileModel) { response in
+//            switch response.result {
+//            case .success(let register):
+//                print("Регистрация: \(register.userMessage)")
+//            case .failure(let error):
+//                print("Error register: \(error.localizedDescription)")
+//            }
+//        }
+//
+//        userRequest.change(for: profileModel) { response in
+//            switch response.result {
+//            case .success(let change):
+//                print("Change: \(change.result)")
+//            case .failure(let error):
+//                print("Error change: \(error.localizedDescription)")
+//            }
+//        }
         
         // MARK: Product Request
         

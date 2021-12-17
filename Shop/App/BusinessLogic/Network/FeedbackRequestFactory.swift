@@ -18,12 +18,12 @@ protocol FeedbackRequestFactory {
         text: String,
         userId: Int,
         productId: Int,
-        completionHandler: @escaping (AFDataResponse<FeedbackResult>) -> Void
+        completionHandler: @escaping (AFDataResponse<DefaultResult>) -> Void
     )
     
     func removeFeedback(
         feedbackId: Int,
         userId: Int,
-        completionHandler: @escaping (AFDataResponse<FeedbackResult>) -> Void
+        completionHandler: @escaping (AFDataResponse<DefaultResult>) -> Void
     )
 }
