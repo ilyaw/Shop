@@ -40,7 +40,6 @@ class RequestFactory {
         return ProductFeedback(errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
     
-    
     func makeErrorParser() -> AbstractErrorParser {
         return ErrorParser()
     }

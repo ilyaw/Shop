@@ -1,0 +1,18 @@
+warning_threshold: 15
+
+line_length:
+    warning: 120
+    error: 150
+
+opt_in_rules:
+    - empty_count
+    - force_unwrapping
+    - private_outlet
+
+excluded:
+    - Pods
+    - ShopTests
+
+disabled_rules:
+    - trailing_whitespace
+    - cyclomatic_complexity

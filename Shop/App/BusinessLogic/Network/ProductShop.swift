@@ -32,7 +32,7 @@ class ProductShop: BaseStoreRequest {
         let productId: Int
         var parameters: Parameters? {
             return [
-                "id_product": productId,
+                "id_product": productId
             ]
         }
     }

@@ -55,7 +55,6 @@ class AuthViewController: UIViewController {
             }
         }
         
-        
         let productRequest = requestFactory.makeProductRequestFactory()
         
         productRequest.getCatalog(numberPage: 1, categoryId: 1) { response in
@@ -70,7 +69,8 @@ class AuthViewController: UIViewController {
         productRequest.getProductById(productId: 123) { response in
             switch response.result {
             case .success(let result):
-                print("Продукт: \(result.product.productName)\nОписание: \(result.product.productDescription ?? "Без описания")")
+                let description = result.product.productDescription ?? "Без описания"
+                print("Продукт: \(result.product.productName)\nОписание: \(description)")
             case .failure(let error):
                 print("Error getProductById: \(error.localizedDescription)")
             }
@@ -159,11 +159,14 @@ struct MainProvider: PreviewProvider {
         let viewController = AuthViewController(presenter: AuthPresenter(),
                                                 requestFactory: RequestFactory())
         
-        func makeUIViewController(context: UIViewControllerRepresentableContext<MainProvider.ContainerView>) -> AuthViewController {
+        func makeUIViewController(
+            context: UIViewControllerRepresentableContext<MainProvider.ContainerView>
+        ) -> AuthViewController {
             return viewController
         }
         
-        func updateUIViewController(_ uiViewController: MainProvider.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<MainProvider.ContainerView>) {
+        func updateUIViewController(_ uiViewController: MainProvider.ContainerView.UIViewControllerType,
+                                    context: UIViewControllerRepresentableContext<MainProvider.ContainerView>) {
         }
     }
 }

@@ -10,5 +10,5 @@ import Foundation
 struct ChangeUserDataResult: Codable {
     let result: Int
     let userMessage: String
-    var errorMessage: String? = nil
+    var errorMessage: String?
 }
