@@ -33,8 +33,6 @@ class AuthViewController: UIViewController {
         presenter.auth(userName: "Somebody", password: "mypassword")
         presenter.logout(userId: 123)
         
-        // TODO: Позже вынесу в отдельный класс
-        
         // MARK: User Request
         let userRequest = requestFactory.makeUserRequestFactory()
         let profileModel = generateProfile()
@@ -42,7 +40,7 @@ class AuthViewController: UIViewController {
         userRequest.register(for: profileModel) { response in
             switch response.result {
             case .success(let register):
-                print("Регистрация: \(register.userMessage)")
+                print("Регистрация: \(register.userMessage ?? "Без сообщения")")
             case .failure(let error):
                 print("Error register: \(error.localizedDescription)")
             }
@@ -57,39 +55,67 @@ class AuthViewController: UIViewController {
             }
         }
         
-        // MARK: Product Request
         
-//        let productRequest = requestFactory.makeProductRequestFactory()
-//        
-//        productRequest.getCatalog(numberPage: 1, categoryId: 1) { response in
-//            switch response.result {
-//            case .success(let catalog):
-//               let _ = catalog.map { print("\($0.productName) за \($0.price) руб.") }
-//            case .failure(let error):
-//                print("Error getCatalog: \(error.localizedDescription)")
-//            }
-//        }
-//        
-//        productRequest.getProductById(productId: 123) { response in
-//            switch response.result {
-//            case .success(let product):
-//                print("Продукт: \(product.productName)\nОписание: \(product.productDescription)")
-//            case .failure(let error):
-//                print("Error getProductById: \(error.localizedDescription)")
-//            }
-//        }
+        let productRequest = requestFactory.makeProductRequestFactory()
+        
+        productRequest.getCatalog(numberPage: 1, categoryId: 1) { response in
+            switch response.result {
+            case .success(let catalog):
+                _ = catalog.products.map { print("\($0.productName) за \($0.productPrice) руб.") }
+            case .failure(let error):
+                print("Error getCatalog: \(error.localizedDescription)")
+            }
+        }
+        
+        productRequest.getProductById(productId: 123) { response in
+            switch response.result {
+            case .success(let result):
+                print("Продукт: \(result.product.productName)\nОписание: \(result.product.productDescription ?? "Без описания")")
+            case .failure(let error):
+                print("Error getProductById: \(error.localizedDescription)")
+            }
+        }
+        
+        let feedbackRequest = requestFactory.makeFeedbackRequestFactory()
+        
+        feedbackRequest.addFeedback(text: "Все ок", userId: 1, productId: 123) { response in
+            switch response.result {
+            case .success(let result):
+                print(result.userMessage ?? "Без сообщения")
+            case .failure(let error):
+                print("Error addFeedback: \(error.localizedDescription)")
+            }
+        }
+        
+        feedbackRequest.getFeedback(productId: 123) { response in
+            switch response.result {
+            case .success(let result):
+                _ = result.feedback.map { print($0.text) }
+            case .failure(let error):
+                print("Error getFeedback: \(error.localizedDescription)")
+            }
+        }
+        
+        feedbackRequest.removeFeedback(feedbackId: 1, userId: 1) { response in
+            switch response.result {
+            case .success(let result):
+                print(result.userMessage ?? "Без сообщения")
+            case .failure(let error):
+                print("Error removeFeedback: \(error.localizedDescription)")
+            }
+        }
     }
     
     // TODO: Позже вынесу в отдельный класс
     
     private func generateProfile() -> ProfileResult {
         ProfileResult(userId: 123,
-                login: "Somebody",
-                password: "mypassword",
-                email: "some@some.ru",
-                gender: "m",
-                creditCard: "9872389-2424-234224-234",
-                bio: "This is good! I think I will switch to another language")
+                      login: "Somebody",
+                      password: "mypassword",
+                      email: "some@some.ru",
+                      gender: "m",
+                      creditCard: "9872389-2424-234224-234",
+                      bio: "This is good! I think I will switch to another language")
     }
     
     func setupUI() {

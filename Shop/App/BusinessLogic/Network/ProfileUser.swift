@@ -33,7 +33,7 @@ class ProfileUser: BaseStoreRequest {
 // MARK: UserRequestFactory
 
 extension ProfileUser: UserRequestFactory {
-    func register(for user: ProfileResult, completionHandler: @escaping (AFDataResponse<RegisterUserResult>) -> Void) {
+    func register(for user: ProfileResult, completionHandler: @escaping (AFDataResponse<DefaultResult>) -> Void) {
         let registerRequest = UserRequest(baseUrl: url, path: "register", profile: user)
         self.request(request: registerRequest, completionHandler: completionHandler)
     }

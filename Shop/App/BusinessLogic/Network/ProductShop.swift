@@ -44,13 +44,13 @@ extension ProductShop: ProductRequestFactory {
     func getCatalog(numberPage: Int,
                     categoryId: Int,
                     completionHandler: @escaping (AFDataResponse<CatalogResult>) -> Void) {
-        let catalogData = CatalogRequest(baseUrl: url, numberPage: numberPage, categoryId: categoryId)
-        self.request(request: catalogData, completionHandler: completionHandler)
+        let catalogDataRequest = CatalogRequest(baseUrl: url, numberPage: numberPage, categoryId: categoryId)
+        self.request(request: catalogDataRequest, completionHandler: completionHandler)
     }
     
     func getProductById(productId: Int,
                         completionHandler: @escaping (AFDataResponse<ProductResult>) -> Void) {
-        let product = ProductRequest(baseUrl: url, productId: productId)
-        self.request(request: product, completionHandler: completionHandler)
+        let getProductRequest = ProductRequest(baseUrl: url, productId: productId)
+        self.request(request: getProductRequest, completionHandler: completionHandler)
     }
 }
