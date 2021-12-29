@@ -12,11 +12,5 @@ struct UserResult: Codable {
     let login: String
     let firstName: String
     let lastName: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case login = "login"
-        case firstName = "firstName"
-        case lastName = "lastName"
-    }
+    let accessToken: String
 }

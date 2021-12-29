@@ -17,7 +17,7 @@ class ProductFeedback: BaseStoreRequest {
         let productId: Int
         var parameters: Parameters? {
             return [
-                "productId": productId,
+                "productId": productId
             ]
         }
     }
@@ -34,7 +34,7 @@ class ProductFeedback: BaseStoreRequest {
             return [
                 "text": text,
                 "userId": userId,
-                "productId": productId,
+                "productId": productId
             ]
         }
     }
@@ -49,7 +49,7 @@ class ProductFeedback: BaseStoreRequest {
         var parameters: Parameters? {
             return [
                 "feedbackId": feedbackId,
-                "userId": userId,
+                "userId": userId
             ]
         }
     }

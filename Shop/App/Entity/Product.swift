@@ -11,5 +11,5 @@ struct Product: Codable {
     let productId: Int
     let productName: String
     let productPrice: Int
-    var productDescription: String? = nil
+    var productDescription: String?
 }

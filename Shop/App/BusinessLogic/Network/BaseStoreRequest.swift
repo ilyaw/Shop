@@ -11,7 +11,8 @@ import Alamofire
 class BaseStoreRequest: AbstractRequestFactory {
     
     var url: URL {
-        URL(string: "https://secret-everglades-22465.herokuapp.com/")!
+//        URL(string: "https://secret-everglades-22465.herokuapp.com/")!
+        URL(string: "http://127.0.0.1:8080/")!
     }
     
     let errorParser: AbstractErrorParser
