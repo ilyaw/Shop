@@ -379,10 +379,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09D7FD632758FF85000A98C9 /* Build configuration list for PBXNativeTarget "Shop" */;
 			buildPhases = (
+				0955899B276E43A4008FFE1A /* Run SwiftLint */,
 				09D7FD352758FF83000A98C9 /* Sources */,
 				09D7FD362758FF83000A98C9 /* Frameworks */,
 				09D7FD372758FF83000A98C9 /* Resources */,
-				0955899B276E43A4008FFE1A /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -740,6 +740,7 @@
 				INFOPLIST_FILE = Shop/Environments/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -768,6 +769,7 @@
 				INFOPLIST_FILE = Shop/Environments/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

@@ -12,4 +12,5 @@ struct UserResult: Codable {
     let login: String
     let firstName: String
     let lastName: String
+    let accessToken: String
 }

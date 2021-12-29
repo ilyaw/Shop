@@ -18,13 +18,13 @@ class ProfileUser: BaseStoreRequest {
         
         var parameters: Parameters? {
             return [
-                "userName": profile.login,
+                "login": profile.login,
                 "password": profile.password,
-                "userId": profile.userId,
-                "email": profile.email,
+                "firstName": profile.firstName,
+                "lastName": profile.lastName,
                 "gender": profile.gender,
-                "creditCard": profile.creditCard,
-                "bio": profile.bio
+                "bio": profile.bio,
+                "creditCard": profile.creditCard
             ]
         }
     }
@@ -33,7 +33,7 @@ class ProfileUser: BaseStoreRequest {
 // MARK: UserRequestFactory
 
 extension ProfileUser: UserRequestFactory {
-    func register(for user: ProfileResult, completionHandler: @escaping (AFDataResponse<DefaultResult>) -> Void) {
+    func register(for user: ProfileResult, completionHandler: @escaping (AFDataResponse<LoginResult>) -> Void) {
         let registerRequest = UserRequest(baseUrl: url, path: "register", profile: user)
         self.request(request: registerRequest, completionHandler: completionHandler)
     }

@@ -16,3 +16,4 @@ excluded:
 disabled_rules:
     - trailing_whitespace
     - cyclomatic_complexity
+    - redundant_optional_initialization

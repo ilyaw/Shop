@@ -25,12 +25,13 @@ class AuthRequestTests: XCTestCase {
     func testAuth() throws {
         
         let expressionLoginResultStub = LoginResult(result: 1,
-                                                    user: UserResult(id: 123,
-                                                                     login: "geekbrains",
-                                                                     firstName: "John",
-                                                                     lastName: "Doe"))
+                                                    user: UserResult(id: 1,
+                                                                     login: "admin",
+                                                                     firstName: "Ilya",
+                                                                     lastName: "Rudenko",
+                                                                     accessToken: "4689145A-2EB1-425C-8843-FACFBDDFF4F0"))
         
-        authRequest.login(userName: "Somebody", password: "mypassword") { (response) in
+        authRequest.login(userName: "admin", password: "123456") { (response) in
             switch response.result {
             case .success(let login):
                 XCTAssertEqual(login.result, expressionLoginResultStub.result)
@@ -46,21 +47,21 @@ class AuthRequestTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
     }
     
-    func testLogout() throws {
-        
-        let expressionLogoutResultStub = LogoutResult(result: 1)
-        
-        authRequest.logout(userId: 123) { response in
-            switch response.result {
-            case .success(let logout):
-                XCTAssertEqual(logout.result, expressionLogoutResultStub.result)
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-            
-            self.expectation.fulfill()
-        }
-        
-        wait(for: [expectation], timeout: 10.0)
-    }
+//    func testLogout() throws {
+//
+//        let expressionLogoutResultStub = LogoutResult(result: 1)
+//
+//        authRequest.logout(userId: 123) { response in
+//            switch response.result {
+//            case .success(let logout):
+//                XCTAssertEqual(logout.result, expressionLogoutResultStub.result)
+//            case .failure(let error):
+//                XCTFail(error.localizedDescription)
+//            }
+//
+//            self.expectation.fulfill()
+//        }
+//
+//        wait(for: [expectation], timeout: 10.0)
+//    }
 }
