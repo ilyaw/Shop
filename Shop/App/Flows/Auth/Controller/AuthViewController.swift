@@ -29,86 +29,8 @@ class AuthViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
-        
-        
-        
-        //        presenter.auth(userName: "Somebody", password: "mypassword")
-        //        presenter.logout(userId: 123)
-        //
-        //        // MARK: User Request
-        //        let userRequest = requestFactory.makeUserRequestFactory()
-        //        let profileModel = generateProfile()
-        //
-        //        userRequest.register(for: profileModel) { response in
-        //            switch response.result {
-        //            case .success(let register):
-        //                print("Регистрация: \(register.userMessage ?? "Без сообщения")")
-        //            case .failure(let error):
-        //                print("Error register: \(error.localizedDescription)")
-        //            }
-        //        }
-        //
-        //        userRequest.change(for: profileModel) { response in
-        //            switch response.result {
-        //            case .success(let change):
-        //                print("Change: \(change.result)")
-        //            case .failure(let error):
-        //                print("Error change: \(error.localizedDescription)")
-        //            }
-        //        }
-        //
-        //        let productRequest = requestFactory.makeProductRequestFactory()
-        //
-        //        productRequest.getCatalog(numberPage: 1, categoryId: 1) { response in
-        //            switch response.result {
-        //            case .success(let catalog):
-        //                _ = catalog.products.map { print("\($0.productName) за \($0.productPrice) руб.") }
-        //            case .failure(let error):
-        //                print("Error getCatalog: \(error.localizedDescription)")
-        //            }
-        //        }
-        //
-        //        productRequest.getProductById(productId: 123) { response in
-        //            switch response.result {
-        //            case .success(let result):
-        //                let description = result.product.productDescription ?? "Без описания"
-        //                print("Продукт: \(result.product.productName)\nОписание: \(description)")
-        //            case .failure(let error):
-        //                print("Error getProductById: \(error.localizedDescription)")
-        //            }
-        //        }
-        //
-        //        let feedbackRequest = requestFactory.makeFeedbackRequestFactory()
-        //
-        //        feedbackRequest.addFeedback(text: "Все ок", userId: 1, productId: 123) { response in
-        //            switch response.result {
-        //            case .success(let result):
-        //                print(result.userMessage ?? "Без сообщения")
-        //            case .failure(let error):
-        //                print("Error addFeedback: \(error.localizedDescription)")
-        //            }
-        //        }
-        //
-        //        feedbackRequest.getFeedback(productId: 123) { response in
-        //            switch response.result {
-        //            case .success(let result):
-        //                _ = result.feedback.map { print($0.text) }
-        //            case .failure(let error):
-        //                print("Error getFeedback: \(error.localizedDescription)")
-        //            }
-        //        }
-        //
-        //        feedbackRequest.removeFeedback(feedbackId: 1, userId: 1) { response in
-        //            switch response.result {
-        //            case .success(let result):
-        //                print(result.userMessage ?? "Без сообщения")
-        //            case .failure(let error):
-        //                print("Error removeFeedback: \(error.localizedDescription)")
-        //            }
-        //        }
     }
 
-    
     func setupUI() {
         view.backgroundColor = .white
         view.addSubview(activityIndicatorView)
