@@ -23,8 +23,8 @@ class ProfileUser: BaseStoreRequest {
                 "firstName": profile.firstName,
                 "lastName": profile.lastName,
                 "gender": profile.gender,
-                "bio": profile.bio,
-                "creditCard": profile.creditCard
+                "bio": profile.bio ?? "",
+                "creditCard": profile.creditCard ?? ""
             ]
         }
     }

@@ -18,7 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        self.appStartManager = AppStartManager(windowScene: windowScene)
+        self.window = UIWindow(windowScene: windowScene)
+        
+        self.appStartManager = AppStartManager()
         self.appStartManager?.start()
     }
     

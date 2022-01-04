@@ -8,12 +8,11 @@
 import Foundation
 import Alamofire
 
-class BaseStoreRequest: AbstractRequestFactory {
-    
-    var url: URL {
-//        URL(string: "https://secret-everglades-22465.herokuapp.com/")!
-        URL(string: "http://127.0.0.1:8080/")!
-    }
+class BaseURL {
+    var url: URL { URL(string: "http://127.0.0.1:8080/")! }
+}
+
+class BaseStoreRequest: BaseURL, AbstractRequestFactory {
     
     let errorParser: AbstractErrorParser
     let sessionManager: Session
@@ -26,4 +25,5 @@ class BaseStoreRequest: AbstractRequestFactory {
         self.sessionManager = sessionManager
         self.queue = queue
     }
+    
 }

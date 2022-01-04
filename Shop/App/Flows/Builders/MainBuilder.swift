@@ -8,13 +8,14 @@
 import UIKit
 
 class MainBuilder {
-    static func build() -> (UIViewController & MainViewInput) {
-        let presenter = AuthPresenter()
-        let requestFactory = RequestFactory()
-        let viewController = AuthViewController(presenter: presenter,
-                                                requestFactory: requestFactory)
-        presenter.viewInput = viewController
-        
-        return viewController
+    static func build() -> UIViewController {
+//        let presenter = AuthPresenter()
+//        let requestFactory = RequestFactory()
+//        let viewController = AuthViewController(presenter: presenter,
+//                                                requestFactory: requestFactory)
+//        presenter.viewInput = viewController
+//
+//        return viewController
+        return UIViewController()
     }
 }
