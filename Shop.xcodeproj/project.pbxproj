@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		090EDF52278522380099295D /* OneLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090EDF51278522380099295D /* OneLineTextField.swift */; };
+		090EDF542785225F0099295D /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090EDF532785225F0099295D /* UIFont + Extension.swift */; };
+		090EDF56278522900099295D /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090EDF55278522900099295D /* UIColor + Extension.swift */; };
+		090EDF58278522B10099295D /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090EDF57278522B10099295D /* UILabel + Extension.swift */; };
+		090EDF5A278523850099295D /* UIButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090EDF59278523850099295D /* UIButton + Extension.swift */; };
+		090EDF5C2785256F0099295D /* UIStackView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090EDF5B2785256F0099295D /* UIStackView + Extension.swift */; };
 		090F0E03278353380097FC8D /* NoConnectionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090F0E02278353380097FC8D /* NoConnectionBuilder.swift */; };
 		090F0E0627837B510097FC8D /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 090F0E0527837B510097FC8D /* SwiftKeychainWrapper */; };
 		091A1DCD275D490C00E62B25 /* UserRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091A1DCC275D490C00E62B25 /* UserRequestFactory.swift */; };
@@ -77,6 +83,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		090EDF51278522380099295D /* OneLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineTextField.swift; sourceTree = "<group>"; };
+		090EDF532785225F0099295D /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
+		090EDF55278522900099295D /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
+		090EDF57278522B10099295D /* UILabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
+		090EDF59278523850099295D /* UIButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Extension.swift"; sourceTree = "<group>"; };
+		090EDF5B2785256F0099295D /* UIStackView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extension.swift"; sourceTree = "<group>"; };
 		090F0E02278353380097FC8D /* NoConnectionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoConnectionBuilder.swift; sourceTree = "<group>"; };
 		091A1DCC275D490C00E62B25 /* UserRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestFactory.swift; sourceTree = "<group>"; };
 		091A1DCE275D49D800E62B25 /* DefaultResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultResult.swift; sourceTree = "<group>"; };
@@ -222,6 +234,7 @@
 				09D8DA652783CBFA005BBF3F /* Extensions */,
 				09222F182783348700505598 /* LogMessage.swift */,
 				09289F1327837CB6001B5830 /* Constant.swift */,
+				090EDF51278522380099295D /* OneLineTextField.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -410,6 +423,11 @@
 				09B7FF89275D40EC000E1B5F /* UIViewController + Extension.swift */,
 				09289F3D2783B55A001B5830 /* URL + Extension.swift */,
 				09D8DA632783CBF4005BBF3F /* UIApplication + Extension.swift */,
+				090EDF532785225F0099295D /* UIFont + Extension.swift */,
+				090EDF55278522900099295D /* UIColor + Extension.swift */,
+				090EDF57278522B10099295D /* UILabel + Extension.swift */,
+				090EDF59278523850099295D /* UIButton + Extension.swift */,
+				090EDF5B2785256F0099295D /* UIStackView + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -575,20 +593,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				09222F1C27834F8100505598 /* NoConnectionViewController.swift in Sources */,
+				090EDF52278522380099295D /* OneLineTextField.swift in Sources */,
 				0929747927613A5C00ABF4A2 /* CatalogResult.swift in Sources */,
 				09D7FDB5275CDDE6000A98C9 /* ProfileResult.swift in Sources */,
 				09289F3827839889001B5830 /* AuthBuilder.swift in Sources */,
+				090EDF5A278523850099295D /* UIButton + Extension.swift in Sources */,
 				09D8DA642783CBF4005BBF3F /* UIApplication + Extension.swift in Sources */,
+				090EDF58278522B10099295D /* UILabel + Extension.swift in Sources */,
 				09B7FF8A275D40EC000E1B5F /* UIViewController + Extension.swift in Sources */,
 				09B7FF83275D12D4000E1B5F /* MainBuilder.swift in Sources */,
 				09743B2F276CCF000030AAE0 /* FeedbackResult.swift in Sources */,
 				09D7FDB3275CDDDF000A98C9 /* LoginResult.swift in Sources */,
 				09D7FDAA275CDD01000A98C9 /* RequestRouter.swift in Sources */,
 				09D7FDA8275CDCEF000A98C9 /* AbstractRequestFactory.swift in Sources */,
+				090EDF542785225F0099295D /* UIFont + Extension.swift in Sources */,
 				090F0E03278353380097FC8D /* NoConnectionBuilder.swift in Sources */,
 				0980C3B827613E8D00EDEB76 /* ProductShop.swift in Sources */,
 				09289F1427837CB6001B5830 /* Constant.swift in Sources */,
 				091A1DD1275D4A0F00E62B25 /* ChangeUserDataResult.swift in Sources */,
+				090EDF56278522900099295D /* UIColor + Extension.swift in Sources */,
 				09D7FDA4275CDCC7000A98C9 /* ErrorParser.swift in Sources */,
 				09B7FF80275D077F000E1B5F /* AuthPresenter.swift in Sources */,
 				09289F3A27839E2C001B5830 /* MainTabBar.swift in Sources */,
@@ -606,6 +629,7 @@
 				091A1DD3275D4A3700E62B25 /* LogoutResult.swift in Sources */,
 				09D7FDAD275CDDB2000A98C9 /* AuthRequestFactory.swift in Sources */,
 				0929747D27613C1300ABF4A2 /* ProductResult.swift in Sources */,
+				090EDF5C2785256F0099295D /* UIStackView + Extension.swift in Sources */,
 				09743B2D276CCD070030AAE0 /* FeedbackRequestFactory.swift in Sources */,
 				09D7FD3D2758FF83000A98C9 /* AppDelegate.swift in Sources */,
 				091A1DCF275D49D800E62B25 /* DefaultResult.swift in Sources */,

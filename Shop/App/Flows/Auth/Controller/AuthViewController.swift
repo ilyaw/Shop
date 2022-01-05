@@ -18,7 +18,26 @@ class AuthViewController: UIViewController {
         view.style = .large
         return view
     }()
-
+    
+    let welcomeLabel = UILabel(text: "Good to see you!🙋‍♂️", font: .avenir26())
+    
+    let loginLabel = UILabel(text: "Login")
+    let passwordLabel = UILabel(text: "Password")
+    
+    let loginTextField = OneLineTextField(font: .avenir20())
+    let passwordTextField = OneLineTextField(font: .avenir20())
+    
+    let signInButton = UIButton(title: "Sign In", titleColor: .white, backgroundColor: .buttonPurple(), cornerRadius: 4)
+    
+    let needAnAccountLabel = UILabel(text: "Need an account?")
+    let signUpButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Sign Up", for: .normal)
+        button.setTitleColor(.buttonRed(), for: .normal)
+        button.titleLabel?.font = .avenir20()
+        return button
+    }()
+    
     // MARK: - Private properties
     
     private var presenter: MainViewOutput
@@ -42,13 +61,60 @@ class AuthViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+        setupConstraints()
     }
-
+    
     // MARK: - Private methods
     
     private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(activityIndicatorView)
+        
+        passwordTextField.isSecureTextEntry = true
+    }
+    
+    private func setupConstraints() {
+        
+        let loginStackView = UIStackView(arrangedSubviews: [loginLabel, loginTextField],
+                                         axis: .vertical,
+                                         spacing: 0)
+        
+        let passwordStackView = UIStackView(arrangedSubviews: [passwordLabel, passwordTextField],
+                                            axis: .vertical,
+                                            spacing: 0)
+        
+        signInButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        let stackView = UIStackView(arrangedSubviews: [loginStackView, passwordStackView, signInButton],
+                                    axis: .vertical,
+                                    spacing: 40)
+        
+        signUpButton.contentHorizontalAlignment = .leading
+        let bottomStackView = UIStackView(arrangedSubviews: [needAnAccountLabel, signUpButton],
+                                          axis: .horizontal,
+                                          spacing: 10)
+        bottomStackView.alignment = .firstBaseline
+        
+        welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        bottomStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(welcomeLabel)
+        view.addSubview(stackView)
+        view.addSubview(bottomStackView)
+        
+        NSLayoutConstraint.activate([
+            welcomeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 160),
+            welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            stackView.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 160),
+            stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
+            stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
+            
+            bottomStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 60),
+            bottomStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
+            bottomStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40)
+        ])
     }
 }
 
