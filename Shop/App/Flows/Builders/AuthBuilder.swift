@@ -8,7 +8,7 @@
 import UIKit
 
 class AuthBuilder {
-    static func build() -> (UIViewController & MainViewInput) {
+    static func build() -> (UIViewController & AuthViewInput) {
         let presenter = AuthPresenter()
         let requestFactory = RequestFactory()
         let viewController = AuthViewController(presenter: presenter,

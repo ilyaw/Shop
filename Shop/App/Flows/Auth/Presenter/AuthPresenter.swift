@@ -6,31 +6,36 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
-protocol MainViewInput: AnyObject {
+protocol AuthViewInput: AnyObject {
     var requestFactory: RequestFactory { get }
     var scrollView: UIScrollView { get }
     var activityIndicatorView: UIActivityIndicatorView { get }
+    var signInButton: UIButton { get }
+    var loginTextField: OneLineTextField { get }
+    var passwordTextField: OneLineTextField { get }
     
     func showError(error: Error)
-    func showLoginResult(result: LoginResult)
-    func showLogoutResult(result: LogoutResult)
+//    func showLoginResult(result: LoginResult)
+//    func showLogoutResult(result: LogoutResult)
 }
 
-protocol MainViewOutput: AnyObject {
-    func auth(userName: String, password: String)
-    func logout(userId: Int)
+protocol AuthViewOutput: AnyObject {
+    //    func auth(userName: String, password: String)
+    //    func logout(userId: Int)
     
     func addObserverForKeyboardNotification()
     func removeObserverForKeyboardNotification()
     func addTapGestureForHideKeybaord()
+    func addTargerForSignInButton()
 }
 
 class AuthPresenter {
     
     // MARK: - Public properties
     
-    weak var viewInput: (UIViewController & MainViewInput)?
+    weak var viewInput: (UIViewController & AuthViewInput)?
     
     // MARK: - Private properties
     
@@ -47,7 +52,11 @@ class AuthPresenter {
             switch response.result {
             case .success(let login):
                 DispatchQueue.main.async {
-                    self.viewInput?.showLoginResult(result: login)
+                    AppData.accessToken = login.user.accessToken
+                    AppData.username = login.user.firstName
+                    
+                    let mainTabbar = MainTabBar()
+                    UIApplication.setRootVC(viewController: mainTabbar)
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -61,22 +70,22 @@ class AuthPresenter {
         }
     }
     
-    private func requestLogout(userId: Int) {
-        authRequestFactory?.logout(userId: userId, completionHandler: { [weak self] response in
-            guard let self = self else { return }
-            
-            switch response.result {
-            case .success(let logout):
-                DispatchQueue.main.async {
-                    self.viewInput?.showLogoutResult(result: logout)
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self.viewInput?.showError(error: error)
-                }
-            }
-        })
-    }
+//    private func requestLogout(userId: Int) {
+//        authRequestFactory?.logout(userId: userId, completionHandler: { [weak self] response in
+//            guard let self = self else { return }
+//
+//            switch response.result {
+//            case .success(let logout):
+//                DispatchQueue.main.async {
+//                   self.viewInput?.showLogoutResult(result: logout)
+//                }
+//            case .failure(let error):
+//                DispatchQueue.main.async {
+//                    self.viewInput?.showError(error: error)
+//                }
+//            }
+//        })
+//    }
     
     private func showActivityIndicator(isShow: Bool) {
         isShow ? viewInput?.activityIndicatorView.startAnimating() :   viewInput?.activityIndicatorView.stopAnimating()
@@ -102,11 +111,22 @@ class AuthPresenter {
     @objc private func hideKeyboard() {
         viewInput?.scrollView.endEditing(true)
     }
+    
+    @objc private func didTapSignIn() {
+        guard let login = viewInput?.loginTextField.text,
+              let password = viewInput?.passwordTextField.text else { return }
+        
+        showActivityIndicator(isShow: true)
+        
+        requestAuth(userName: login, password: password) { [weak self] in
+            self?.showActivityIndicator(isShow: false)
+        }
+    }
 }
 
-// MARK: - AuthPresenter + MainViewOutput
+// MARK: - AuthPresenter + AuthViewOutput
 
-extension AuthPresenter: MainViewOutput {
+extension AuthPresenter: AuthViewOutput {
     
     // MARK: - Public methods
     
@@ -133,15 +153,19 @@ extension AuthPresenter: MainViewOutput {
         viewInput?.scrollView.addGestureRecognizer(hideKeyboardGesture)
     }
     
-    func auth(userName: String, password: String) {
-        showActivityIndicator(isShow: true)
-        
-        requestAuth(userName: userName, password: password) { [weak self] in
-            self?.showActivityIndicator(isShow: false)
-        }
+    func addTargerForSignInButton() {
+        viewInput?.signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
     }
     
-    func logout(userId: Int) {
-        requestLogout(userId: userId)
-    }
+    //    func auth(userName: String, password: String) {
+    //        showActivityIndicator(isShow: true)
+    //
+    //        requestAuth(userName: userName, password: password) { [weak self] in
+    //            self?.showActivityIndicator(isShow: false)
+    //        }
+    //    }
+    //
+    //    func logout(userId: Int) {
+    //        requestLogout(userId: userId)
+    //    }
 }

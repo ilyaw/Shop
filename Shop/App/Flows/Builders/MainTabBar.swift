@@ -18,13 +18,13 @@ class MainTabBar: UITabBarController {
     
     private func setupVCs() {
         viewControllers = [
-            createNavController(for: AuthBuilder.build(),
+            createNavController(for: HomeBuilder.build(),
                                    title: NSLocalizedString("Главная", comment: ""),
                                    image: UIImage(systemName: "house") ?? UIImage()),
-            createNavController(for: AuthBuilder.build(),
+            createNavController(for: HomeBuilder.build(),
                                    title: NSLocalizedString("Корзина", comment: ""),
                                    image: UIImage(systemName: "cart") ?? UIImage()),
-            createNavController(for: AuthBuilder.build(),
+            createNavController(for: HomeBuilder.build(),
                                    title: NSLocalizedString("Профиль", comment: ""),
                                    image: UIImage(systemName: "person") ?? UIImage())
         ]

@@ -10,17 +10,13 @@ import Network
 import SwiftKeychainWrapper
 
 final class AppStartManager {
-    
-    // MARK: - Private properties
-    
-    private lazy var checkAccessToken: Bool = {
-        KeychainWrapper.standard.string(forKey: AppConstant.keychainAccessTokenKey) == nil ? false : true
-    }()
-    
+
     // MARK: - Public methods
     
     func start() {
         let baseURL = BaseURL()
+        
+//        AppData.accessToken = ""
         
         baseURL.url.сheckWebsiteAvailability { isAvailability in
             if isAvailability {
@@ -37,12 +33,12 @@ final class AppStartManager {
     }
     
     public func presentScreen() {
-        if self.checkAccessToken {
-            let tabbar = MainTabBar()
-            UIApplication.setRootVC(viewController: tabbar)
-        } else {
+        if AppData.accessToken.isEmpty {
             let auth = AuthBuilder.build()
             UIApplication.setRootVC(viewController: auth)
+        } else {
+            let tabbar = MainTabBar()
+            UIApplication.setRootVC(viewController: tabbar)
         }
     }
 }

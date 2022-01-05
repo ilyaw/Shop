@@ -45,11 +45,11 @@ class AuthViewController: UIViewController {
     
     // MARK: - Private properties
     
-    private var presenter: MainViewOutput
+    private var presenter: AuthViewOutput
     
     // MARK: - Inits
     
-    init(presenter: MainViewOutput, requestFactory: RequestFactory) {
+    init(presenter: AuthViewOutput, requestFactory: RequestFactory) {
         self.presenter = presenter
         self.requestFactory = requestFactory
         
@@ -67,6 +67,7 @@ class AuthViewController: UIViewController {
         
         setupUI()
         setupConstraints()
+        presenter.addTargerForSignInButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -147,21 +148,21 @@ class AuthViewController: UIViewController {
     }
 }
 
-// MARK: - AuthViewController + MainViewInput
+// MARK: - AuthViewController + AuthViewInput
 
-extension AuthViewController: MainViewInput {
+extension AuthViewController: AuthViewInput {
     
     func showError(error: Error) {
         showAlert(with: error.localizedDescription)
     }
     
-    func showLoginResult(result: LoginResult) {
-        showAlert(with: "Hello, \(result.user.firstName)!" )
-    }
+//    func showLoginResult(result: LoginResult) {
+//        showAlert(with: "Hello, \(result.user.firstName)!" )
+//    }
     
-    func showLogoutResult(result: LogoutResult) {
-        showAlert(with: "Logout result is \(result.result)" )
-    }
+//    func showLogoutResult(result: LogoutResult) {
+//        showAlert(with: "Logout result is \(result.result)" )
+//    }
 }
 
 // MARK: - SwiftUI
