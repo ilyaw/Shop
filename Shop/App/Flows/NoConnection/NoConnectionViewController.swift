@@ -42,8 +42,8 @@ class NoConnectionViewController: UIViewController {
         baseURL.url.сheckWebsiteAvailability { [weak self] isValid in
             if isValid {
                 DispatchQueue.main.async {
-                    let tabbar = MainTabBar()
-                    UIApplication.setRootVC(viewController: tabbar)
+                    let appStart = AppStartManager()
+                    appStart.presentScreen()
                 }
             } else {
                 DispatchQueue.main.async {

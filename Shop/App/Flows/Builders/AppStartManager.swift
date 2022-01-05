@@ -36,9 +36,7 @@ final class AppStartManager {
         }
     }
     
-    // MARK: - Private methods
-    
-    private func presentScreen() {
+    public func presentScreen() {
         if self.checkAccessToken {
             let tabbar = MainTabBar()
             UIApplication.setRootVC(viewController: tabbar)
