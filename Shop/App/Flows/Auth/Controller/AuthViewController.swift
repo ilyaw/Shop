@@ -9,7 +9,8 @@ import UIKit
 
 class AuthViewController: UIViewController {
     
-    var presenter: MainViewOutput
+    // MARK: - Public properties
+    
     var requestFactory: RequestFactory
     
     lazy var activityIndicatorView: UIActivityIndicatorView = {
@@ -17,6 +18,12 @@ class AuthViewController: UIViewController {
         view.style = .large
         return view
     }()
+
+    // MARK: - Private properties
+    
+    private var presenter: MainViewOutput
+    
+    // MARK: - Inits
     
     init(presenter: MainViewOutput, requestFactory: RequestFactory) {
         self.presenter = presenter
@@ -25,23 +32,27 @@ class AuthViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
     }
 
-    func setupUI() {
+    // MARK: - Private methods
+    
+    private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(activityIndicatorView)
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
-// MARK: MainViewInput
+// MARK: - AuthViewController + MainViewInput
 
 extension AuthViewController: MainViewInput {
     

@@ -1,5 +1,5 @@
 //
-//  BaseTabBar.swift
+//  MainTabBar.swift
 //  Shop
 //
 //  Created by Ilya on 04.01.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseTabBar: UITabBarController {
+class MainTabBar: UITabBarController {
     
     override func viewDidLoad() {
         UITabBar.appearance().barTintColor = .systemBackground

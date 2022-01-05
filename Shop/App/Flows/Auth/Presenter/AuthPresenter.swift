@@ -22,11 +22,17 @@ protocol MainViewOutput {
 
 class AuthPresenter {
     
+    // MARK: - Public properties
+    
     weak var viewInput: (UIViewController & MainViewInput)?
+    
+    // MARK: - Private properties
     
     private var authRequestFactory: AuthRequestFactory? {
         viewInput?.requestFactory.makeAuthRequestFatory()
     }
+    
+    // MARK: - Private properties
     
     private func requestAuth(userName: String, password: String, completion: @escaping () -> Void) {
         authRequestFactory?.login(userName: userName, password: password) { [weak self] response in
@@ -71,7 +77,12 @@ class AuthPresenter {
     }
 }
 
+// MARK: - AuthPresenter + MainViewOutput
+
 extension AuthPresenter: MainViewOutput {
+    
+    // MARK: - Public methods
+    
     func auth(userName: String, password: String) {
         showActivityIndicator(isShow: true)
         

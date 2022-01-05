@@ -9,7 +9,9 @@ import UIKit
 
 class NoConnectionViewController: UIViewController {
     
-    let errorMessageLabel: UILabel = {
+    // MARK: - Private properties
+    
+    private let errorMessageLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemPurple
         label.text = "No connection 🥲"
@@ -17,26 +19,30 @@ class NoConnectionViewController: UIViewController {
         return label
     }()
     
-    let reconnectButton: UIButton = {
+    private let reconnectButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("Retry again", for: .normal)
         btn.setTitleColor(.blue, for: .normal)
         return btn
     }()
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
     
+    // MARK: - Private methods
+    
     @objc
-    func didTapRetryAgain() {
+    private func didTapRetryAgain() {
         let baseURL = BaseURL()
         
         baseURL.url.сheckWebsiteAvailability { [weak self] isValid in
             if isValid {
                 DispatchQueue.main.async {
-                    let tabbar = BaseTabBar()
+                    let tabbar = MainTabBar()
                     UIApplication.setRootVC(viewController: tabbar)
                 }
             } else {
