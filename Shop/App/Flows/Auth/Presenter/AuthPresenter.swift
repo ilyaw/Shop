@@ -17,8 +17,8 @@ protocol AuthViewInput: AnyObject {
     var passwordTextField: OneLineTextField { get }
     
     func showError(error: Error)
-//    func showLoginResult(result: LoginResult)
-//    func showLogoutResult(result: LogoutResult)
+    //    func showLoginResult(result: LoginResult)
+    //    func showLogoutResult(result: LogoutResult)
 }
 
 protocol AuthViewOutput: AnyObject {
@@ -70,23 +70,6 @@ class AuthPresenter {
         }
     }
     
-//    private func requestLogout(userId: Int) {
-//        authRequestFactory?.logout(userId: userId, completionHandler: { [weak self] response in
-//            guard let self = self else { return }
-//
-//            switch response.result {
-//            case .success(let logout):
-//                DispatchQueue.main.async {
-//                   self.viewInput?.showLogoutResult(result: logout)
-//                }
-//            case .failure(let error):
-//                DispatchQueue.main.async {
-//                    self.viewInput?.showError(error: error)
-//                }
-//            }
-//        })
-//    }
-    
     private func showActivityIndicator(isShow: Bool) {
         isShow ? viewInput?.activityIndicatorView.startAnimating() :   viewInput?.activityIndicatorView.stopAnimating()
     }
@@ -112,8 +95,32 @@ class AuthPresenter {
         viewInput?.scrollView.endEditing(true)
     }
     
+    private func checkDataValid() -> Bool {
+        guard let loginTextField = viewInput?.loginTextField,
+              let passwordTextField = viewInput?.passwordTextField,
+              let login = loginTextField.text,
+              let password = passwordTextField.text else {
+                  return false
+              }
+        
+        if login.isEmpty && password.isEmpty {
+            loginTextField.shake()
+            passwordTextField.shake()
+            return false
+        } else if login.isEmpty {
+            loginTextField.shake()
+            return false
+        } else if password.isEmpty {
+            passwordTextField.shake()
+            return false
+        }
+        
+        return true
+    }
+    
     @objc private func didTapSignIn() {
-        guard let login = viewInput?.loginTextField.text,
+        guard checkDataValid(),
+              let login = viewInput?.loginTextField.text,
               let password = viewInput?.passwordTextField.text else { return }
         
         showActivityIndicator(isShow: true)
@@ -156,16 +163,4 @@ extension AuthPresenter: AuthViewOutput {
     func addTargerForSignInButton() {
         viewInput?.signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
     }
-    
-    //    func auth(userName: String, password: String) {
-    //        showActivityIndicator(isShow: true)
-    //
-    //        requestAuth(userName: userName, password: password) { [weak self] in
-    //            self?.showActivityIndicator(isShow: false)
-    //        }
-    //    }
-    //
-    //    func logout(userId: Int) {
-    //        requestLogout(userId: userId)
-    //    }
 }

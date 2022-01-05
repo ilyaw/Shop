@@ -16,7 +16,7 @@ final class AppStartManager {
     func start() {
         let baseURL = BaseURL()
         
-//        AppData.accessToken = ""
+        AppData.accessToken = ""
         
         baseURL.url.сheckWebsiteAvailability { isAvailability in
             if isAvailability {
