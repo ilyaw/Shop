@@ -38,6 +38,11 @@ class AuthViewController: UIViewController {
         return button
     }()
     
+    let scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        return scroll
+    }()
+    
     // MARK: - Private properties
     
     private var presenter: MainViewOutput
@@ -59,9 +64,21 @@ class AuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
         setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    
+        presenter.addObserverForKeyboardNotification()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        presenter.removeObserverForKeyboardNotification()
     }
     
     // MARK: - Private methods
@@ -71,10 +88,10 @@ class AuthViewController: UIViewController {
         view.addSubview(activityIndicatorView)
         
         passwordTextField.isSecureTextEntry = true
+        presenter.addTapGestureForHideKeybaord()
     }
     
     private func setupConstraints() {
-        
         let loginStackView = UIStackView(arrangedSubviews: [loginLabel, loginTextField],
                                          axis: .vertical,
                                          spacing: 0)
@@ -98,22 +115,34 @@ class AuthViewController: UIViewController {
         welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         bottomStackView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(welcomeLabel)
-        view.addSubview(stackView)
-        view.addSubview(bottomStackView)
+        view.addSubview(scrollView)
+        
+        scrollView.addSubview(welcomeLabel)
+        scrollView.addSubview(stackView)
+        scrollView.addSubview(bottomStackView)
+        
+        let viewSafeArea = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            welcomeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 160),
-            welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scrollView.topAnchor.constraint(equalTo: viewSafeArea.topAnchor),
+            scrollView.leftAnchor.constraint(equalTo: viewSafeArea.leftAnchor),
+            scrollView.rightAnchor.constraint(equalTo: viewSafeArea.rightAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: viewSafeArea.bottomAnchor),
+            scrollView.widthAnchor.constraint(equalTo: viewSafeArea.widthAnchor),
             
-            stackView.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 160),
-            stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
-            stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40),
+            welcomeLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 80),
+            welcomeLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            
+            stackView.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 80),
+            stackView.leftAnchor.constraint(equalTo: viewSafeArea.leftAnchor, constant: 20),
+            stackView.rightAnchor.constraint(equalTo: viewSafeArea.rightAnchor, constant: -20),
             
             bottomStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 60),
-            bottomStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40),
-            bottomStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40)
+            bottomStackView.leftAnchor.constraint(equalTo: viewSafeArea.leftAnchor, constant: 40),
+            bottomStackView.rightAnchor.constraint(equalTo: viewSafeArea.rightAnchor, constant: -40),
+            bottomStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
     }
 }
