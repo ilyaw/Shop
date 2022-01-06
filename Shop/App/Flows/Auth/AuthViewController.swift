@@ -11,7 +11,7 @@ class AuthViewController: UIViewController {
     
     // MARK: - Public properties
     
-    var requestFactory: RequestFactory
+    var requestFactory: AuthRequestFactory
     
     lazy var activityIndicatorView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(frame: view.bounds)
@@ -49,7 +49,7 @@ class AuthViewController: UIViewController {
     
     // MARK: - Inits
     
-    init(presenter: AuthViewOutput, requestFactory: RequestFactory) {
+    init(presenter: AuthViewOutput, requestFactory: AuthRequestFactory) {
         self.presenter = presenter
         self.requestFactory = requestFactory
         
@@ -151,18 +151,16 @@ class AuthViewController: UIViewController {
 // MARK: - AuthViewController + AuthViewInput
 
 extension AuthViewController: AuthViewInput {
-    
-    func showError(error: Error) {
-        showAlert(with: error.localizedDescription)
+    func showMainTabbar() {
+        let mainTabbar = MainTabBar()
+        mainTabbar.modalPresentationStyle = .fullScreen
+        
+        self.present(mainTabbar, animated: true, completion: nil)
     }
     
-//    func showLoginResult(result: LoginResult) {
-//        showAlert(with: "Hello, \(result.user.firstName)!" )
-//    }
-    
-//    func showLogoutResult(result: LogoutResult) {
-//        showAlert(with: "Logout result is \(result.result)" )
-//    }
+    func showError(error: String) {
+        showAlert(with: error, title: "Неудачно 🥲")
+    }
 }
 
 // MARK: - SwiftUI
@@ -177,7 +175,7 @@ struct MainProvider: PreviewProvider {
     struct ContainerView: UIViewControllerRepresentable {
         
         let viewController = AuthViewController(presenter: AuthPresenter(),
-                                                requestFactory: RequestFactory())
+                                                requestFactory: RequestFactory().makeAuthRequestFatory())
         
         func makeUIViewController(
             context: UIViewControllerRepresentableContext<MainProvider.ContainerView>

@@ -9,22 +9,18 @@ import UIKit
 import SwiftKeychainWrapper
 
 protocol AuthViewInput: AnyObject {
-    var requestFactory: RequestFactory { get }
+    var requestFactory: AuthRequestFactory { get }
     var scrollView: UIScrollView { get }
     var activityIndicatorView: UIActivityIndicatorView { get }
     var signInButton: UIButton { get }
     var loginTextField: OneLineTextField { get }
     var passwordTextField: OneLineTextField { get }
     
-    func showError(error: Error)
-    //    func showLoginResult(result: LoginResult)
-    //    func showLogoutResult(result: LogoutResult)
+    func showError(error: String)
+    func showMainTabbar()
 }
 
 protocol AuthViewOutput: AnyObject {
-    //    func auth(userName: String, password: String)
-    //    func logout(userId: Int)
-    
     func addObserverForKeyboardNotification()
     func removeObserverForKeyboardNotification()
     func addTapGestureForHideKeybaord()
@@ -37,16 +33,10 @@ class AuthPresenter {
     
     weak var viewInput: (UIViewController & AuthViewInput)?
     
-    // MARK: - Private properties
-    
-    private var authRequestFactory: AuthRequestFactory? {
-        viewInput?.requestFactory.makeAuthRequestFatory()
-    }
-    
     // MARK: - Private methods
     
     private func requestAuth(userName: String, password: String, completion: @escaping () -> Void) {
-        authRequestFactory?.login(userName: userName, password: password) { [weak self] response in
+        viewInput?.requestFactory.login(userName: userName, password: password) { [weak self] response in
             guard let self = self else { return }
             
             switch response.result {
@@ -55,12 +45,16 @@ class AuthPresenter {
                     AppData.accessToken = login.user.accessToken
                     AppData.username = login.user.firstName
                     
-                    let mainTabbar = MainTabBar()
-                    UIApplication.setRootVC(viewController: mainTabbar)
+                    self.viewInput?.showMainTabbar()
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
-                    self.viewInput?.showError(error: error)
+                    if let statusCode = response.response?.statusCode,
+                       statusCode == 401 {
+                        self.viewInput?.showError(error: "Неверный логин или пароль")
+                    } else {
+                        self.viewInput?.showError(error: error.localizedDescription)
+                    }
                 }
             }
             

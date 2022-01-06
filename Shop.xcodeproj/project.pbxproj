@@ -191,6 +191,14 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
+		09064C9427866AE000E605A6 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				09B7FF7F275D077F000E1B5F /* AuthPresenter.swift */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
 		09222F1A27834ED900505598 /* NoConnection */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,7 +236,6 @@
 		09B7FF81275D12C7000E1B5F /* Builders */ = {
 			isa = PBXGroup;
 			children = (
-				09B7FF85275D141C000E1B5F /* AppStartManager.swift */,
 				09289F3927839E2C001B5830 /* MainTabBar.swift */,
 				09B7FF82275D12D4000E1B5F /* HomeBuilder.swift */,
 				090F0E02278353380097FC8D /* NoConnectionBuilder.swift */,
@@ -350,6 +357,7 @@
 		09D7FD7027590AFC000A98C9 /* BusinessLogic */ = {
 			isa = PBXGroup;
 			children = (
+				09064C9427866AE000E605A6 /* Presenters */,
 				09D7FDAB275CDD93000A98C9 /* Network */,
 				09064C8D27864A2200E605A6 /* Storage */,
 			);
@@ -376,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				09064C9227864D1200E605A6 /* HomeViewController.swift */,
+				09B7FF85275D141C000E1B5F /* AppStartManager.swift */,
 				09B7FF81275D12C7000E1B5F /* Builders */,
 				09D7FDBA275D0614000A98C9 /* Auth */,
 				09222F1A27834ED900505598 /* NoConnection */,
@@ -412,29 +421,12 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		09D7FDB9275D05B7000A98C9 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				09B7FF7F275D077F000E1B5F /* AuthPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
 		09D7FDBA275D0614000A98C9 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				09D7FDB9275D05B7000A98C9 /* Presenter */,
-				09D7FDBB275D0632000A98C9 /* Controller */,
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
-		09D7FDBB275D0632000A98C9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				09D7FD402758FF83000A98C9 /* AuthViewController.swift */,
 			);
-			path = Controller;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		09D8DA652783CBFA005BBF3F /* Extensions */ = {

@@ -10,11 +10,10 @@ import UIKit
 class AuthBuilder {
     static func build() -> (UIViewController & AuthViewInput) {
         let presenter = AuthPresenter()
-        let requestFactory = RequestFactory()
+        let requestFactory = RequestFactory().makeAuthRequestFatory()
         let viewController = AuthViewController(presenter: presenter,
                                                 requestFactory: requestFactory)
         presenter.viewInput = viewController
-        
         return viewController
     }
 }
