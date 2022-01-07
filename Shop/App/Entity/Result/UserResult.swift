@@ -10,7 +10,6 @@ import Foundation
 struct UserResult: Codable {
     let id: Int
     let login: String
-    let firstName: String
-    let lastName: String
+    let fullName: String
     let accessToken: String
 }

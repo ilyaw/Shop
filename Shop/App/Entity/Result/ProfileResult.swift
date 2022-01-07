@@ -10,9 +10,8 @@ import Foundation
 struct ProfileResult: Codable {
     let login: String
     let password: String
-    let firstName: String
-    let lastName: String
-    let gender: String
+    let fullName: String
+    let phone: String
     var bio: String?
     var creditCard: String?
     var money: Decimal? = 5000000

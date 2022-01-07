@@ -6,18 +6,19 @@
 //
 
 import UIKit
-import SwiftKeychainWrapper
 
 protocol AuthViewInput: AnyObject {
     var requestFactory: AuthRequestFactory { get }
     var scrollView: UIScrollView { get }
     var activityIndicatorView: UIActivityIndicatorView { get }
     var signInButton: UIButton { get }
+    var signUpButton: UIButton { get }
     var loginTextField: OneLineTextField { get }
     var passwordTextField: OneLineTextField { get }
     
     func showError(error: String)
     func showMainTabbar()
+    func showRegisterController(to controller: UIViewController)
 }
 
 protocol AuthViewOutput: AnyObject {
@@ -25,6 +26,7 @@ protocol AuthViewOutput: AnyObject {
     func removeObserverForKeyboardNotification()
     func addTapGestureForHideKeybaord()
     func addTargerForSignInButton()
+    func addTargetForSignUpButton()
 }
 
 class AuthPresenter {
@@ -43,7 +45,7 @@ class AuthPresenter {
             case .success(let login):
                 DispatchQueue.main.async {
                     AppData.accessToken = login.user.accessToken
-                    AppData.username = login.user.firstName
+                    AppData.username = login.user.fullName
                     
                     self.viewInput?.showMainTabbar()
                 }
@@ -123,6 +125,11 @@ class AuthPresenter {
             self?.showActivityIndicator(isShow: false)
         }
     }
+    
+    @objc private func didTapSignUp() {
+        let registerController = SignUpBuilder.build()
+        viewInput?.showRegisterController(to: registerController)
+    }
 }
 
 // MARK: - AuthPresenter + AuthViewOutput
@@ -156,5 +163,9 @@ extension AuthPresenter: AuthViewOutput {
     
     func addTargerForSignInButton() {
         viewInput?.signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
+    }
+    
+    func addTargetForSignUpButton() {
+        viewInput?.signUpButton.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
     }
 }

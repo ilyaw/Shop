@@ -20,9 +20,8 @@ class ProfileUser: BaseStoreRequest {
             return [
                 "login": profile.login,
                 "password": profile.password,
-                "firstName": profile.firstName,
-                "lastName": profile.lastName,
-                "gender": profile.gender,
+                "fullName": profile.fullName,
+                "phone": profile.phone,
                 "bio": profile.bio ?? "",
                 "creditCard": profile.creditCard ?? ""
             ]

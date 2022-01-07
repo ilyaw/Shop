@@ -20,16 +20,14 @@ class AuthViewController: UIViewController {
     }()
     
     let welcomeLabel = UILabel(text: "Good to see you!🙋‍♂️", font: .avenir26())
-    
     let loginLabel = UILabel(text: "Login")
     let passwordLabel = UILabel(text: "Password")
+    let needAnAccountLabel = UILabel(text: "Need an account?")
     
     let loginTextField = OneLineTextField(font: .avenir20())
     let passwordTextField = OneLineTextField(font: .avenir20())
     
     let signInButton = UIButton(title: "Sign In", titleColor: .white, backgroundColor: .buttonPurple(), cornerRadius: 4)
-    
-    let needAnAccountLabel = UILabel(text: "Need an account?")
     let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
@@ -68,11 +66,12 @@ class AuthViewController: UIViewController {
         setupUI()
         setupConstraints()
         presenter.addTargerForSignInButton()
+        presenter.addTargetForSignUpButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
+        
         presenter.addObserverForKeyboardNotification()
     }
     
@@ -85,11 +84,16 @@ class AuthViewController: UIViewController {
     // MARK: - Private methods
     
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.addSubview(activityIndicatorView)
         
         passwordTextField.isSecureTextEntry = true
         presenter.addTapGestureForHideKeybaord()
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Авторизация",
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
     }
     
     private func setupConstraints() {
@@ -151,6 +155,7 @@ class AuthViewController: UIViewController {
 // MARK: - AuthViewController + AuthViewInput
 
 extension AuthViewController: AuthViewInput {
+    
     func showMainTabbar() {
         let mainTabbar = MainTabBar()
         mainTabbar.modalPresentationStyle = .fullScreen
@@ -160,6 +165,10 @@ extension AuthViewController: AuthViewInput {
     
     func showError(error: String) {
         showAlert(with: error, title: "Неудачно 🥲")
+    }
+    
+    func showRegisterController(to controller: UIViewController) {
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 }
 
