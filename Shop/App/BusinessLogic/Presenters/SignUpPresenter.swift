@@ -164,13 +164,9 @@ class SignUpPresenter {
         textField.text = result
         
         if result.isValid(validType: validType) {
-            label.text = viewInput?.signUpView.validSymbol
-            label.textColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0, alpha: 1)
-            label.tag = Tag.valid.rawValue
+            setValidLabel(label, isValid: true, text: viewInput?.signUpView.validSymbol)
         } else {
-            label.text = wrongMessage
-            label.textColor = #colorLiteral(red: 0.5783785502, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
-            label.tag = Tag.invalid.rawValue
+            setValidLabel(label, isValid: false, text: wrongMessage)
         }
     }
     
@@ -195,13 +191,9 @@ class SignUpPresenter {
         }
         
         if result.count == 18 {
-            label.text = viewInput?.signUpView.validSymbol
-            label.textColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0, alpha: 1)
-            label.tag = Tag.valid.rawValue
+            setValidLabel(label, isValid: true, text: viewInput?.signUpView.validSymbol)
         } else {
-            label.text = "Неверный формат..."
-            label.textColor = #colorLiteral(red: 0.5783785502, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
-            label.tag = Tag.invalid.rawValue
+            setValidLabel(label, isValid: false, text: "Неверный формат...")
         }
         
         return result
@@ -228,20 +220,28 @@ class SignUpPresenter {
         }
         
         if result.count == 19 {
-            label.text = viewInput?.signUpView.validSymbol
-            label.textColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0, alpha: 1)
-            label.tag = Tag.valid.rawValue
+            setValidLabel(label, isValid: true, text: viewInput?.signUpView.validSymbol)
         } else if result.isEmpty {
             label.text = "Необязательно"
             label.textColor = .label
             label.tag = Tag.valid.rawValue
         } else {
-            label.text = "Неверный формат..."
+            setValidLabel(label, isValid: false, text: "Неверный формат...")
+        }
+        
+        return result
+    }
+    
+    private func setValidLabel(_ label: UILabel, isValid: Bool, text: String?) {
+        if isValid {
+            label.textColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0, alpha: 1)
+            label.tag = Tag.valid.rawValue
+        } else {
             label.textColor = #colorLiteral(red: 0.5783785502, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
             label.tag = Tag.invalid.rawValue
         }
         
-        return result
+        label.text = text
     }
     
     private func showActivityIndicator(isShow: Bool) {
@@ -284,6 +284,7 @@ extension SignUpPresenter: SignUpViewOutput {
                                                                 mask: "+X (XXX) XXX-XX-XX",
                                                                 string: string,
                                                                 range: range)
+            
         case view.cardTextField:
             view.cardTextField.text = setCardMask(textField: view.cardTextField,
                                                   label: view.cardValidLabel,
