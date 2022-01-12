@@ -106,6 +106,8 @@ class SignUpView: UIView {
         self.addSubview(activityIndicatorView)
         
         passwordTextField.isSecureTextEntry = true
+        phoneNumberTextField.keyboardType = .numberPad
+        
         competion()
     }
     
