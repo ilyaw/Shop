@@ -61,7 +61,7 @@ class AuthPresenter {
                     AppData.accessToken = user.accessToken
                     AppData.username = user.fullName
                     
-                    self.viewInput?.showMainTabbar()
+                    self.router.onShowMainScreen?()
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -144,6 +144,10 @@ class AuthPresenter {
         router.showSignUp()
 //        let registerController = SignUpBuilder.build()
 //        viewInput?.showRegisterController(to: registerController)
+    }
+    
+    deinit {
+        print("deinit AuthPresenter")
     }
 }
 

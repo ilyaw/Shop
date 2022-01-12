@@ -1,5 +1,5 @@
 //
-//  RegisterPresenter.swift
+//  SignUpPresenter.swift
 //  Shop
 //
 //  Created by Ilya on 06.01.2022.
@@ -94,8 +94,16 @@ class SignUpPresenter {
         requestFactory.register(for: profile, completionHandler: { [weak self] response in
             switch response.result {
             case let .success(registration):
-                if registration.result == 1 {
-                    print(registration)
+                if registration.result == 1,
+                   let accessToken = registration.user?.accessToken,
+                   let name = registration.user?.fullName {
+                    AppData.accessToken = accessToken
+                    AppData.username = name
+                    
+                    DispatchQueue.main.async {
+                        self?.router.onShowMainScreen?()
+                    }
+                    
                 } else if let errorMessage = registration.errorMessage {
                     DispatchQueue.main.async {
                         self?.viewInput?.showError(error: errorMessage)

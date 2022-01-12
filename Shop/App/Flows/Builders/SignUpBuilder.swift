@@ -7,13 +7,13 @@
 
 import UIKit
 
-class SignUpBuilder {
-    static func build(router: StartRouter) -> UIViewController {
-        let requestFactory = RequestFactory().makeUserRequestFactory()
-        let presenter = SignUpPresenter(router: router, requestFactory: requestFactory)
-        let viewController = SignUpViewController(presenter: presenter)
-        presenter.viewInput = viewController
-        
-        return viewController
-    }
-}
+//class SignUpBuilder {
+//    static func build(router: StartRouter) -> UIViewController {
+//        let requestFactory = RequestFactory().makeUserRequestFactory()
+//        let presenter = SignUpPresenter(router: router, requestFactory: requestFactory)
+//        let viewController = SignUpViewController(presenter: presenter)
+//        presenter.viewInput = viewController
+//        
+//        return viewController
+//    }
+//}

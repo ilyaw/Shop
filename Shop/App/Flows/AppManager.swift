@@ -14,10 +14,9 @@ final class AppManager {
     private let window: UIWindow
     private var appStartRouter: AppStartRouter?
     private var mainTabbar: MainTabBarController?
-
+    
     init(windowScene: UIWindowScene) {
         self.window = UIWindow(windowScene: windowScene)
-        window.makeKeyAndVisible()
     }
     
     func start() {
@@ -25,29 +24,30 @@ final class AppManager {
         mainTabbar = nil
         
         appStartRouter = AppStartRouter(window: window)
-        appStartRouter?.start()
-        
         appStartRouter?.onShowMainScreen = { [weak self] in
             self?.startMainScreen()
         }
+        
+        appStartRouter?.start()
     }
     
-    func startMainScreen() {
+    func startMainScreen(animated: Bool = false) {
         appStartRouter?.removeNavigationStack()
         appStartRouter = nil
         
         mainTabbar = MainTabBarController()
         
         mainTabbar?.signOut = {
+            AppData.accessToken = ""
             self.start()
             UIView.transition(with: self.window, duration: 0.25, options: .transitionCrossDissolve, animations: nil)
-            print("sign out")
         }
         
         mainTabbar?.setupVCs()
-                
+        
         self.window.rootViewController = mainTabbar
-
+        self.window.makeKeyAndVisible()
+        
         UIView.transition(with: window,
                           duration: 0.5,
                           options: [.curveLinear, .transitionFlipFromLeft],
@@ -64,11 +64,13 @@ protocol StartRouter: AnyObject {
 }
 
 final class AppStartRouter {
-
+    
     var onShowMainScreen: VoidClouser?
     let navigationController: UINavigationController
+    let window: UIWindow
     
     required init(window: UIWindow) {
+        self.window = window
         navigationController = UINavigationController()
         window.rootViewController = navigationController
     }
@@ -76,37 +78,43 @@ final class AppStartRouter {
     // MARK: - Public methods
     
     func start() {
-        checkNetwork { [weak self] in
-            if AppData.accessToken.isEmpty {
-                self?.showAuth()
-            } else {
-                self?.onShowMainScreen?()
-            }
+        if AppData.accessToken.isEmpty {
+            self.showAuth()
+        } else {
+            self.onShowMainScreen?()
         }
+        
+        // TODO: Подумать куда вынести
+        //        checkNetwork { [weak self] in
+        //            if AppData.accessToken.isEmpty {
+        //                self?.showAuth()
+        //            } else {
+        //                self?.onShowMainScreen?()
+        //            }
+        //        }
     }
-    
+     
     func removeNavigationStack() {
         navigationController.viewControllers = []
     }
     
-    // MARK: - Private methods
-    
-    private func checkNetwork(completion: @escaping VoidClouser) {
-        let baseURL = BaseURL()
-        
-        baseURL.url.сheckWebsiteAvailability { [weak self] isAvailability in
-            if isAvailability {
-                DispatchQueue.main.async {
-                    completion()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    let noConnectionController = NoConnectionBuilder.build(completion: completion)
-                    self?.navigationController.pushViewController(noConnectionController, animated: true)
-                }
-            }
-        }
-    }
+    // TODO: Подумать куда вынести
+    //    private func checkNetwork(completion: @escaping VoidClouser) {
+    //        let baseURL = BaseURL()
+    //        completion()
+    //        //        baseURL.url.сheckWebsiteAvailability { [weak self] isAvailability in
+    //        //            if isAvailability {
+    //        //                DispatchQueue.main.async {
+    //        //                    completion()
+    //        //                }
+    //        //            } else {
+    //        //                DispatchQueue.main.async {
+    //        //                    let noConnectionController = NoConnectionBuilder.build(completion: completion)
+    //        //                    self?.navigationController.pushViewController(noConnectionController, animated: true)
+    //        //                }
+    //        //            }
+    //        //        }
+    //    }
     
     deinit {
         print("deinit AppStartRouter")
@@ -117,12 +125,14 @@ final class AppStartRouter {
 
 extension AppStartRouter: StartRouter {
     func showAuth() {
-        let controller = AuthBuilder.build(router: self)
+        window.makeKeyAndVisible()
+        let controller = Builders.authBuild(router: self)
         navigationController.setViewControllers([controller], animated: true)
+        
     }
     
     func showSignUp() {
-        let controller = SignUpBuilder.build(router: self)
+        let controller = Builders.signUpBuild(router: self)
         navigationController.pushViewController(controller, animated: true)
     }
     

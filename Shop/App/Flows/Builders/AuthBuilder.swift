@@ -7,13 +7,13 @@
 
 import UIKit
 
-class AuthBuilder {
-    static func build(router: StartRouter) -> UIViewController {
-        let requestFactory = RequestFactory().makeAuthRequestFatory()
-        let presenter = AuthPresenter(router: router, requestFactory: requestFactory)
-        let viewController = AuthViewController(presenter: presenter)
-        presenter.viewInput = viewController
-        
-        return viewController
-    }
-}
+//class AuthBuilder {
+//    static func build(router: StartRouter) -> UIViewController {
+//        let requestFactory = RequestFactory().makeAuthRequestFatory()
+//        let presenter = AuthPresenter(router: router, requestFactory: requestFactory)
+//        let viewController = AuthViewController(presenter: presenter)
+//        presenter.viewInput = viewController
+//        
+//        return viewController
+//    }
+//}

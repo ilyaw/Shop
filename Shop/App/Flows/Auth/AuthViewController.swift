@@ -153,10 +153,10 @@ class AuthViewController: UIViewController {
 extension AuthViewController: AuthViewInput {
     
     func showMainTabbar() {
-        let mainTabbar = MainTabBar()
-        mainTabbar.modalPresentationStyle = .fullScreen
-        
-        self.present(mainTabbar, animated: true, completion: nil)
+//        let mainTabbar = MainTabBar()
+//        mainTabbar.modalPresentationStyle = .fullScreen
+//
+//        self.present(mainTabbar, animated: true, completion: nil)
     }
     
     func showError(error: String) {

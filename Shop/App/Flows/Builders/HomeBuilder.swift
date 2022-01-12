@@ -6,10 +6,11 @@
 //
 
 import UIKit
-
-class HomeBuilder {
-    static func build() -> UIViewController {
-        let controller = HomeViewController()
-        return controller
-    }
-}
+//
+//class HomeBuilder {
+//    static func build() -> UIViewController {
+//        let controller = HomeViewController()
+//        
+//        return controller
+//    }
+//}

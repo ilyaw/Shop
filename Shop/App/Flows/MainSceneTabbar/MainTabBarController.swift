@@ -17,23 +17,23 @@ class MainTabBarController: UITabBarController {
         //        tabBar.tintColor = .label
         //        setupVCs()
     }
-        
+    
     func setupVCs() {
         let homeNavigation = createNavController(title: "Home", image: UIImage(systemName: "house"))
         let cartNavigation = createNavController(title: "Cart", image: UIImage(systemName: "cart"))
         let profileNavigation = createNavController(title: "Profile", image: UIImage(systemName: "person"))
         
-//        let homeController = Builders.homeBuild(navigationController: homeNavigation)
-//        let cartController = Builders.cartBuild(navigationController: cartNavigation)
-//        let profileController = Builders.profileBuild(navigationController: profileNavigation, signOut: signOut)
-//
-//        homeNavigation.setViewControllers([homeController], animated: true)
-//        cartNavigation.setViewControllers([cartController], animated: true)
-//        profileNavigation.setViewControllers([profileController], animated: true)
-//
-//        viewControllers = [
-//            homeNavigation, cartNavigation, profileNavigation
-//        ]
+        let homeController = Builders.homeBuild(navigationController: homeNavigation)
+        let cartController = Builders.cartBuild(navigationController: cartNavigation)
+        let profileController = Builders.profileBuild(navigationController: profileNavigation, signOut: signOut)
+        
+        homeNavigation.setViewControllers([homeController], animated: true)
+        cartNavigation.setViewControllers([cartController], animated: true)
+        profileNavigation.setViewControllers([profileController], animated: true)
+        
+        viewControllers = [
+            homeNavigation, cartNavigation, profileNavigation
+        ]
     }
     
     private func createNavController(title: String, image: UIImage?) -> UINavigationController {

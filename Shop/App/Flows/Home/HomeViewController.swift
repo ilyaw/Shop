@@ -9,9 +9,16 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    var presenter: HomePresenterOutput?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+        navigationItem.title = "Home"        
+        view.backgroundColor = .systemBackground
+    }
+    
+    deinit {
+        print("deinit HomeViewController")
     }
 }
