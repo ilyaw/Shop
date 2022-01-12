@@ -9,6 +9,14 @@ import UIKit
 
 extension UIColor {
     
+//    var errorValidColor: UIColor {
+//        return #colorLiteral(red: 0.5783785502, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
+//    }
+    
+    static func errorValidColor() -> UIColor {
+        return #colorLiteral(red: 0.5783785502, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
+    }
+    
     static func buttonRed() -> UIColor {
         return #colorLiteral(red: 0.8156862745, green: 0.007843137255, blue: 0.1058823529, alpha: 1)
     }

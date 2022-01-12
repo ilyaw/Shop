@@ -31,7 +31,7 @@ final class AppManager {
         appStartRouter?.start()
     }
     
-    func startMainScreen(animated: Bool = false) {
+    func startMainScreen() {
         appStartRouter?.removeNavigationStack()
         appStartRouter = nil
         
@@ -39,6 +39,8 @@ final class AppManager {
         
         mainTabbar?.signOut = {
             AppData.accessToken = ""
+            AppData.username = ""
+            
             self.start()
             UIView.transition(with: self.window, duration: 0.25, options: .transitionCrossDissolve, animations: nil)
         }
@@ -46,7 +48,10 @@ final class AppManager {
         mainTabbar?.setupVCs()
         
         self.window.rootViewController = mainTabbar
-        self.window.makeKeyAndVisible()
+        
+        if !self.window.isKeyWindow {
+            self.window.makeKeyAndVisible()
+        }
         
         UIView.transition(with: window,
                           duration: 0.5,
@@ -93,7 +98,7 @@ final class AppStartRouter {
         //            }
         //        }
     }
-     
+    
     func removeNavigationStack() {
         navigationController.viewControllers = []
     }

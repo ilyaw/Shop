@@ -16,7 +16,6 @@ protocol AuthViewInput: AnyObject {
     var passwordTextField: OneLineTextField { get }
     
     func showError(error: String)
-    func showMainTabbar()
     func showRegisterController(to controller: UIViewController)
 }
 
@@ -81,7 +80,8 @@ class AuthPresenter {
     }
     
     private func showActivityIndicator(isShow: Bool) {
-        isShow ? viewInput?.activityIndicatorView.startAnimating() :   viewInput?.activityIndicatorView.stopAnimating()
+        guard let view = viewInput else { return }
+        isShow ? view.activityIndicatorView.startAnimating() : view.activityIndicatorView.stopAnimating()
     }
     
     @objc private func keyboardWasShown(notification: Notification) {
@@ -142,8 +142,6 @@ class AuthPresenter {
     
     @objc private func didTapSignUp() {
         router.showSignUp()
-//        let registerController = SignUpBuilder.build()
-//        viewInput?.showRegisterController(to: registerController)
     }
     
     deinit {

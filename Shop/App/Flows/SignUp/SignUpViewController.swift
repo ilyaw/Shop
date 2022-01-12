@@ -41,7 +41,7 @@ class SignUpViewController: UIViewController {
         
         self.view = SignUpView(frame: view.bounds)
         presenter.configureController()
-        setupDelegate()
+        setupDelegates()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +58,7 @@ class SignUpViewController: UIViewController {
     
     // MARK: - Private methods
     
-    private func setupDelegate() {
+    private func setupDelegates() {
         signUpView.loginTextField.delegate = self
         signUpView.nameTextField.delegate = self
         signUpView.phoneNumberTextField.delegate = self
@@ -73,10 +73,6 @@ extension SignUpViewController: SignUpViewInput {
         
     func showError(error: String) {
         self.showAlert(with: error, title: "🥲")
-    }
-    
-    func showMainTabbar() {
-        
     }
 }
 

@@ -10,7 +10,6 @@ import UIKit
 protocol SignUpViewInput: AnyObject {
     var signUpView: SignUpView { get }
     func showError(error: String)
-    func showMainTabbar()
 }
 
 protocol SignUpViewOutput: AnyObject {
@@ -24,6 +23,10 @@ protocol SignUpViewOutput: AnyObject {
 }
 
 class SignUpPresenter {
+    
+    enum Tag: Int {
+        case valid, invalid
+    }
     
     // MARK: - Public properties
     
@@ -40,6 +43,7 @@ class SignUpPresenter {
     // MARK: - Private methods
     
     @objc private func keyboardWasShown(notification: Notification) {
+        
         guard let info = notification.userInfo as NSDictionary?,
               let keyboardFrameValue = info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue
         else { return }
@@ -61,12 +65,16 @@ class SignUpPresenter {
     }
     
     @objc private func didTapSignUp() {
-        guard let profile = generateProfile() else {
+        guard checkValidFields(), let profile = generateProfile() else {
             viewInput?.showError(error: "Проверьте обязательные поля")
             return
         }
         
-        requestRegistration(for: profile)
+        showActivityIndicator(isShow: true)
+
+        requestRegistration(for: profile) { [weak self] in
+            self?.showActivityIndicator(isShow: false)
+        }
     }
     
     private func generateProfile() -> ProfileResult? {
@@ -90,7 +98,23 @@ class SignUpPresenter {
         return profile
     }
     
-    private func requestRegistration(for profile: ProfileResult) {
+    private func checkValidFields() -> Bool {
+        guard let view = viewInput?.signUpView else {  return false  }
+        
+        let validLabels = [view.loginValidLabel,
+                           view.nameValidLabel,
+                           view.phoneValidLabel,
+                           view.cardValidLabel,
+                           view.passwordValidLabel]
+        
+        for validLabel in validLabels where validLabel.tag == Tag.invalid.rawValue {
+            return false
+        }
+        
+        return true
+    }
+    
+    private func requestRegistration(for profile: ProfileResult, completion: VoidClouser?) {
         requestFactory.register(for: profile, completionHandler: { [weak self] response in
             switch response.result {
             case let .success(registration):
@@ -114,6 +138,10 @@ class SignUpPresenter {
                     self?.viewInput?.showError(error: error.localizedDescription)
                 }
             }
+            
+            DispatchQueue.main.async {
+                completion?()
+            }
         })
     }
     
@@ -132,14 +160,17 @@ class SignUpPresenter {
         } else {
             result = text
         }
+        
         textField.text = result
         
         if result.isValid(validType: validType) {
             label.text = viewInput?.signUpView.validSymbol
             label.textColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0, alpha: 1)
+            label.tag = Tag.valid.rawValue
         } else {
             label.text = wrongMessage
             label.textColor = #colorLiteral(red: 0.5783785502, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
+            label.tag = Tag.invalid.rawValue
         }
     }
     
@@ -166,9 +197,11 @@ class SignUpPresenter {
         if result.count == 18 {
             label.text = viewInput?.signUpView.validSymbol
             label.textColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0, alpha: 1)
+            label.tag = Tag.valid.rawValue
         } else {
             label.text = "Неверный формат..."
             label.textColor = #colorLiteral(red: 0.5783785502, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
+            label.tag = Tag.invalid.rawValue
         }
         
         return result
@@ -197,15 +230,23 @@ class SignUpPresenter {
         if result.count == 19 {
             label.text = viewInput?.signUpView.validSymbol
             label.textColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0, alpha: 1)
+            label.tag = Tag.valid.rawValue
         } else if result.isEmpty {
             label.text = "Необязательно"
             label.textColor = .label
+            label.tag = Tag.valid.rawValue
         } else {
             label.text = "Неверный формат..."
             label.textColor = #colorLiteral(red: 0.5783785502, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
+            label.tag = Tag.invalid.rawValue
         }
         
         return result
+    }
+    
+    private func showActivityIndicator(isShow: Bool) {
+        guard let view = viewInput?.signUpView else { return }
+        isShow ? view.activityIndicatorView.startAnimating() : view.activityIndicatorView.stopAnimating()
     }
 }
 
@@ -254,7 +295,7 @@ extension SignUpPresenter: SignUpViewOutput {
             setTextField(textField: view.passwordTextField,
                          label: view.passwordValidLabel,
                          validType: .password,
-                         wrongMessage: "По 1 сим.: a-z, A-Z, 0-9 и мин. длинна: 6 сим.",
+                         wrongMessage: "a-z, A-Z, 0-9 и мин. длинна: 6 сим.",
                          string: string,
                          range: range)
         default:
