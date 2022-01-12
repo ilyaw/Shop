@@ -186,29 +186,3 @@ class SignUpView: UIView {
         ])
     }
 }
-
-// MARK: - SwiftUI
-
-import SwiftUI
-
-struct RegisterProvider: PreviewProvider {
-    static var previews: some View {
-        ContainerView().edgesIgnoringSafeArea(.all)
-    }
-    
-    struct ContainerView: UIViewControllerRepresentable {
-        
-        let viewController = SignUpViewController(presenter: SignUpPresenter(),
-                                                  requestFactory: RequestFactory().makeUserRequestFactory())
-        
-        func makeUIViewController(
-            context: UIViewControllerRepresentableContext<RegisterProvider.ContainerView>
-        ) -> SignUpViewController {
-            return viewController
-        }
-        
-        func updateUIViewController(_ uiViewController: RegisterProvider.ContainerView.UIViewControllerType,
-                                    context: UIViewControllerRepresentableContext<RegisterProvider.ContainerView>) {
-        }
-    }
-}

@@ -9,30 +9,29 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     
-    // MARK: - Inits
+    // MARK: - Public properties
     
-    required init(presenter: SignUpViewOutput, requestFactory: UserRequestFactory) {
-        self.presenter = presenter
-        self.requestFactory = requestFactory
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Private properties
-    
-    private let presenter: SignUpViewOutput
-    let requestFactory: UserRequestFactory
-
     var signUpView: SignUpView {
         guard let view = self.view as? SignUpView else {
             return SignUpView(frame: self.view.bounds)
         }
         
         return view
+    }
+    
+    // MARK: - Private properties
+    
+    private let presenter: SignUpViewOutput
+
+    // MARK: - Inits
+    
+    init(presenter: SignUpViewOutput) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Lifecycle
@@ -73,7 +72,7 @@ class SignUpViewController: UIViewController {
 extension SignUpViewController: SignUpViewInput {
         
     func showError(error: String) {
-        
+        self.showAlert(with: error, title: "🥲")
     }
     
     func showMainTabbar() {

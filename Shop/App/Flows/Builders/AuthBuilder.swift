@@ -8,15 +8,12 @@
 import UIKit
 
 class AuthBuilder {
-    static func build() -> UIViewController {
-        let navigation = UINavigationController()
-        let presenter = AuthPresenter()
+    static func build(router: StartRouter) -> UIViewController {
         let requestFactory = RequestFactory().makeAuthRequestFatory()
-        let viewController = AuthViewController(presenter: presenter,
-                                                requestFactory: requestFactory)
+        let presenter = AuthPresenter(router: router, requestFactory: requestFactory)
+        let viewController = AuthViewController(presenter: presenter)
         presenter.viewInput = viewController
         
-        navigation.viewControllers = [viewController]
-        return navigation
+        return viewController
     }
 }

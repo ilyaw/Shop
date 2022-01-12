@@ -8,14 +8,13 @@
 import UIKit
 
 protocol SignUpViewInput: AnyObject {
-    init(presenter: SignUpViewOutput, requestFactory: UserRequestFactory)
     var signUpView: SignUpView { get }
-    var requestFactory: UserRequestFactory { get }
     func showError(error: String)
     func showMainTabbar()
 }
 
 protocol SignUpViewOutput: AnyObject {
+    init(router: StartRouter, requestFactory: UserRequestFactory)
     func configureController()
     func addObserverForKeyboardNotification()
     func removeObserverForKeyboardNotification()
@@ -29,6 +28,14 @@ class SignUpPresenter {
     // MARK: - Public properties
     
     weak var viewInput: (UIViewController & SignUpViewInput)?
+    
+    let router: StartRouter
+    let requestFactory: UserRequestFactory
+    
+    required init(router: StartRouter, requestFactory: UserRequestFactory) {
+        self.router = router
+        self.requestFactory = requestFactory
+    }
     
     // MARK: - Private methods
     
@@ -54,7 +61,52 @@ class SignUpPresenter {
     }
     
     @objc private func didTapSignUp() {
+        guard let profile = generateProfile() else {
+            viewInput?.showError(error: "Проверьте обязательные поля")
+            return
+        }
         
+        requestRegistration(for: profile)
+    }
+    
+    private func generateProfile() -> ProfileResult? {
+        guard let view = viewInput?.signUpView,
+              let login = view.loginTextField.text,
+              !login.isEmpty,
+              let name = view.nameTextField.text,
+              !name.isEmpty,
+              let phone = view.phoneNumberTextField.text,
+              !phone.isEmpty,
+              let card = view.cardTextField.text,
+              let password = view.passwordTextField.text,
+              !password.isEmpty else { return nil }
+        
+        let profile = ProfileResult(login: login,
+                                    password: password,
+                                    fullName: name,
+                                    phone: phone,
+                                    creditCard: card.isEmpty ? nil : card)
+        
+        return profile
+    }
+    
+    private func requestRegistration(for profile: ProfileResult) {
+        requestFactory.register(for: profile, completionHandler: { [weak self] response in
+            switch response.result {
+            case let .success(registration):
+                if registration.result == 1 {
+                    print(registration)
+                } else if let errorMessage = registration.errorMessage {
+                    DispatchQueue.main.async {
+                        self?.viewInput?.showError(error: errorMessage)
+                    }
+                }
+            case let .failure(error):
+                DispatchQueue.main.async {
+                    self?.viewInput?.showError(error: error.localizedDescription)
+                }
+            }
+        })
     }
     
     private func setTextField(textField: UITextField,
@@ -158,7 +210,6 @@ extension SignUpPresenter: SignUpViewOutput {
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
-        
         guard let view = viewInput?.signUpView else { return false }
         
         switch textField {

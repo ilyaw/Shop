@@ -9,6 +9,10 @@ import UIKit
 
 class NoConnectionViewController: UIViewController {
     
+    // MARK: - Public properties
+    
+    var connectionWasRestored: VoidClouser?
+    
     // MARK: - Private properties
     
     private let errorMessageLabel: UILabel = {
@@ -42,8 +46,7 @@ class NoConnectionViewController: UIViewController {
         baseURL.url.сheckWebsiteAvailability { [weak self] isValid in
             if isValid {
                 DispatchQueue.main.async {
-                    let appStart = AppStartManager()
-                    appStart.presentScreen()
+                    self?.connectionWasRestored?()
                 }
             } else {
                 DispatchQueue.main.async {
@@ -89,30 +92,5 @@ class NoConnectionViewController: UIViewController {
     
     private func setTamic() {
         _ = [errorMessageLabel, reconnectButton].map { $0.translatesAutoresizingMaskIntoConstraints = false }
-    }
-}
-
-// MARK: - SwiftUI
-
-import SwiftUI
-
-struct NoConnectionProvider: PreviewProvider {
-    static var previews: some View {
-        ContainerView().edgesIgnoringSafeArea(.all)
-    }
-    
-    struct ContainerView: UIViewControllerRepresentable {
-        
-        let viewController = NoConnectionViewController()
-        
-        func makeUIViewController(
-            context: UIViewControllerRepresentableContext<NoConnectionProvider.ContainerView>
-        ) -> NoConnectionViewController {
-            return viewController
-        }
-        
-        func updateUIViewController(_ uiViewController: NoConnectionProvider.ContainerView.UIViewControllerType,
-                                    context: UIViewControllerRepresentableContext<NoConnectionProvider.ContainerView>) {
-        }
     }
 }

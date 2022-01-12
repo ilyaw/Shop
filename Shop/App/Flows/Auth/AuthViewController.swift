@@ -10,9 +10,7 @@ import UIKit
 class AuthViewController: UIViewController {
     
     // MARK: - Public properties
-    
-    var requestFactory: AuthRequestFactory
-    
+
     lazy var activityIndicatorView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(frame: view.bounds)
         view.style = .large
@@ -47,10 +45,8 @@ class AuthViewController: UIViewController {
     
     // MARK: - Inits
     
-    init(presenter: AuthViewOutput, requestFactory: AuthRequestFactory) {
+    init(presenter: AuthViewOutput) {
         self.presenter = presenter
-        self.requestFactory = requestFactory
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -169,31 +165,5 @@ extension AuthViewController: AuthViewInput {
     
     func showRegisterController(to controller: UIViewController) {
         self.navigationController?.pushViewController(controller, animated: true)
-    }
-}
-
-// MARK: - SwiftUI
-
-import SwiftUI
-
-struct MainProvider: PreviewProvider {
-    static var previews: some View {
-        ContainerView().edgesIgnoringSafeArea(.all)
-    }
-    
-    struct ContainerView: UIViewControllerRepresentable {
-        
-        let viewController = AuthViewController(presenter: AuthPresenter(),
-                                                requestFactory: RequestFactory().makeAuthRequestFatory())
-        
-        func makeUIViewController(
-            context: UIViewControllerRepresentableContext<MainProvider.ContainerView>
-        ) -> AuthViewController {
-            return viewController
-        }
-        
-        func updateUIViewController(_ uiViewController: MainProvider.ContainerView.UIViewControllerType,
-                                    context: UIViewControllerRepresentableContext<MainProvider.ContainerView>) {
-        }
     }
 }

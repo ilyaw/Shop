@@ -8,7 +8,6 @@
 import UIKit
 
 protocol AuthViewInput: AnyObject {
-    var requestFactory: AuthRequestFactory { get }
     var scrollView: UIScrollView { get }
     var activityIndicatorView: UIActivityIndicatorView { get }
     var signInButton: UIButton { get }
@@ -22,6 +21,7 @@ protocol AuthViewInput: AnyObject {
 }
 
 protocol AuthViewOutput: AnyObject {
+    init(router: StartRouter, requestFactory: AuthRequestFactory)
     func addObserverForKeyboardNotification()
     func removeObserverForKeyboardNotification()
     func addTapGestureForHideKeybaord()
@@ -35,17 +35,31 @@ class AuthPresenter {
     
     weak var viewInput: (UIViewController & AuthViewInput)?
     
+    let router: StartRouter
+    let requestFactory: AuthRequestFactory
+    
+    // MARK: - Inits
+    
+    required init(router: StartRouter, requestFactory: AuthRequestFactory) {
+        self.router = router
+        self.requestFactory = requestFactory
+    }
+    
     // MARK: - Private methods
     
     private func requestAuth(userName: String, password: String, completion: @escaping () -> Void) {
-        viewInput?.requestFactory.login(userName: userName, password: password) { [weak self] response in
+        requestFactory.login(userName: userName, password: password) { [weak self] response in
             guard let self = self else { return }
             
             switch response.result {
             case .success(let login):
                 DispatchQueue.main.async {
-                    AppData.accessToken = login.user.accessToken
-                    AppData.username = login.user.fullName
+                    guard let user = login.user else {
+                        self.viewInput?.showError(error: "Ошибка в авторизации")
+                        return
+                    }
+                    AppData.accessToken = user.accessToken
+                    AppData.username = user.fullName
                     
                     self.viewInput?.showMainTabbar()
                 }
@@ -127,15 +141,16 @@ class AuthPresenter {
     }
     
     @objc private func didTapSignUp() {
-        let registerController = SignUpBuilder.build()
-        viewInput?.showRegisterController(to: registerController)
+        router.showSignUp()
+//        let registerController = SignUpBuilder.build()
+//        viewInput?.showRegisterController(to: registerController)
     }
 }
 
 // MARK: - AuthPresenter + AuthViewOutput
 
 extension AuthPresenter: AuthViewOutput {
-    
+
     // MARK: - Public methods
     
     func addObserverForKeyboardNotification() {

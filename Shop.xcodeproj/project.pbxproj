@@ -38,6 +38,8 @@
 		0929747927613A5C00ABF4A2 /* CatalogResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0929747827613A5C00ABF4A2 /* CatalogResult.swift */; };
 		0929747B27613BDD00ABF4A2 /* ProductRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0929747A27613BDD00ABF4A2 /* ProductRequestFactory.swift */; };
 		0929747D27613C1300ABF4A2 /* ProductResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0929747C27613C1300ABF4A2 /* ProductResult.swift */; };
+		09404BAE278F39B400A925AF /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09404BAD278F39B400A925AF /* AppManager.swift */; };
+		09404BB1278F3EC900A925AF /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09404BB0278F3EC900A925AF /* MainTabBarController.swift */; };
 		094E81F72761142100710310 /* AuthRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E81F62761142100710310 /* AuthRequestTests.swift */; };
 		094E81F92761143600710310 /* UserRequestsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E81F82761143600710310 /* UserRequestsTests.swift */; };
 		09743B2B276CCC480030AAE0 /* FeedbackRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09743B2A276CCC480030AAE0 /* FeedbackRequestTests.swift */; };
@@ -72,6 +74,7 @@
 		09D8DA642783CBF4005BBF3F /* UIApplication + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D8DA632783CBF4005BBF3F /* UIApplication + Extension.swift */; };
 		09EAE7822787496C00D825BB /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EAE7812787496C00D825BB /* SignUpView.swift */; };
 		09EF45A32787B81B0040623F /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EF45A22787B81B0040623F /* String + Extension.swift */; };
+		09EF45A5278B3E3A0040623F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EF45A4278B3E3A0040623F /* Router.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +125,8 @@
 		0929747827613A5C00ABF4A2 /* CatalogResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogResult.swift; sourceTree = "<group>"; };
 		0929747A27613BDD00ABF4A2 /* ProductRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRequestFactory.swift; sourceTree = "<group>"; };
 		0929747C27613C1300ABF4A2 /* ProductResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductResult.swift; sourceTree = "<group>"; };
+		09404BAD278F39B400A925AF /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
+		09404BB0278F3EC900A925AF /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		094E81F62761142100710310 /* AuthRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestTests.swift; sourceTree = "<group>"; };
 		094E81F82761143600710310 /* UserRequestsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestsTests.swift; sourceTree = "<group>"; };
 		09743B2A276CCC480030AAE0 /* FeedbackRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackRequestTests.swift; sourceTree = "<group>"; };
@@ -162,6 +167,7 @@
 		09D8DA632783CBF4005BBF3F /* UIApplication + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extension.swift"; sourceTree = "<group>"; };
 		09EAE7812787496C00D825BB /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		09EF45A22787B81B0040623F /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
+		09EF45A4278B3E3A0040623F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +239,14 @@
 				09222F1B27834F8100505598 /* NoConnectionViewController.swift */,
 			);
 			path = NoConnection;
+			sourceTree = "<group>";
+		};
+		09404BAF278F3EB600A925AF /* MainSceneTabbar */ = {
+			isa = PBXGroup;
+			children = (
+				09404BB0278F3EC900A925AF /* MainTabBarController.swift */,
+			);
+			path = MainSceneTabbar;
 			sourceTree = "<group>";
 		};
 		099B34EA275FC3B400D8D8D3 /* TestPlanes */ = {
@@ -386,6 +400,7 @@
 		09D7FD7027590AFC000A98C9 /* BusinessLogic */ = {
 			isa = PBXGroup;
 			children = (
+				09EF45A4278B3E3A0040623F /* Router.swift */,
 				09064C9427866AE000E605A6 /* Presenters */,
 				09D7FDAB275CDD93000A98C9 /* Network */,
 				09064C8D27864A2200E605A6 /* Storage */,
@@ -413,6 +428,8 @@
 			isa = PBXGroup;
 			children = (
 				09B7FF85275D141C000E1B5F /* AppStartManager.swift */,
+				09404BAD278F39B400A925AF /* AppManager.swift */,
+				09404BAF278F3EB600A925AF /* MainSceneTabbar */,
 				09B7FF81275D12C7000E1B5F /* Builders */,
 				09D7FDBA275D0614000A98C9 /* Auth */,
 				09064C9527866D2600E605A6 /* SignUp */,
@@ -635,11 +652,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09404BB1278F3EC900A925AF /* MainTabBarController.swift in Sources */,
 				09222F1C27834F8100505598 /* NoConnectionViewController.swift in Sources */,
 				090EDF52278522380099295D /* OneLineTextField.swift in Sources */,
 				0929747927613A5C00ABF4A2 /* CatalogResult.swift in Sources */,
 				09D7FDB5275CDDE6000A98C9 /* ProfileResult.swift in Sources */,
 				09289F3827839889001B5830 /* AuthBuilder.swift in Sources */,
+				09EF45A5278B3E3A0040623F /* Router.swift in Sources */,
 				090EDF5A278523850099295D /* UIButton + Extension.swift in Sources */,
 				09D8DA642783CBF4005BBF3F /* UIApplication + Extension.swift in Sources */,
 				09EF45A32787B81B0040623F /* String + Extension.swift in Sources */,
@@ -667,6 +686,7 @@
 				09B03398276CD65000F68070 /* ProductFeedback.swift in Sources */,
 				09064C9C2786762700E605A6 /* RegisterPresenter.swift in Sources */,
 				09222F192783348700505598 /* LogMessage.swift in Sources */,
+				09404BAE278F39B400A925AF /* AppManager.swift in Sources */,
 				0929747B27613BDD00ABF4A2 /* ProductRequestFactory.swift in Sources */,
 				09D7FD412758FF83000A98C9 /* AuthViewController.swift in Sources */,
 				09064C9727866D3600E605A6 /* SignUpViewController.swift in Sources */,

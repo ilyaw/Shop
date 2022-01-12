@@ -8,11 +8,10 @@
 import UIKit
 
 class SignUpBuilder {
-    static func build() -> UIViewController {
-        let presenter = SignUpPresenter()
+    static func build(router: StartRouter) -> UIViewController {
         let requestFactory = RequestFactory().makeUserRequestFactory()
-        let viewController = SignUpViewController(presenter: presenter,
-                                                requestFactory: requestFactory)
+        let presenter = SignUpPresenter(router: router, requestFactory: requestFactory)
+        let viewController = SignUpViewController(presenter: presenter)
         presenter.viewInput = viewController
         
         return viewController
