@@ -52,6 +52,7 @@
 		09743B2D276CCD070030AAE0 /* FeedbackRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09743B2C276CCD070030AAE0 /* FeedbackRequestFactory.swift */; };
 		09743B2F276CCF000030AAE0 /* FeedbackResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09743B2E276CCF000030AAE0 /* FeedbackResult.swift */; };
 		0980C3B827613E8D00EDEB76 /* ProductShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0980C3B727613E8D00EDEB76 /* ProductShop.swift */; };
+		098323B22790B9C800C21054 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098323B12790B9C800C21054 /* RegexTests.swift */; };
 		099B34E8275E618700D8D8D3 /* UserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099B34E7275E618700D8D8D3 /* UserResult.swift */; };
 		09B03398276CD65000F68070 /* ProductFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B03397276CD65000F68070 /* ProductFeedback.swift */; };
 		09B7FF80275D077F000E1B5F /* AuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B7FF7F275D077F000E1B5F /* AuthPresenter.swift */; };
@@ -141,6 +142,7 @@
 		09743B2C276CCD070030AAE0 /* FeedbackRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackRequestFactory.swift; sourceTree = "<group>"; };
 		09743B2E276CCF000030AAE0 /* FeedbackResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackResult.swift; sourceTree = "<group>"; };
 		0980C3B727613E8D00EDEB76 /* ProductShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductShop.swift; sourceTree = "<group>"; };
+		098323B12790B9C800C21054 /* RegexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
 		099B34E7275E618700D8D8D3 /* UserResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResult.swift; sourceTree = "<group>"; };
 		099B34E9275FC39A00D8D8D3 /* Unit.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Unit.xctestplan; path = TestPlanes/Unit.xctestplan; sourceTree = SOURCE_ROOT; };
 		099B34EB275FC97C00D8D8D3 /* UI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI.xctestplan; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 				094E81F82761143600710310 /* UserRequestsTests.swift */,
 				09229A5B2761380D00DA4A69 /* ProductRequestTests.swift */,
 				09743B2A276CCC480030AAE0 /* FeedbackRequestTests.swift */,
+				098323B12790B9C800C21054 /* RegexTests.swift */,
 			);
 			path = ShopTests;
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 				09229A5C2761380D00DA4A69 /* ProductRequestTests.swift in Sources */,
 				09743B2B276CCC480030AAE0 /* FeedbackRequestTests.swift in Sources */,
 				094E81F92761143600710310 /* UserRequestsTests.swift in Sources */,
+				098323B22790B9C800C21054 /* RegexTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

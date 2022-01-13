@@ -48,9 +48,9 @@ class UserRequestsTests: XCTestCase {
             switch response.result {
             case .success(let register):
                 XCTAssertEqual(register.result, expressionRegisterUserResultStub.result)
-                XCTAssertEqual(register.user.login, expressionRegisterUserResultStub.user.login)
-                XCTAssertEqual(register.user.fullName, expressionRegisterUserResultStub.user.fullName)
-                XCTAssertFalse(register.user.accessToken.isEmpty)
+                XCTAssertEqual(register.user!.login, expressionRegisterUserResultStub.user!.login)
+                XCTAssertEqual(register.user!.fullName, expressionRegisterUserResultStub.user!.fullName)
+                XCTAssertFalse(register.user!.accessToken.isEmpty)
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
