@@ -63,6 +63,7 @@ class AuthPresenter {
                     self.router.onShowMainScreen?()
                 }
             case .failure(let error):
+                logging(error.localizedDescription)
                 DispatchQueue.main.async {
                     if let statusCode = response.response?.statusCode,
                        statusCode == 401 {

@@ -122,7 +122,7 @@ final class AppStartRouter {
     //    }
     
     deinit {
-        print("deinit AppStartRouter")
+       print("deinit AppStartRouter")
     }
 }
 

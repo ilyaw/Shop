@@ -75,7 +75,6 @@
 		09D7FDB3275CDDDF000A98C9 /* LoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D7FDB2275CDDDF000A98C9 /* LoginResult.swift */; };
 		09D7FDB5275CDDE6000A98C9 /* ProfileResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D7FDB4275CDDE6000A98C9 /* ProfileResult.swift */; };
 		09D7FDB8275CDE9C000A98C9 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 09D7FDB7275CDE9C000A98C9 /* Alamofire */; };
-		09D8DA642783CBF4005BBF3F /* UIApplication + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D8DA632783CBF4005BBF3F /* UIApplication + Extension.swift */; };
 		09EAE7822787496C00D825BB /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EAE7812787496C00D825BB /* SignUpView.swift */; };
 		09EF45A32787B81B0040623F /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EF45A22787B81B0040623F /* String + Extension.swift */; };
 /* End PBXBuildFile section */
@@ -171,7 +170,6 @@
 		09D7FDB0275CDDC9000A98C9 /* RequestFactroy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactroy.swift; sourceTree = "<group>"; };
 		09D7FDB2275CDDDF000A98C9 /* LoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResult.swift; sourceTree = "<group>"; };
 		09D7FDB4275CDDE6000A98C9 /* ProfileResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResult.swift; sourceTree = "<group>"; };
-		09D8DA632783CBF4005BBF3F /* UIApplication + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extension.swift"; sourceTree = "<group>"; };
 		09EAE7812787496C00D825BB /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		09EF45A22787B81B0040623F /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -538,7 +536,6 @@
 			children = (
 				09B7FF89275D40EC000E1B5F /* UIViewController + Extension.swift */,
 				09289F3D2783B55A001B5830 /* URL + Extension.swift */,
-				09D8DA632783CBF4005BBF3F /* UIApplication + Extension.swift */,
 				090EDF532785225F0099295D /* UIFont + Extension.swift */,
 				090EDF55278522900099295D /* UIColor + Extension.swift */,
 				090EDF57278522B10099295D /* UILabel + Extension.swift */,
@@ -718,7 +715,6 @@
 				09404BCA278F507700A925AF /* ProfileViewController.swift in Sources */,
 				09404BB3278F4E7900A925AF /* Builders.swift in Sources */,
 				090EDF5A278523850099295D /* UIButton + Extension.swift in Sources */,
-				09D8DA642783CBF4005BBF3F /* UIApplication + Extension.swift in Sources */,
 				09EF45A32787B81B0040623F /* String + Extension.swift in Sources */,
 				090EDF58278522B10099295D /* UILabel + Extension.swift in Sources */,
 				09B7FF8A275D40EC000E1B5F /* UIViewController + Extension.swift in Sources */,

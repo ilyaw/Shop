@@ -46,14 +46,14 @@ class MainTabBarController: UITabBarController {
     
     func removeNavigationStack() {
         guard let controllers = viewControllers else { return }
-        
+
         for controller in controllers {
             if let controller = controller as? UINavigationController {
                 controller.viewControllers.removeAll()
             }
         }
     }
-    
+
     deinit {
         print("deinit MainTabBarController")
     }

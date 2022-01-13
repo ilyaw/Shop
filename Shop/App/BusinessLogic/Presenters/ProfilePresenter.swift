@@ -12,16 +12,18 @@ protocol ProfilePresenterInput {
 }
 
 protocol ProfilePresenterOutput {
-    init(router: ProfileRouter)
+    init(router: ProfileRouter, signOut: VoidClouser?)
     func didTapSignOut()
 }
 
 class ProfilePresenter: ProfilePresenterOutput {
-    private let router: ProfileRouter
-    var signOut: VoidClouser?
     
-    required init(router: ProfileRouter) {
+    private let router: ProfileRouter
+    private let signOut: VoidClouser?
+    
+    required init(router: ProfileRouter, signOut: VoidClouser?) {
         self.router = router
+        self.signOut = signOut
     }
     
     func didTapSignOut() {

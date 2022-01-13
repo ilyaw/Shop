@@ -107,11 +107,9 @@ class SignUpPresenter {
                            view.cardValidLabel,
                            view.passwordValidLabel]
         
-        for validLabel in validLabels where validLabel.tag == Tag.invalid.rawValue {
-            return false
-        }
+        let isContains = validLabels.contains(where: { $0.tag == Tag.invalid.rawValue })
         
-        return true
+        return isContains ? false : true
     }
     
     private func requestRegistration(for profile: ProfileResult, completion: VoidClouser?) {
@@ -129,11 +127,13 @@ class SignUpPresenter {
                     }
                     
                 } else if let errorMessage = registration.errorMessage {
+                    logging(errorMessage)
                     DispatchQueue.main.async {
                         self?.viewInput?.showError(error: errorMessage)
                     }
                 }
             case let .failure(error):
+                logging(error.localizedDescription)
                 DispatchQueue.main.async {
                     self?.viewInput?.showError(error: error.localizedDescription)
                 }
