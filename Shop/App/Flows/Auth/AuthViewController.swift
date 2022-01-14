@@ -10,7 +10,7 @@ import UIKit
 class AuthViewController: UIViewController {
     
     // MARK: - Public properties
-
+    
     lazy var activityIndicatorView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(frame: view.bounds)
         view.style = .large
@@ -76,10 +76,28 @@ class AuthViewController: UIViewController {
         
         presenter.removeObserverForKeyboardNotification()
     }
+}
+
+// MARK: - AuthViewController + AuthViewInput
+
+extension AuthViewController: AuthViewInput {
+    
+    func showError(error: String) {
+        showAlert(with: error, title: "Неудачно 🥲")
+    }
+    
+    func showRegisterController(to controller: UIViewController) {
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
+// MARK: - AuthViewController private
+
+private extension AuthViewController {
     
     // MARK: - Private methods
     
-    private func setupUI() {
+    func setupUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(activityIndicatorView)
         
@@ -92,7 +110,7 @@ class AuthViewController: UIViewController {
                                                            action: nil)
     }
     
-    private func setupConstraints() {
+    func setupConstraints() {
         let loginStackView = UIStackView(arrangedSubviews: [loginLabel, loginTextField],
                                          axis: .vertical,
                                          spacing: 0)
@@ -133,7 +151,7 @@ class AuthViewController: UIViewController {
             scrollView.bottomAnchor.constraint(equalTo: viewSafeArea.bottomAnchor),
             scrollView.widthAnchor.constraint(equalTo: viewSafeArea.widthAnchor),
             
-            welcomeLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 80),
+            welcomeLabelTopAnchor(),
             welcomeLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             
             stackView.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 80),
@@ -146,17 +164,12 @@ class AuthViewController: UIViewController {
             bottomStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
     }
-}
-
-// MARK: - AuthViewController + AuthViewInput
-
-extension AuthViewController: AuthViewInput {
-        
-    func showError(error: String) {
-        showAlert(with: error, title: "Неудачно 🥲")
-    }
     
-    func showRegisterController(to controller: UIViewController) {
-        self.navigationController?.pushViewController(controller, animated: true)
+    func welcomeLabelTopAnchor() -> NSLayoutConstraint {
+        if UIDevice.current.name == "iPod touch (7th generation)" {
+            return welcomeLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20)
+        } else {
+            return welcomeLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 80)
+        }
     }
 }

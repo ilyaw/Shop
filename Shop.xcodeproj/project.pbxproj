@@ -53,6 +53,9 @@
 		09743B2F276CCF000030AAE0 /* FeedbackResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09743B2E276CCF000030AAE0 /* FeedbackResult.swift */; };
 		0980C3B827613E8D00EDEB76 /* ProductShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0980C3B727613E8D00EDEB76 /* ProductShop.swift */; };
 		098323B22790B9C800C21054 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098323B12790B9C800C21054 /* RegexTests.swift */; };
+		098323B42791497500C21054 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098323B32791497500C21054 /* ProfileView.swift */; };
+		098323B627914A9600C21054 /* ViewSpecificController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098323B527914A9600C21054 /* ViewSpecificController.swift */; };
+		098323B82791E86A00C21054 /* CardInfoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098323B72791E86A00C21054 /* CardInfoResult.swift */; };
 		099B34E8275E618700D8D8D3 /* UserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099B34E7275E618700D8D8D3 /* UserResult.swift */; };
 		09B03398276CD65000F68070 /* ProductFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B03397276CD65000F68070 /* ProductFeedback.swift */; };
 		09B7FF80275D077F000E1B5F /* AuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B7FF7F275D077F000E1B5F /* AuthPresenter.swift */; };
@@ -143,6 +146,9 @@
 		09743B2E276CCF000030AAE0 /* FeedbackResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackResult.swift; sourceTree = "<group>"; };
 		0980C3B727613E8D00EDEB76 /* ProductShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductShop.swift; sourceTree = "<group>"; };
 		098323B12790B9C800C21054 /* RegexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
+		098323B32791497500C21054 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		098323B527914A9600C21054 /* ViewSpecificController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSpecificController.swift; sourceTree = "<group>"; };
+		098323B72791E86A00C21054 /* CardInfoResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoResult.swift; sourceTree = "<group>"; };
 		099B34E7275E618700D8D8D3 /* UserResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResult.swift; sourceTree = "<group>"; };
 		099B34E9275FC39A00D8D8D3 /* Unit.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Unit.xctestplan; path = TestPlanes/Unit.xctestplan; sourceTree = SOURCE_ROOT; };
 		099B34EB275FC97C00D8D8D3 /* UI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI.xctestplan; sourceTree = "<group>"; };
@@ -286,6 +292,7 @@
 		09404BC7278F503C00A925AF /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				098323B32791497500C21054 /* ProfileView.swift */,
 				09404BC9278F507700A925AF /* ProfileViewController.swift */,
 			);
 			path = Profile;
@@ -332,6 +339,7 @@
 				0929747827613A5C00ABF4A2 /* CatalogResult.swift */,
 				0929747C27613C1300ABF4A2 /* ProductResult.swift */,
 				09743B2E276CCF000030AAE0 /* FeedbackResult.swift */,
+				098323B72791E86A00C21054 /* CardInfoResult.swift */,
 			);
 			path = Result;
 			sourceTree = "<group>";
@@ -420,6 +428,7 @@
 		09D7FD6C27590AB1000A98C9 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				098323B527914A9600C21054 /* ViewSpecificController.swift */,
 				09B7FF87275D20DA000E1B5F /* AppDelegate */,
 				09D7FD7327590B14000A98C9 /* Flows */,
 				09D7FD7227590B0B000A98C9 /* Assembly */,
@@ -730,6 +739,7 @@
 				090EDF542785225F0099295D /* UIFont + Extension.swift in Sources */,
 				0980C3B827613E8D00EDEB76 /* ProductShop.swift in Sources */,
 				09289F1427837CB6001B5830 /* Constant.swift in Sources */,
+				098323B42791497500C21054 /* ProfileView.swift in Sources */,
 				091A1DD1275D4A0F00E62B25 /* ChangeUserDataResult.swift in Sources */,
 				090EDF56278522900099295D /* UIColor + Extension.swift in Sources */,
 				09404BC0278F4FBB00A925AF /* CatalogPresenter.swift in Sources */,
@@ -746,6 +756,7 @@
 				0929747B27613BDD00ABF4A2 /* ProductRequestFactory.swift in Sources */,
 				09404BB6278F4EC800A925AF /* HomeRouter.swift in Sources */,
 				09D7FD412758FF83000A98C9 /* AuthViewController.swift in Sources */,
+				098323B627914A9600C21054 /* ViewSpecificController.swift in Sources */,
 				09064C9727866D3600E605A6 /* SignUpViewController.swift in Sources */,
 				09D5DBA6276A33A90072252C /* Product.swift in Sources */,
 				09D7FDAF275CDDBF000A98C9 /* Auth.swift in Sources */,
@@ -760,6 +771,7 @@
 				09D7FD3D2758FF83000A98C9 /* AppDelegate.swift in Sources */,
 				09404BCC278F508B00A925AF /* ProfilePresenter.swift in Sources */,
 				091A1DCF275D49D800E62B25 /* DefaultResult.swift in Sources */,
+				098323B82791E86A00C21054 /* CardInfoResult.swift in Sources */,
 				09289F3E2783B55A001B5830 /* URL + Extension.swift in Sources */,
 				09D7FD3F2758FF83000A98C9 /* SceneDelegate.swift in Sources */,
 				09064C8C27864A1A00E605A6 /* UserDefaultsStorage.swift in Sources */,

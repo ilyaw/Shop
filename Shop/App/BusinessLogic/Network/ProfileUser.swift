@@ -27,11 +27,26 @@ class ProfileUser: BaseStoreRequest {
             ]
         }
     }
+    
+    private struct CardInfoRequest: RequestRouter {
+        var baseUrl: URL
+        var method: HTTPMethod = .post
+        var path: String = "getCardInfo"
+
+        let accessToken: String
+
+        var parameters: Parameters? {
+            return [
+                "accessToken": accessToken
+            ]
+        }
+    }
 }
 
-// MARK: UserRequestFactory
+// MARK: - ProfileUser + UserRequestFactory
 
 extension ProfileUser: UserRequestFactory {
+    
     func register(for user: ProfileResult, completionHandler: @escaping (AFDataResponse<LoginResult>) -> Void) {
         let registerRequest = UserRequest(baseUrl: url, path: "register", profile: user)
         self.request(request: registerRequest, completionHandler: completionHandler)
@@ -40,5 +55,10 @@ extension ProfileUser: UserRequestFactory {
     func change(for user: ProfileResult, completionHandler: @escaping (AFDataResponse<ChangeUserDataResult>) -> Void) {
         let changeRequest = UserRequest(baseUrl: url, path: "change", profile: user)
         self.request(request: changeRequest, completionHandler: completionHandler)
+    }
+    
+    func getCardInfo(accessToken: String, completionHandler: @escaping (AFDataResponse<CardInfoResponse>) -> Void) {
+        let cardInfoRequst = CardInfoRequest(baseUrl: url, accessToken: accessToken)
+        self.request(request: cardInfoRequst, completionHandler: completionHandler)
     }
 }

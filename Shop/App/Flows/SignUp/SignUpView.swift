@@ -83,13 +83,20 @@ class SignUpView: UIView {
     
     // MARK: - Inits
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    init() {
+        super.init(frame: .zero)
         setupUI {
             setupConstraints()
         }
     }
+    
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        
+//        setupUI {
+//            setupConstraints()
+//        }
+//    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)

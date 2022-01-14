@@ -120,7 +120,7 @@ class SignUpPresenter {
                    let accessToken = registration.user?.accessToken,
                    let name = registration.user?.fullName {
                     AppData.accessToken = accessToken
-                    AppData.username = name
+                    AppData.fullName = name
                     
                     DispatchQueue.main.async {
                         self?.router.onShowMainScreen?()

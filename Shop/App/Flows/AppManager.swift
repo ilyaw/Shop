@@ -39,7 +39,7 @@ final class AppManager {
         
         mainTabbar?.signOut = {
             AppData.accessToken = ""
-            AppData.username = ""
+            AppData.fullName = ""
             
             self.start()
             UIView.transition(with: self.window, duration: 0.25, options: .transitionCrossDissolve, animations: nil)

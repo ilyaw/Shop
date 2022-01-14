@@ -9,8 +9,14 @@ import Foundation
 
 struct AppData {
     @UserDefaultsStorage(key: AppConstant.firstNameKey, defaultValue: "")
-    static var username: String
+    static var fullName: String
     
     @KeychainStorage(key: AppConstant.keychainAccessTokenKey, defaultValue: "")
     static var accessToken: String
+    
+    @KeychainStorage(key: AppConstant.keychainAccessTokenKey, defaultValue: "")
+    static var card: String
+    
+    @KeychainStorage(key: AppConstant.keychainAccessTokenKey, defaultValue: "")
+    static var money: String
 }

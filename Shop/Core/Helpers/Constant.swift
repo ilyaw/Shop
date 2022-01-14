@@ -10,4 +10,5 @@ import Foundation
 struct AppConstant {
     static let keychainAccessTokenKey = "AccessToken"
     static let firstNameKey = "firstNameKey"
+    
 }

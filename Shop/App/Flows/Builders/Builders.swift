@@ -38,9 +38,10 @@ class Builders {
     }
     
     static func profileBuild(navigationController: UINavigationController, signOut: VoidClouser?) -> UIViewController {
+        let requestFactory = RequestFactory().makeUserRequestFactory()
         let router = ProfileRouter(navigationController: navigationController)
         let profileController = ProfileViewController()
-        let presenter = ProfilePresenter(router: router, signOut: signOut)
+        let presenter = ProfilePresenter(router: router, requestFactory: requestFactory, signOut: signOut)
         profileController.presenter = presenter
         return profileController
     }

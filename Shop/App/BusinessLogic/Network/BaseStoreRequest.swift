@@ -28,5 +28,4 @@ class BaseStoreRequest: BaseURL, AbstractRequestFactory {
         self.sessionManager = sessionManager
         self.queue = queue
     }
-    
 }

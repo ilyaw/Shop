@@ -12,11 +12,7 @@ class SignUpViewController: UIViewController {
     // MARK: - Public properties
     
     var signUpView: SignUpView {
-        guard let view = self.view as? SignUpView else {
-            return SignUpView(frame: self.view.bounds)
-        }
-        
-        return view
+        return (view as? SignUpView) ?? SignUpView()
     }
     
     // MARK: - Private properties
@@ -39,9 +35,13 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view = SignUpView(frame: view.bounds)
+//        self.view = SignUpView(frame: view.bounds)
         presenter.configureController()
         setupDelegates()
+    }
+    
+    override func loadView() {
+        view = SignUpView()
     }
     
     override func viewWillAppear(_ animated: Bool) {

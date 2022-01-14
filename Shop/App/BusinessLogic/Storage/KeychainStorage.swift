@@ -23,6 +23,7 @@ struct KeychainStorage {
             return KeychainWrapper.standard.string(forKey: key) ?? defaultValue
         }
         set {
+            KeychainWrapper.standard[""] = ""
             KeychainWrapper.standard.set(newValue, forKey: key)
         }
     }

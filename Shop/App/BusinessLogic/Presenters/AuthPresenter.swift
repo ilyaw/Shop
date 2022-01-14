@@ -52,28 +52,33 @@ class AuthPresenter {
             
             switch response.result {
             case .success(let login):
-                DispatchQueue.main.async {
-                    guard let user = login.user else {
+                guard let user = login.user else {
+                    DispatchQueue.main.async {
                         self.viewInput?.showError(error: "Ошибка в авторизации")
-                        return
                     }
-                    AppData.accessToken = user.accessToken
-                    AppData.username = user.fullName
-                    
+                    return
+                }
+                
+                AppData.accessToken = user.accessToken
+                AppData.fullName = user.fullName
+                
+                DispatchQueue.main.async {
                     self.router.onShowMainScreen?()
                 }
             case .failure(let error):
                 logging(error.localizedDescription)
-                DispatchQueue.main.async {
-                    if let statusCode = response.response?.statusCode,
-                       statusCode == 401 {
+                
+                if let statusCode = response.response?.statusCode,
+                   statusCode == 401 {
+                    DispatchQueue.main.async {
                         self.viewInput?.showError(error: "Неверный логин или пароль")
-                    } else {
+                    }
+                } else {
+                    DispatchQueue.main.async {
                         self.viewInput?.showError(error: error.localizedDescription)
                     }
                 }
             }
-            
             DispatchQueue.main.async {
                 completion()
             }
@@ -153,7 +158,7 @@ class AuthPresenter {
 // MARK: - AuthPresenter + AuthViewOutput
 
 extension AuthPresenter: AuthViewOutput {
-
+    
     // MARK: - Public methods
     
     func addObserverForKeyboardNotification() {

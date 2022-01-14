@@ -20,6 +20,9 @@ class RegexTests: XCTestCase {
         
         let invalidLogin = "1123"
         XCTAssertFalse(invalidLogin.isValid(validType: .login))
+        
+        let invalidLogin2 = "Тест"
+        XCTAssertFalse(invalidLogin2.isValid(validType: .login))
     }
     
     func testName() throws {
