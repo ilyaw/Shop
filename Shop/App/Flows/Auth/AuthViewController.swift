@@ -91,7 +91,7 @@ extension AuthViewController: AuthViewInput {
     }
 }
 
-// MARK: - AuthViewController private
+// MARK: - AuthViewController + private extension
 
 private extension AuthViewController {
     

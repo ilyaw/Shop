@@ -89,15 +89,7 @@ class SignUpView: UIView {
             setupConstraints()
         }
     }
-    
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        
-//        setupUI {
-//            setupConstraints()
-//        }
-//    }
-    
+        
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
@@ -105,9 +97,12 @@ class SignUpView: UIView {
             setupConstraints()
         }
     }
-    
-    // MARK: - Private methods
-    
+}
+
+// MARK: - SignUpView + private extension
+
+private extension SignUpView {
+   
     private func setupUI(competion: () -> Void) {
         self.backgroundColor = .systemBackground
         self.addSubview(activityIndicatorView)

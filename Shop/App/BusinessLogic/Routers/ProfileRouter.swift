@@ -17,8 +17,17 @@ class ProfileRouter {
         self.navigationController = navigationController
     }
 
-    func changeData() {
+    func openSettings() {
 //        let changeProfileController = Builders.changeProfileBuild(navigationController: navigationController)
-//        navigationController.pushViewController(changeProfileController, animated: true)
+        let vc = UIViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.view.backgroundColor = .systemBlue
+                
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            vc.dismiss(animated: true, completion: nil)
+        }
+        
+        navigationController.present(vc, animated: true)
     }
+    
 }

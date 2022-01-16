@@ -9,12 +9,6 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     
-    // MARK: - Public properties
-    
-    var signUpView: SignUpView {
-        return (view as? SignUpView) ?? SignUpView()
-    }
-    
     // MARK: - Private properties
     
     private let presenter: SignUpViewOutput
@@ -35,7 +29,6 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.view = SignUpView(frame: view.bounds)
         presenter.configureController()
         setupDelegates()
     }
@@ -71,6 +64,14 @@ class SignUpViewController: UIViewController {
 
 extension SignUpViewController: SignUpViewInput {
         
+    // MARK: - Public properties
+    
+    var signUpView: SignUpView {
+        return (view as? SignUpView) ?? SignUpView()
+    }
+    
+    // MARK: - Public methods
+    
     func showError(error: String) {
         self.showAlert(with: error, title: "🥲")
     }

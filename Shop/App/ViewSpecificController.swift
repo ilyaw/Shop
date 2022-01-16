@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ViewSpecificController {
+protocol ViewSpecificController: AnyObject {
     associatedtype RootView: UIView
 }
 

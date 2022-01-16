@@ -9,7 +9,8 @@ import Foundation
 
 // MARK: - Presenter
 
-protocol HomePresenterInput: AnyObject { }
+protocol HomePresenterInput: AnyObject {
+}
 
 protocol HomePresenterOutput: AnyObject {
     init(router: HomeRouter)

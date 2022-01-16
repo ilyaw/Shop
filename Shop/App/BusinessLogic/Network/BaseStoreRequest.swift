@@ -12,7 +12,7 @@ import Alamofire
 // Hosting: https://secret-everglades-22465.herokuapp.com/
 
 class BaseURL {
-    var url: URL { URL(string: "https://secret-everglades-22465.herokuapp.com/")! }
+    var url: URL { URL(string: "http://127.0.0.1:8080/")! }
 }
 
 class BaseStoreRequest: BaseURL, AbstractRequestFactory {
