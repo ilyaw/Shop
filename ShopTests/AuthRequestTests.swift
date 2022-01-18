@@ -26,17 +26,16 @@ class AuthRequestTests: XCTestCase {
         
         let expressionLoginResultStub = LoginResult(result: 1,
                                                     user: UserResult(id: 1,
-                                                                     login: "admin",
-                                                                     firstName: "Ilya",
-                                                                     lastName: "Rudenko",
+                                                                     login: "1",
+                                                                     fullName: "Илья Руденко",
                                                                      accessToken: "4689145A-2EB1-425C-8843-FACFBDDFF4F0"))
         
-        authRequest.login(userName: "admin", password: "123456") { (response) in
+        authRequest.login(userName: "1", password: "1") { (response) in
             switch response.result {
             case .success(let login):
                 XCTAssertEqual(login.result, expressionLoginResultStub.result)
-                XCTAssertEqual(login.user.id, expressionLoginResultStub.user.id)
-                XCTAssertEqual(login.user.login, expressionLoginResultStub.user.login)
+                XCTAssertEqual(login.user!.id, expressionLoginResultStub.user!.id)
+                XCTAssertEqual(login.user!.login, expressionLoginResultStub.user!.login)
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }

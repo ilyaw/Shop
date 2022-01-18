@@ -35,20 +35,22 @@ class UserRequestsTests: XCTestCase {
         let expressionRegisterUserResultStub = LoginResult(result: 1,
                                                            user: UserResult(id: -1,
                                                                             login: generateRandomName,
-                                                                            firstName: "Foo",
-                                                                            lastName: "Bar",
+                                                                            fullName: "Foo Bar",
                                                                             accessToken: String()))
         
-        let profile = ProfileResult(login: generateRandomName, password: "123456", firstName: "Foo", lastName: "Bar", gender: "m", bio: "dlfdsfsdf")
+        let profile = ProfileResult(login: generateRandomName,
+                                    password: "123456",
+                                    fullName: "Foo Bar",
+                                    phone: "+7(911)666-66-66",
+                                    bio: "dlfdsfsdf")
         
         userRequest.register(for: profile) { response in
             switch response.result {
             case .success(let register):
                 XCTAssertEqual(register.result, expressionRegisterUserResultStub.result)
-                XCTAssertEqual(register.user.login, expressionRegisterUserResultStub.user.login)
-                XCTAssertEqual(register.user.firstName, expressionRegisterUserResultStub.user.firstName)
-                XCTAssertEqual(register.user.lastName, expressionRegisterUserResultStub.user.lastName)
-                XCTAssertFalse(register.user.accessToken.isEmpty)
+                XCTAssertEqual(register.user!.login, expressionRegisterUserResultStub.user!.login)
+                XCTAssertEqual(register.user!.fullName, expressionRegisterUserResultStub.user!.fullName)
+                XCTAssertFalse(register.user!.accessToken.isEmpty)
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }

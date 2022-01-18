@@ -8,8 +8,8 @@
 import UIKit
 
 extension UIViewController {
-    func showAlert(with message: String) {
-        let alert = UIAlertController(title: "Ok",
+    func showAlert(with message: String, title: String = "OK") {
+        let alert = UIAlertController(title: title,
                                       message: "\(message)!",
                                       preferredStyle: UIAlertController.Style.alert)
         

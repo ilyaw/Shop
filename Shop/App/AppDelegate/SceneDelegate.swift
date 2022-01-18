@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    var appStartManager: AppStartManager?
+    var appManager: AppManager?
     
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
@@ -18,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        self.appStartManager = AppStartManager(windowScene: windowScene)
-        self.appStartManager?.start()
+        self.appManager = AppManager(windowScene: windowScene)
+        self.appManager?.start()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
