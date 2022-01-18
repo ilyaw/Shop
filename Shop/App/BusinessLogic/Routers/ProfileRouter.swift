@@ -11,23 +11,24 @@ import UIKit
 
 class ProfileRouter {
     
-    var navigationController: UINavigationController
+    // MARK: - Private properties
     
-    init(navigationController: UINavigationController) {
+    private let navigationController: UINavigationController
+    private let signOut: VoidClouser?
+    
+    // MARK: - Inits
+    
+    init(navigationController: UINavigationController, signOut: VoidClouser?) {
         self.navigationController = navigationController
+        self.signOut = signOut
     }
 
-    func openSettings() {
-//        let changeProfileController = Builders.changeProfileBuild(navigationController: navigationController)
-        let vc = UIViewController()
-        vc.modalPresentationStyle = .fullScreen
-        vc.view.backgroundColor = .systemBlue
-                
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            vc.dismiss(animated: true, completion: nil)
-        }
-        
-        navigationController.present(vc, animated: true)
-    }
+    // MARK: - Public methods
     
+    func openSettings() {
+        let settingsController = Builders.settingsBuild(signOut: signOut)
+        settingsController.modalPresentationStyle = .fullScreen
+        
+        navigationController.present(settingsController, animated: true)
+    }
 }

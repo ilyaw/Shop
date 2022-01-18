@@ -8,15 +8,12 @@
 import Foundation
 
 struct AppData {
-    @UserDefaultsStorage(key: AppConstant.firstNameKey, defaultValue: "")
+    @UserDefaultsStorage<String>(key: AppConstant.firstNameKey, defaultValue: "")
     static var fullName: String
+    
+    @UserDefaultsStorage<Bool>(key: AppConstant.isActivePushNotification, defaultValue: false)
+    static var isAcitvePushNotification: Bool
     
     @KeychainStorage(key: AppConstant.keychainAccessTokenKey, defaultValue: "")
     static var accessToken: String
-    
-    @KeychainStorage(key: AppConstant.keychainAccessTokenKey, defaultValue: "")
-    static var card: String
-    
-    @KeychainStorage(key: AppConstant.keychainAccessTokenKey, defaultValue: "")
-    static var money: String
 }

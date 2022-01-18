@@ -23,7 +23,7 @@ class ProfilePresenter: ProfilePresenterOutput {
     
     // MARK: - Public properties
     
-    weak var viewInput: (UIViewController & ProfilePresenterInput)?
+    weak var input: (UIViewController & ProfilePresenterInput)?
     
     // MARK: - Private properties
     
@@ -68,16 +68,13 @@ class ProfilePresenter: ProfilePresenterOutput {
 // MARK: - ProfilePresenter + private extension
 
 private extension ProfilePresenter {
-    
+        
     func setImageNumberAndName(numberCard: String, name: String) {
-        
-        let numberCard = numberCard.inserting(separator: " ", every: 4)
-        
         let staticPositionYForCardNumber: CGFloat = 346.0
         let staticPositionYForCardName: CGFloat = 541.0
         let staticPositionXForCardName: CGFloat = 80.0
         
-        guard let cardImageView = viewInput?.profileView.cardImageView,
+        guard let cardImageView = input?.profileView.cardImageView,
               var cardImage = cardImageView.image,
               let helveticaBold70 = UIFont(name: "Helvetica Bold", size: 70),
               let helvetica55 = UIFont(name: "Helvetica", size: 55),
@@ -86,7 +83,7 @@ private extension ProfilePresenter {
                                                     atPoint: CGPoint(x: cardImageView.frame.midX - 50,
                                                                      y: staticPositionYForCardNumber),
                                                     textFont: helveticaBold70) else { return }
-    
+        
         cardImage = cardWithNumberImage
         
         guard let cardWithNameImage = textToImage(text: name as NSString,
@@ -94,10 +91,10 @@ private extension ProfilePresenter {
                                                   atPoint: CGPoint(x: staticPositionXForCardName,
                                                                    y: staticPositionYForCardName),
                                                   textFont: helvetica55) else { return }
-                
+        
         cardImage = cardWithNameImage
         
-        self.viewInput?.profileView.cardImageView.image = cardImage
+        self.input?.profileView.cardImageView.image = cardImage
     }
     
     func textToImage(text: NSString,
@@ -126,10 +123,10 @@ private extension ProfilePresenter {
         return newImage
     }
     
-    func setupProfileView(cardInfoResponse: CardInfoResponse.Card?) {
-        guard let view = self.viewInput?.profileView, let card = cardInfoResponse else {
-            self.viewInput?.profileView.setupUI(existCard: .no)
-            self.viewInput?.profileView.openSettingsButton.addTarget(self,
+    func setupProfileView(cardInfoResponse: CardInfoResult.Card?) {
+        guard let view = self.input?.profileView, let card = cardInfoResponse else {
+            self.input?.profileView.setupUI(existCard: .no)
+            self.input?.profileView.openSettingsButton.addTarget(self,
                                                                      action: #selector(openSettings),
                                                                      for: .touchUpInside)
             return

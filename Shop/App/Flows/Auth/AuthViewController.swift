@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SPAlert
 
 class AuthViewController: UIViewController {
     
@@ -83,7 +84,7 @@ class AuthViewController: UIViewController {
 extension AuthViewController: AuthViewInput {
     
     func showError(error: String) {
-        showAlert(with: error, title: "Неудачно 🥲")
+        SPAlert.present(title: "Ошибка", message: error, preset: .error, haptic: .error)
     }
     
     func showRegisterController(to controller: UIViewController) {

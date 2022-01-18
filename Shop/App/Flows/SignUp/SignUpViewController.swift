@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SPAlert
 
 class SignUpViewController: UIViewController {
     
@@ -73,7 +74,7 @@ extension SignUpViewController: SignUpViewInput {
     // MARK: - Public methods
     
     func showError(error: String) {
-        self.showAlert(with: error, title: "🥲")
+        SPAlert.present(message: error, haptic: .error)
     }
 }
 

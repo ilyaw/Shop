@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileView: UIView {
     
-    // MARK: - Public properties
+    // MARK: - Private set properties
     
     private(set) lazy var cardImageView: UIImageView = {
         let imageView = UIImageView()

@@ -1,60 +1,103 @@
 //
-//  SignUpPresenter.swift
+//  SettingsPresenter.swift
 //  Shop
 //
-//  Created by Ilya on 06.01.2022.
+//  Created by Ilya on 16.01.2022.
 //
 
 import UIKit
 
-protocol SignUpViewInput: AnyObject {
-    var signUpView: SignUpView { get }
+protocol SettingsPresenterInput: AnyObject {
+    var profileView: SettingsView { get }
     func showError(error: String)
+    func showResult(message: String)
 }
 
-protocol SignUpViewOutput: AnyObject {
-    init(router: StartRouter, requestFactory: UserRequestFactory)
-    func configureController()
+protocol SettingsPresenterOutput: AnyObject {
+    init(requestFactory: UserRequestFactory, signOut: VoidClouser?)
+    func getUserData()
     func addObserverForKeyboardNotification()
     func removeObserverForKeyboardNotification()
+    func configureController()
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool
 }
 
-class SignUpPresenter {
-
+class SettingsPresenter: SettingsPresenterOutput {
+    
     // MARK: - Public properties
     
-    weak var input: (UIViewController & SignUpViewInput)?
+    weak var input: SettingsPresenterInput?
     
-    let router: StartRouter
-    let requestFactory: UserRequestFactory
+    // MARK: - Private properties
     
-    required init(router: StartRouter, requestFactory: UserRequestFactory) {
-        self.router = router
+    private let requestFactory: UserRequestFactory
+    private let signOut: VoidClouser?
+    
+    required init(requestFactory: UserRequestFactory, signOut: VoidClouser?) {
         self.requestFactory = requestFactory
+        self.signOut = signOut
     }
-}
-
-// MARK: - SignUpPresenter + SignUpViewOutput
-
-extension SignUpPresenter: SignUpViewOutput {
     
-    // MARK: - Public methods
+    func getUserData() {
+        requestFactory.getUserInfo(accessToken: AppData.accessToken) { [weak self] response in
+            switch response.result {
+            case .success(let result):
+                guard let user = result.user else { return }
+                
+                DispatchQueue.main.async {
+                    self?.view.fillTextFeilds(userInfo: user)
+                    self?.checkValidUserData(userInfo: user)
+                }
+                
+            case .failure(let error):
+                logging(error.localizedDescription)
+            }
+        }
+    }
+    
+    func configureController() {
+        let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        
+        view.scrollView.addGestureRecognizer(hideKeyboardGesture)
+        
+        view.saveInforamtionButton.addTarget(self,
+                                             action: #selector(didTapSaveInformation),
+                                             for: .touchUpInside)
+        
+        view.signOutButton.addTarget(self,
+                                     action: #selector(didTapSignOut),
+                                     for: .touchUpInside)
+        
+        view.notificationSwitch.isOn = AppData.isAcitvePushNotification
+    }
+    
+    func addObserverForKeyboardNotification() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWasShown),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.keyboardWillBeHidden(notification:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    func removeObserverForKeyboardNotification() {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIResponder.keyboardWillShowNotification,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIResponder.keyboardWillHideNotification,
+                                                  object: nil)
+    }
     
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
+        
         switch textField {
-        case view.loginTextField:
-            setTextField(textField: view.loginTextField,
-                         label: view.loginValidLabel,
-                         validType: .login,
-                         wrongMessage: "a-z, A-Z, мин. 2 символ",
-                         string: string,
-                         range: range)
-            
         case view.nameTextField:
             setTextField(textField: view.nameTextField,
                          label: view.nameValidLabel,
@@ -76,55 +119,22 @@ extension SignUpPresenter: SignUpViewOutput {
                                                   mask: "XXXX-XXXX-XXXX-XXXX",
                                                   string: string,
                                                   range: range)
-            
-        case view.passwordTextField:
-            setTextField(textField: view.passwordTextField,
-                         label: view.passwordValidLabel,
-                         validType: .password,
-                         wrongMessage: "a-z, A-Z, 0-9 и мин. длинна: 6 сим.",
-                         string: string,
-                         range: range)
         default:
             break
         }
         
         return false
     }
-    
-    func configureController() {
-        let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        view.scrollView.addGestureRecognizer(hideKeyboardGesture)
-        
-        view.signInButton.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
-    }
-    
-    func addObserverForKeyboardNotification() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardWasShown),
-                                               name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardWillBeHidden(notification:)),
-                                               name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    func removeObserverForKeyboardNotification() {
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillShowNotification,
-                                                  object: nil)
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillHideNotification,
-                                                  object: nil)
-    }
 }
 
-// MARK: SignUpPresenter + private extension
+// MARK: - SettingsPresenter + private extension
 
-private extension SignUpPresenter {
+private extension SettingsPresenter {
     
     // MARK: - Private properties
     
-    var view: SignUpView {
-        return input?.signUpView ?? SignUpView()
+    var view: SettingsView {
+        return input?.profileView ?? SettingsView()
     }
     
     // MARK: - Private methods
@@ -142,7 +152,7 @@ private extension SignUpPresenter {
         view.scrollView.scrollIndicatorInsets = contentInsets
     }
     
-    @objc func keyboardWillBeHidden(notification: Notification) {
+    @objc private func keyboardWillBeHidden(notification: Notification) {
         let contentInsets = UIEdgeInsets.zero
         view.scrollView.contentInset = contentInsets
     }
@@ -151,7 +161,7 @@ private extension SignUpPresenter {
         view.scrollView.endEditing(true)
     }
     
-    @objc func didTapSignUp() {
+    @objc func didTapSaveInformation() {
         guard checkValidFields(), let profile = generateProfile() else {
             input?.showError(error: "Проверьте обязательные поля")
             return
@@ -159,74 +169,46 @@ private extension SignUpPresenter {
         
         showActivityIndicator(isShow: true)
         
-        requestRegistration(for: profile) { [weak self] in
+        requestUpdateUserInfo(for: profile) { [weak self] in
             self?.showActivityIndicator(isShow: false)
         }
     }
     
-    func generateProfile() -> ProfileResult? {
-        guard let login = view.loginTextField.text,
-              !login.isEmpty,
-              let name = view.nameTextField.text,
-              !name.isEmpty,
-              let phone = view.phoneNumberTextField.text,
-              !phone.isEmpty,
-              let card = view.cardTextField.text,
-              let password = view.passwordTextField.text,
-              !password.isEmpty else { return nil }
-        
-        let profile = ProfileResult(login: login,
-                                    password: password,
-                                    fullName: name,
-                                    phone: phone,
-                                    creditCard: card.isEmpty ? nil : card)
-        
-        return profile
+    @objc func didTapSignOut() {
+        signOut?()
     }
     
-    func checkValidFields() -> Bool {
-        let validLabels = [view.loginValidLabel,
-                           view.nameValidLabel,
-                           view.phoneValidLabel,
-                           view.cardValidLabel,
-                           view.passwordValidLabel]
-        
-        let isContains = validLabels.contains(where: { $0.tag == Tag.invalid.rawValue })
-        
-        return isContains ? false : true
-    }
-    
-    func requestRegistration(for profile: ProfileResult, completion: VoidClouser?) {
-        requestFactory.register(for: profile, completionHandler: { [weak self] response in
+    func requestUpdateUserInfo(for profile: UpdateUser, completion: VoidClouser?) {
+        requestFactory.change(for: profile) { [weak self] response in
             switch response.result {
-            case let .success(registration):
-                if registration.result == 1,
-                   let accessToken = registration.user?.accessToken,
-                   let name = registration.user?.fullName {
-                    AppData.accessToken = accessToken
-                    AppData.fullName = name
+            case .success(let update):
+                if update.result == 1, let message = update.userMessage {
+                    AppData.fullName = profile.name
                     
                     DispatchQueue.main.async {
-                        self?.router.onShowMainScreen?()
+                        AppData.isAcitvePushNotification = self?.view.notificationSwitch.isOn ?? false
+                        self?.input?.showResult(message: message)
                     }
-                    
-                } else if let errorMessage = registration.errorMessage {
+                } else if let errorMessage = update.errorMessage {
                     logging(errorMessage)
+                    
                     DispatchQueue.main.async {
                         self?.input?.showError(error: errorMessage)
                     }
                 }
-            case let .failure(error):
+                
+            case .failure(let error):
                 logging(error.localizedDescription)
+                
                 DispatchQueue.main.async {
                     self?.input?.showError(error: error.localizedDescription)
                 }
             }
-            
-            DispatchQueue.main.async {
-                completion?()
-            }
-        })
+        }
+    }
+    
+    func showActivityIndicator(isShow: Bool) {
+        isShow ? view.activityIndicatorView.startAnimating() : view.activityIndicatorView.stopAnimating()
     }
     
     func setTextField(textField: UITextField,
@@ -306,7 +288,7 @@ private extension SignUpPresenter {
         if result.count == 19 {
             setValidLabel(label, isValid: true, text: view.validSymbol)
         } else if result.isEmpty {
-            label.text = "Необязательно"
+            label.text = "Обязательное поле"
             label.textColor = .label
             label.tag = Tag.valid.rawValue
         } else {
@@ -328,7 +310,46 @@ private extension SignUpPresenter {
         label.text = text
     }
     
-    func showActivityIndicator(isShow: Bool) {
-        isShow ? view.activityIndicatorView.startAnimating() : view.activityIndicatorView.stopAnimating()
+    func checkValidUserData(userInfo: UserInfo) {
+        let isNameValid = userInfo.name.isValid(validType: .name)
+        let isPhoneValid = userInfo.phone.isValid(validType: .phone)
+        let isCardValid = userInfo.card?.isValid(validType: .card) ?? false
+        
+        setValidLabel(view.nameValidLabel,
+                      isValid: isNameValid,
+                      text: isNameValid ? view.validSymbol : "мин. 2 буквы")
+        
+        setValidLabel(view.phoneValidLabel,
+                      isValid: isPhoneValid,
+                      text: isPhoneValid ? view.validSymbol : "Неверный формат...")
+        
+        setValidLabel(view.cardValidLabel,
+                      isValid: isCardValid,
+                      text: isCardValid ? view.validSymbol : "Неверный формат...")
+    }
+    
+    func generateProfile() -> UpdateUser? {
+        guard let name = view.nameTextField.text,
+              !name.isEmpty,
+              let phone = view.phoneNumberTextField.text,
+              !phone.isEmpty,
+              let card = view.cardTextField.text,
+              !card.isEmpty else { return nil }
+        
+        let updateUser = UpdateUser(accessToken: AppData.accessToken,
+                                    name: name,
+                                    phone: phone,
+                                    card: card)
+        return updateUser
+    }
+    
+    func checkValidFields() -> Bool {
+        let validLabels = [view.nameValidLabel,
+                           view.phoneValidLabel,
+                           view.cardValidLabel]
+        
+        let isContains = validLabels.contains(where: { $0.tag == Tag.invalid.rawValue })
+        
+        return isContains ? false : true
     }
 }

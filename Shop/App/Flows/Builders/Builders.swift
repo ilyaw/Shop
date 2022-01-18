@@ -13,7 +13,7 @@ class Builders {
         let requestFactory = RequestFactory().makeAuthRequestFatory()
         let presenter = AuthPresenter(router: router, requestFactory: requestFactory)
         let controller = AuthViewController(presenter: presenter)
-        presenter.viewInput = controller
+        presenter.input = controller
         return controller
     }
     
@@ -21,7 +21,7 @@ class Builders {
         let requestFactory = RequestFactory().makeUserRequestFactory()
         let presenter = SignUpPresenter(router: router, requestFactory: requestFactory)
         let controller = SignUpViewController(presenter: presenter)
-        presenter.viewInput = controller
+        presenter.input = controller
         return controller
     }
     
@@ -39,11 +39,21 @@ class Builders {
     
     static func profileBuild(navigationController: UINavigationController, signOut: VoidClouser?) -> UIViewController {
         let requestFactory = RequestFactory().makeUserRequestFactory()
-        let router = ProfileRouter(navigationController: navigationController)
+        let router = ProfileRouter(navigationController: navigationController, signOut: signOut)
         let presenter = ProfilePresenter(router: router, requestFactory: requestFactory, signOut: signOut)
         let controller = ProfileViewController(presenter: presenter)
-        presenter.viewInput = controller
+        presenter.input = controller
         return controller
+    }
+    
+    static func settingsBuild(signOut: VoidClouser?) -> UIViewController {
+        let requestFactory = RequestFactory().makeUserRequestFactory()
+        let presenter = SettingsPresenter(requestFactory: requestFactory, signOut: signOut)
+        let controller = SettingsViewController(presenter: presenter)
+        presenter.input = controller
+        
+        let navigationController = UINavigationController(rootViewController: controller)
+        return navigationController
     }
     
     static func catalogBuild(navigationController: UINavigationController) -> UIViewController {

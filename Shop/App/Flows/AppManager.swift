@@ -103,23 +103,23 @@ final class AppStartRouter {
         navigationController.viewControllers = []
     }
     
-    // TODO: Подумать куда вынести
-    //    private func checkNetwork(completion: @escaping VoidClouser) {
-    //        let baseURL = BaseURL()
-    //        completion()
-    //        //        baseURL.url.сheckWebsiteAvailability { [weak self] isAvailability in
-    //        //            if isAvailability {
-    //        //                DispatchQueue.main.async {
-    //        //                    completion()
-    //        //                }
-    //        //            } else {
-    //        //                DispatchQueue.main.async {
-    //        //                    let noConnectionController = NoConnectionBuilder.build(completion: completion)
-    //        //                    self?.navigationController.pushViewController(noConnectionController, animated: true)
-    //        //                }
-    //        //            }
-    //        //        }
-    //    }
+//     TODO: Подумать куда вынести
+//        private func checkNetwork(completion: @escaping VoidClouser) {
+//            let baseURL = BaseURL()
+//            completion()
+//                    baseURL.url.сheckWebsiteAvailability { [weak self] isAvailability in
+//                        if isAvailability {
+//                            DispatchQueue.main.async {
+//                                completion()
+//                            }
+//                        } else {
+//                            DispatchQueue.main.async {
+//                                let noConnectionController = NoConnectionBuilder.build(completion: completion)
+//                                self?.navigationController.pushViewController(noConnectionController, animated: true)
+//                            }
+//                        }
+//                    }
+//        }
     
     deinit {
        print("deinit AppStartRouter")

@@ -32,7 +32,7 @@ class AuthPresenter {
     
     // MARK: - Public properties
     
-    weak var viewInput: (UIViewController & AuthViewInput)?
+    weak var input: (UIViewController & AuthViewInput)?
     
     let router: StartRouter
     let requestFactory: AuthRequestFactory
@@ -54,7 +54,7 @@ class AuthPresenter {
             case .success(let login):
                 guard let user = login.user else {
                     DispatchQueue.main.async {
-                        self.viewInput?.showError(error: "Ошибка в авторизации")
+                        self.input?.showError(error: "Ошибка в авторизации")
                     }
                     return
                 }
@@ -71,11 +71,11 @@ class AuthPresenter {
                 if let statusCode = response.response?.statusCode,
                    statusCode == 401 {
                     DispatchQueue.main.async {
-                        self.viewInput?.showError(error: "Неверный логин или пароль")
+                        self.input?.showError(error: "Неверный логин или пароль")
                     }
                 } else {
                     DispatchQueue.main.async {
-                        self.viewInput?.showError(error: error.localizedDescription)
+                        self.input?.showError(error: error.localizedDescription)
                     }
                 }
             }
@@ -86,7 +86,7 @@ class AuthPresenter {
     }
     
     private func showActivityIndicator(isShow: Bool) {
-        guard let view = viewInput else { return }
+        guard let view = input else { return }
         isShow ? view.activityIndicatorView.startAnimating() : view.activityIndicatorView.stopAnimating()
     }
     
@@ -98,22 +98,22 @@ class AuthPresenter {
         let kbSize = keyboardFrameValue.cgRectValue.size
         let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: kbSize.height, right: 0.0)
         
-        viewInput?.scrollView.contentInset = contentInsets
-        viewInput?.scrollView.scrollIndicatorInsets = contentInsets
+        input?.scrollView.contentInset = contentInsets
+        input?.scrollView.scrollIndicatorInsets = contentInsets
     }
     
     @objc private func keyboardWillBeHidden(notification: Notification) {
         let contentInsets = UIEdgeInsets.zero
-        viewInput?.scrollView.contentInset = contentInsets
+        input?.scrollView.contentInset = contentInsets
     }
     
     @objc private func hideKeyboard() {
-        viewInput?.scrollView.endEditing(true)
+        input?.scrollView.endEditing(true)
     }
     
     private func checkDataValid() -> Bool {
-        guard let loginTextField = viewInput?.loginTextField,
-              let passwordTextField = viewInput?.passwordTextField,
+        guard let loginTextField = input?.loginTextField,
+              let passwordTextField = input?.passwordTextField,
               let login = loginTextField.text,
               let password = passwordTextField.text else {
                   return false
@@ -136,8 +136,8 @@ class AuthPresenter {
     
     @objc private func didTapSignIn() {
         guard checkDataValid(),
-              let login = viewInput?.loginTextField.text,
-              let password = viewInput?.passwordTextField.text else { return }
+              let login = input?.loginTextField.text,
+              let password = input?.passwordTextField.text else { return }
         
         showActivityIndicator(isShow: true)
         
@@ -181,14 +181,14 @@ extension AuthPresenter: AuthViewOutput {
     
     func addTapGestureForHideKeybaord() {
         let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        viewInput?.scrollView.addGestureRecognizer(hideKeyboardGesture)
+        input?.scrollView.addGestureRecognizer(hideKeyboardGesture)
     }
     
     func addTargerForSignInButton() {
-        viewInput?.signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
+        input?.signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
     }
     
     func addTargetForSignUpButton() {
-        viewInput?.signUpButton.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
+        input?.signUpButton.addTarget(self, action: #selector(didTapSignUp), for: .touchUpInside)
     }
 }

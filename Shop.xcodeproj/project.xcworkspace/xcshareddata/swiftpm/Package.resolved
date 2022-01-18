@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "SPAlert",
+        "repositoryURL": "https://github.com/ivanvorobei/SPAlert",
+        "state": {
+          "branch": null,
+          "revision": "0df499e9f5dc43790ac65f227821acfa7b05b168",
+          "version": "4.2.0"
+        }
+      },
+      {
         "package": "SwiftKeychainWrapper",
         "repositoryURL": "https://github.com/jrendel/SwiftKeychainWrapper.git",
         "state": {

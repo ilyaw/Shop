@@ -89,7 +89,7 @@ class SignUpView: UIView {
             setupConstraints()
         }
     }
-        
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
@@ -102,56 +102,49 @@ class SignUpView: UIView {
 // MARK: - SignUpView + private extension
 
 private extension SignUpView {
-   
-    private func setupUI(competion: () -> Void) {
+    func setupUI(competion: () -> Void) {
         self.backgroundColor = .systemBackground
         self.addSubview(activityIndicatorView)
         
         passwordTextField.isSecureTextEntry = true
         phoneNumberTextField.keyboardType = .numberPad
+        cardTextField.keyboardType = .numberPad
         
         competion()
     }
     
-    private func createStubView() -> UIView {
-        let view = UIView()
-        view.heightAnchor.constraint(equalToConstant: 5).isActive = true
-        view.backgroundColor = .systemBackground
-        return view
-    }
-    
-    private func setupConstraints() {
+    func setupConstraints() {
         let loginStackView = UIStackView(arrangedSubviews: [loginLabel,
                                                             loginTextField,
-                                                            createStubView(),
+                                                            createEmpyView(),
                                                             loginValidLabel],
                                          axis: .vertical,
                                          spacing: 0)
         
         let nameStackView = UIStackView(arrangedSubviews: [nameLabel,
                                                            nameTextField,
-                                                           createStubView(),
+                                                           createEmpyView(),
                                                            nameValidLabel],
                                         axis: .vertical,
                                         spacing: 0)
         
         let phoneStackView = UIStackView(arrangedSubviews: [phoneLabel,
                                                             phoneNumberTextField,
-                                                            createStubView(),
+                                                            createEmpyView(),
                                                             phoneValidLabel],
                                          axis: .vertical,
                                          spacing: 0)
         
         let cardStackView = UIStackView(arrangedSubviews: [cardLabel,
                                                            cardTextField,
-                                                           createStubView(),
+                                                           createEmpyView(),
                                                            cardValidLabel],
                                         axis: .vertical,
                                         spacing: 0)
         
         let passwordStackView = UIStackView(arrangedSubviews: [passwordLabel,
                                                                passwordTextField,
-                                                               createStubView(),
+                                                               createEmpyView(),
                                                                passwordValidLabel],
                                             axis: .vertical,
                                             spacing: 0)
@@ -188,5 +181,12 @@ private extension SignUpView {
             stackView.rightAnchor.constraint(equalTo: viewSafeArea.rightAnchor, constant: -20),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20)
         ])
+    }
+    
+    func createEmpyView() -> UIView {
+        let view = UIView()
+        view.heightAnchor.constraint(equalToConstant: 5).isActive = true
+        view.backgroundColor = .systemBackground
+        return view
     }
 }

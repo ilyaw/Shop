@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CardInfoResponse: Codable {
+struct CardInfoResult: Codable {
     struct Card: Codable {
         var creditCard: String
         var money: Decimal

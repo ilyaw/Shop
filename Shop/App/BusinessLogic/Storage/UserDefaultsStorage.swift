@@ -8,18 +8,20 @@
 import Foundation
 
 @propertyWrapper
-struct UserDefaultsStorage {
+struct UserDefaultsStorage<T> {
     private let key: String
-    private let defaultValue: String
+    private let defaultValue: T
     
-    init(key: String, defaultValue: String) {
+    init(key: String, defaultValue: T) {
         self.key = key
         self.defaultValue = defaultValue
     }
     
-    var wrappedValue: String {
+    var wrappedValue: T {
         get {
-            return UserDefaults.standard.string(forKey: key) ?? defaultValue
+            guard let value =  UserDefaults.standard.object(forKey: key) as? T else { return defaultValue }
+            return value
+//            return UserDefaults.standard.object(forKey: key) as? T
         }
         set {
             UserDefaults.standard.set(newValue, forKey: key)
