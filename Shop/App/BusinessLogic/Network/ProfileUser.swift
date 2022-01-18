@@ -20,26 +20,67 @@ class ProfileUser: BaseStoreRequest {
             return [
                 "login": profile.login,
                 "password": profile.password,
-                "firstName": profile.firstName,
-                "lastName": profile.lastName,
-                "gender": profile.gender,
-                "bio": profile.bio,
-                "creditCard": profile.creditCard
+                "fullName": profile.fullName,
+                "phone": profile.phone,
+                "bio": profile.bio ?? "",
+                "creditCard": profile.creditCard ?? ""
+            ]
+        }
+    }
+    
+    private struct ChangeUserRequest: RequestRouter {
+        var baseUrl: URL
+        var method: HTTPMethod = .post
+        var path: String = "change"
+        
+        let user: UpdateUser
+        
+        var parameters: Parameters? {
+            return [
+                "accessToken": user.accessToken,
+                "name": user.name,
+                "phone": user.phone,
+                "card": user.card
+            ]
+        }
+    }
+    
+    private struct GetInfoRequest: RequestRouter {
+        var baseUrl: URL
+        var method: HTTPMethod = .post
+        var path: String
+
+        let accessToken: String
+
+        var parameters: Parameters? {
+            return [
+                "accessToken": accessToken
             ]
         }
     }
 }
 
-// MARK: UserRequestFactory
+// MARK: - ProfileUser + UserRequestFactory
 
 extension ProfileUser: UserRequestFactory {
+
     func register(for user: ProfileResult, completionHandler: @escaping (AFDataResponse<LoginResult>) -> Void) {
         let registerRequest = UserRequest(baseUrl: url, path: "register", profile: user)
         self.request(request: registerRequest, completionHandler: completionHandler)
     }
-    
-    func change(for user: ProfileResult, completionHandler: @escaping (AFDataResponse<ChangeUserDataResult>) -> Void) {
-        let changeRequest = UserRequest(baseUrl: url, path: "change", profile: user)
+
+    func change(for user: UpdateUser, completionHandler: @escaping (AFDataResponse<DefaultResult>) -> Void) {
+        let changeRequest = ChangeUserRequest(baseUrl: url, user: user)
         self.request(request: changeRequest, completionHandler: completionHandler)
+    }
+    
+    func getCardInfo(accessToken: String, completionHandler: @escaping (AFDataResponse<CardInfoResult>) -> Void) {
+        let cardInfoRequst = GetInfoRequest(baseUrl: url, path: "getCardInfo", accessToken: accessToken)
+        self.request(request: cardInfoRequst, completionHandler: completionHandler)
+    }
+
+    func getUserInfo(accessToken: String, completionHandler: @escaping (AFDataResponse<UserInfoResult>) -> Void) {
+        let userInfoRequst = GetInfoRequest(baseUrl: url, path: "getUserInfo", accessToken: accessToken)
+        self.request(request: userInfoRequst, completionHandler: completionHandler)
     }
 }
