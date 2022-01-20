@@ -33,6 +33,8 @@ class AdsBannerViewCell: UICollectionViewCell {
     // MARK: - Lifecycle
     
     override func layoutSubviews() {
+        super.layoutSubviews()
+        
         bannerImageView.frame = bounds
     }
     
@@ -43,7 +45,6 @@ class AdsBannerViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        super.layoutSubviews()
         bannerImageView.image = nil
     }
 }

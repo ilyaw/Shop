@@ -45,6 +45,7 @@ class HomePresenter: NSObject {
         view.collectionView.setCollectionViewLayout(layout, animated: true)
         
         registerCells()
+        registerHeaders()
         
         view.collectionView.dataSource = self
         view.collectionView.delegate = self
@@ -56,7 +57,7 @@ class HomePresenter: NSObject {
 
 extension HomePresenter: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -67,6 +68,8 @@ extension HomePresenter: UICollectionViewDataSource {
             return data.adsBanners.count
         } else if section == 1 {
             return data.categores.count
+        } else if section == 2 {
+            return data.articles.count
         } else {
             return 0
         }
@@ -90,6 +93,14 @@ extension HomePresenter: UICollectionViewDataSource {
             
             cell.setupCell(category: categories[indexPath.row])
             return cell
+        } else if indexPath.section == 2 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticlesViewCell.reuseId,
+                                                                for: indexPath) as? ArticlesViewCell,
+                  let articles = data?.articles,
+                  let url = URL(string: articles[indexPath.row]) else { return UICollectionViewCell() }
+            
+            cell.setupCell(with: url)
+            return cell
         } else {
             return UICollectionViewCell()
         }
@@ -106,9 +117,17 @@ extension HomePresenter: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                     withReuseIdentifier: HomeCategoryHeader.reuseId,
-                                                                     for: indexPath)
+        guard let header = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: HomeTitleHeaderView.reuseId,
+            for: indexPath) as? HomeTitleHeaderView else { return UICollectionReusableView() }
+        
+        if indexPath.section == 1 {
+            header.titleLabel.text = "Категории"
+        } else {
+            header.titleLabel.text = "Экспертные статьи"
+        }
+        
         return header
     }
 }
@@ -137,9 +156,18 @@ private extension HomePresenter {
                                      forCellWithReuseIdentifier: AdsBannerViewCell.reuseId)
         view.collectionView.register(CategoryViewCell.self,
                                      forCellWithReuseIdentifier: CategoryViewCell.reuseId)
-        view.collectionView.register(HomeCategoryHeader.self,
-                                     forSupplementaryViewOfKind: HomeCategoryHeader.categoryHeaderId,
-                                     withReuseIdentifier: HomeCategoryHeader.reuseId)
+        view.collectionView.register(ArticlesViewCell.self,
+                                     forCellWithReuseIdentifier: ArticlesViewCell.reuseId)
+    }
+    
+    func registerHeaders() {
+        view.collectionView.register(HomeTitleHeaderView.self,
+                                     forSupplementaryViewOfKind: Constant.categoryHeaderId,
+                                     withReuseIdentifier: HomeTitleHeaderView.reuseId)
+        
+        view.collectionView.register(HomeTitleHeaderView.self,
+                                     forSupplementaryViewOfKind: Constant.articlesHeaderId,
+                                     withReuseIdentifier: HomeTitleHeaderView.reuseId)
     }
     
     func createLayout() -> UICollectionViewCompositionalLayout {
@@ -148,6 +176,8 @@ private extension HomePresenter {
                 return self.createAdsBannerSection()
             } else if sectionNumber == 1 {
                 return self.createCategoriesSection()
+            } else if sectionNumber == 2 {
+                return self.createArticles()
             } else {
                 return nil
             }
@@ -189,7 +219,35 @@ private extension HomePresenter {
         section.boundarySupplementaryItems = [
             .init(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                     heightDimension: .absolute(50)),
-                  elementKind: HomeCategoryHeader.categoryHeaderId,
+                  elementKind: Constant.categoryHeaderId,
+                  alignment: .topLeading)
+        ]
+        
+        return section
+    }
+    
+    struct Constant {
+        static let categoryHeaderId = "categoryHeaderId"
+        static let articlesHeaderId = "articlesHeaderId"
+    }
+    
+    func createArticles() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                              heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets.trailing = 32
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8),
+                                               heightDimension: .absolute(160))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets.leading = 16
+        section.boundarySupplementaryItems = [
+            .init(layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                    heightDimension: .absolute(50)),
+                  elementKind: Constant.articlesHeaderId,
                   alignment: .topLeading)
         ]
         

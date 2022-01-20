@@ -22,4 +22,5 @@ struct HomeResult: Decodable {
     
     var adsBanners: [String]
     var categores: [Category]
+    var articles: [String]
 }

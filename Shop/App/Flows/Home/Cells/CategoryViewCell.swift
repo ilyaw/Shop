@@ -39,16 +39,18 @@ class CategoryViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
+    
+    override func prepareForReuse() {
+        iconView.image = nil
+        titleLabel.text = nil
+    }
+    
     // MARK: - Public methods
     
     func setupCell(category: CategoryInfoProtocol) {
         iconView.kf.setImage(with: URL(string: category.icon))
         titleLabel.text = category.title
-    }
-    
-    override func prepareForReuse() {
-        iconView.image = nil
-        titleLabel.text = nil
     }
 }
 

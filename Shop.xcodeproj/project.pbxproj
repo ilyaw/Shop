@@ -49,8 +49,9 @@
 		09404BCC278F508B00A925AF /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09404BCB278F508B00A925AF /* ProfilePresenter.swift */; };
 		094E81F72761142100710310 /* AuthRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E81F62761142100710310 /* AuthRequestTests.swift */; };
 		094E81F92761143600710310 /* UserRequestsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E81F82761143600710310 /* UserRequestsTests.swift */; };
-		095535B92799E91700041776 /* HomeCategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095535B82799E91700041776 /* HomeCategoryHeader.swift */; };
+		095535B92799E91700041776 /* HomeTitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095535B82799E91700041776 /* HomeTitleHeaderView.swift */; };
 		095535BB2799EAA700041776 /* CategoryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095535BA2799EAA700041776 /* CategoryViewCell.swift */; };
+		095535BD279A107800041776 /* ArticlesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095535BC279A107800041776 /* ArticlesViewCell.swift */; };
 		0962F59E2794AE0500A9D954 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0962F59D2794AE0500A9D954 /* SettingsViewController.swift */; };
 		0962F5A02794AE1300A9D954 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0962F59F2794AE1300A9D954 /* SettingsView.swift */; };
 		096DAA462796FD6E003F5366 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DAA452796FD6E003F5366 /* Tag.swift */; };
@@ -158,8 +159,9 @@
 		09404BCB278F508B00A925AF /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		094E81F62761142100710310 /* AuthRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestTests.swift; sourceTree = "<group>"; };
 		094E81F82761143600710310 /* UserRequestsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestsTests.swift; sourceTree = "<group>"; };
-		095535B82799E91700041776 /* HomeCategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoryHeader.swift; sourceTree = "<group>"; };
+		095535B82799E91700041776 /* HomeTitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleHeaderView.swift; sourceTree = "<group>"; };
 		095535BA2799EAA700041776 /* CategoryViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewCell.swift; sourceTree = "<group>"; };
+		095535BC279A107800041776 /* ArticlesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesViewCell.swift; sourceTree = "<group>"; };
 		0962F59D2794AE0500A9D954 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0962F59F2794AE1300A9D954 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		096DAA452796FD6E003F5366 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 			children = (
 				09BDFA5B2799B24900F91DB0 /* AdsBannerViewCell.swift */,
 				095535BA2799EAA700041776 /* CategoryViewCell.swift */,
+				095535BC279A107800041776 /* ArticlesViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -432,7 +435,7 @@
 		09BDFA662799E8E900F91DB0 /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				095535B82799E91700041776 /* HomeCategoryHeader.swift */,
+				095535B82799E91700041776 /* HomeTitleHeaderView.swift */,
 			);
 			path = Header;
 			sourceTree = "<group>";
@@ -792,7 +795,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				095535B92799E91700041776 /* HomeCategoryHeader.swift in Sources */,
+				095535B92799E91700041776 /* HomeTitleHeaderView.swift in Sources */,
 				09404BB1278F3EC900A925AF /* MainTabBarController.swift in Sources */,
 				09B4F7172795D03F0035CD79 /* UserInfoResult.swift in Sources */,
 				09222F1C27834F8100505598 /* NoConnectionViewController.swift in Sources */,
@@ -835,6 +838,7 @@
 				09B03398276CD65000F68070 /* ProductFeedback.swift in Sources */,
 				09064C9C2786762700E605A6 /* SignUpPresenter.swift in Sources */,
 				09404BBB278F4F7800A925AF /* ProductViewController.swift in Sources */,
+				095535BD279A107800041776 /* ArticlesViewCell.swift in Sources */,
 				09222F192783348700505598 /* LogMessage.swift in Sources */,
 				09404BAE278F39B400A925AF /* AppManager.swift in Sources */,
 				0929747B27613BDD00ABF4A2 /* ProductRequestFactory.swift in Sources */,
