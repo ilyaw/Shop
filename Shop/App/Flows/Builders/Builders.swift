@@ -26,9 +26,11 @@ class Builders {
     }
     
     static func homeBuild(navigationController: UINavigationController) -> UIViewController {
+        let requestFactory = RequestFactory().makeHomeRequestFactory()
         let router = HomeRouter(navigationController: navigationController)
-        let controller = HomeViewController()
-        controller.presenter = HomePresenter(router: router)
+        let presenter = HomePresenter(router: router, requestFactory: requestFactory)
+        let controller = HomeViewController(presenter: presenter)
+        presenter.input = controller
         return controller
     }
     
