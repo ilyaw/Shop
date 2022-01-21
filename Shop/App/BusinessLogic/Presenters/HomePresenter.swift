@@ -57,27 +57,27 @@ class HomePresenter: NSObject {
 
 extension HomePresenter: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         guard let data = data else { return 0 }
         
-        if section == 0 {
-            return data.adsBanners.count
-        } else if section == 1 {
-            return data.categores.count
-        } else if section == 2 {
-            return data.articles.count
-        } else {
-            return 0
+        switch section {
+        case 0: return data.adsBanners.count
+        case 1: return data.categores.count
+        case 2: return data.articles.count
+        case 3: return data.bestsellers.count
+        default: return 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
+        
+        switch indexPath.section {
+        case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AdsBannerViewCell.reuseId,
                                                                 for: indexPath) as? AdsBannerViewCell,
                   let banners = data?.adsBanners,
@@ -86,14 +86,14 @@ extension HomePresenter: UICollectionViewDataSource {
             
             cell.setupCell(with: url)
             return cell
-        } else if indexPath.section == 1 {
+        case 1:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryViewCell.reuseId,
                                                                 for: indexPath) as? CategoryViewCell,
                   let categories = data?.categores else { return UICollectionViewCell() }
             
             cell.setupCell(category: categories[indexPath.row])
             return cell
-        } else if indexPath.section == 2 {
+        case 2:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticlesViewCell.reuseId,
                                                                 for: indexPath) as? ArticlesViewCell,
                   let articles = data?.articles,
@@ -101,8 +101,13 @@ extension HomePresenter: UICollectionViewDataSource {
             
             cell.setupCell(with: url)
             return cell
-        } else {
-            return UICollectionViewCell()
+        case 3:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BestsellersViewCell.reuseId,
+                                                                for: indexPath) as? BestsellersViewCell,
+                  let products = data?.bestsellers else { return UICollectionViewCell() }
+            cell.setupCell(product: products[indexPath.row])
+            return cell
+        default: return UICollectionViewCell()
         }
     }
 }
@@ -124,8 +129,10 @@ extension HomePresenter: UICollectionViewDelegate {
         
         if indexPath.section == 1 {
             header.titleLabel.text = "Категории"
-        } else {
+        } else if indexPath.section == 2 {
             header.titleLabel.text = "Экспертные статьи"
+        } else {
+            header.titleLabel.text = "Хиты продаж 🔥"
         }
         
         return header
@@ -147,6 +154,12 @@ extension HomePresenter: HomePresenterOutput {
 // MARK: HomePresenter + private extension
 
 private extension HomePresenter {
+    struct Constant {
+        static let categoryHeaderId = "categoryHeaderId"
+        static let articlesHeaderId = "articlesHeaderId"
+        static let bestsellersHeaderId = "bestsellersHeaderId"
+    }
+    
     var view: HomeView {
         return input?.homeView ?? HomeView()
     }
@@ -158,6 +171,8 @@ private extension HomePresenter {
                                      forCellWithReuseIdentifier: CategoryViewCell.reuseId)
         view.collectionView.register(ArticlesViewCell.self,
                                      forCellWithReuseIdentifier: ArticlesViewCell.reuseId)
+        view.collectionView.register(BestsellersViewCell.self,
+                                     forCellWithReuseIdentifier: BestsellersViewCell.reuseId)
     }
     
     func registerHeaders() {
@@ -168,18 +183,20 @@ private extension HomePresenter {
         view.collectionView.register(HomeTitleHeaderView.self,
                                      forSupplementaryViewOfKind: Constant.articlesHeaderId,
                                      withReuseIdentifier: HomeTitleHeaderView.reuseId)
+        
+        view.collectionView.register(HomeTitleHeaderView.self,
+                                     forSupplementaryViewOfKind: Constant.bestsellersHeaderId,
+                                     withReuseIdentifier: HomeTitleHeaderView.reuseId)
     }
     
     func createLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionNumber, _) -> NSCollectionLayoutSection? in
-            if sectionNumber == 0 {
-                return self.createAdsBannerSection()
-            } else if sectionNumber == 1 {
-                return self.createCategoriesSection()
-            } else if sectionNumber == 2 {
-                return self.createArticles()
-            } else {
-                return nil
+            switch sectionNumber {
+            case 0: return self.createAdsBannerSection()
+            case 1: return self.createCategoriesSection()
+            case 2: return self.createArticlesSection()
+            case 3: return self.createBestsellersSection()
+            default: return nil
             }
         }
     }
@@ -226,12 +243,7 @@ private extension HomePresenter {
         return section
     }
     
-    struct Constant {
-        static let categoryHeaderId = "categoryHeaderId"
-        static let articlesHeaderId = "articlesHeaderId"
-    }
-    
-    func createArticles() -> NSCollectionLayoutSection {
+    func createArticlesSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -244,10 +256,36 @@ private extension HomePresenter {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets.leading = 16
+        section.contentInsets.bottom = 20
         section.boundarySupplementaryItems = [
             .init(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                     heightDimension: .absolute(50)),
                   elementKind: Constant.articlesHeaderId,
+                  alignment: .topLeading)
+        ]
+        
+        return section
+    }
+    
+    func createBestsellersSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+                                              heightDimension: .absolute(260))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets.bottom = 16
+        item.contentInsets.trailing = 16
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .estimated(1000))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 0)
+        
+        section.boundarySupplementaryItems = [
+            .init(layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                    heightDimension: .absolute(50)),
+                  elementKind: Constant.bestsellersHeaderId,
                   alignment: .topLeading)
         ]
         
