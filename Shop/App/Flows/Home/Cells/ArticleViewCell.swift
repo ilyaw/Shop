@@ -1,5 +1,5 @@
 //
-//  ArticlesViewCell.swift
+//  ArticleViewCell.swift
 //  Shop
 //
 //  Created by Ilya on 21.01.2022.
@@ -8,8 +8,8 @@
 import UIKit
 import Kingfisher
 
-class ArticlesViewCell: UICollectionViewCell {
-    static let reuseId = "ArticlesViewCell"
+class ArticleViewCell: UICollectionViewCell {
+    static let reuseId = "ArticleViewCell"
     
     // MARK: - Private properties
     private let articlesImageView = UIImageView()
@@ -44,9 +44,9 @@ class ArticlesViewCell: UICollectionViewCell {
     }
 }
 
-// MARK: ArticlesViewCell + private extension
+// MARK: ArticleViewCell + private extension
 
-private extension ArticlesViewCell {
+private extension ArticleViewCell {
     func setupUI() {
         addSubview(articlesImageView)
         layer.cornerRadius = 25

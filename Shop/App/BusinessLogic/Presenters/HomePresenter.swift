@@ -13,12 +13,6 @@ protocol HomePresenterInput: AnyObject {
     var homeView: HomeView { get }
 }
 
-protocol HomePresenterOutput: AnyObject {
-    init(router: HomeRouter, requestFactory: HomeRequestFactory)
-    func detailProduct(by id: Int)
-    func showCatalog()
-}
-
 class HomePresenter: NSObject {
     
     // MARK: - Public properties
@@ -75,7 +69,6 @@ extension HomePresenter: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         switch indexPath.section {
         case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AdsBannerViewCell.reuseId,
@@ -94,16 +87,16 @@ extension HomePresenter: UICollectionViewDataSource {
             cell.setupCell(category: categories[indexPath.row])
             return cell
         case 2:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticlesViewCell.reuseId,
-                                                                for: indexPath) as? ArticlesViewCell,
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleViewCell.reuseId,
+                                                                for: indexPath) as? ArticleViewCell,
                   let articles = data?.articles,
                   let url = URL(string: articles[indexPath.row]) else { return UICollectionViewCell() }
             
             cell.setupCell(with: url)
             return cell
         case 3:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BestsellersViewCell.reuseId,
-                                                                for: indexPath) as? BestsellersViewCell,
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductViewCell.reuseId,
+                                                                for: indexPath) as? ProductViewCell,
                   let products = data?.bestsellers else { return UICollectionViewCell() }
             cell.setupCell(product: products[indexPath.row])
             return cell
@@ -116,7 +109,10 @@ extension HomePresenter: UICollectionViewDataSource {
 
 extension HomePresenter: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+        if indexPath.section == 1 {
+            guard let category = data?.categores[indexPath.row] else { return }
+            router.showProducts(by: category.categoryId, title: category.title)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -139,18 +135,6 @@ extension HomePresenter: UICollectionViewDelegate {
     }
 }
 
-// MARK: - HomePresenter + HomePresenterOutput
-
-extension HomePresenter: HomePresenterOutput {
-    func detailProduct(by id: Int) {
-        router.showDetailProduct(by: id)
-    }
-    
-    func showCatalog() {
-        router.showCatalog()
-    }
-}
-
 // MARK: HomePresenter + private extension
 
 private extension HomePresenter {
@@ -169,10 +153,10 @@ private extension HomePresenter {
                                      forCellWithReuseIdentifier: AdsBannerViewCell.reuseId)
         view.collectionView.register(CategoryViewCell.self,
                                      forCellWithReuseIdentifier: CategoryViewCell.reuseId)
-        view.collectionView.register(ArticlesViewCell.self,
-                                     forCellWithReuseIdentifier: ArticlesViewCell.reuseId)
-        view.collectionView.register(BestsellersViewCell.self,
-                                     forCellWithReuseIdentifier: BestsellersViewCell.reuseId)
+        view.collectionView.register(ArticleViewCell.self,
+                                     forCellWithReuseIdentifier: ArticleViewCell.reuseId)
+        view.collectionView.register(ProductViewCell.self,
+                                     forCellWithReuseIdentifier: ProductViewCell.reuseId)
     }
     
     func registerHeaders() {
@@ -270,6 +254,7 @@ private extension HomePresenter {
     func createBestsellersSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                               heightDimension: .absolute(260))
+        
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets.bottom = 16
         item.contentInsets.trailing = 16
@@ -301,15 +286,15 @@ private extension HomePresenter {
                 DispatchQueue.main.async {
                     self?.view.collectionView.reloadData()
                 }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self?.view.collectionView.scrollToItem(at: IndexPath(row: 1, section: 0),
+                                                           at: .centeredHorizontally,
+                                                           animated: true)
+                }
             case .failure(let error):
                 logging(error.localizedDescription)
             }
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.view.collectionView.scrollToItem(at: IndexPath(row: 1, section: 0),
-                                                  at: .centeredHorizontally,
-                                                  animated: true)
         }
     }
 }

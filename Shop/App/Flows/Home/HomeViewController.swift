@@ -27,13 +27,13 @@ class HomeViewController: UIViewController, ViewSpecificController {
     
     // MARK: - Lifecycle
     
+    override func loadView() {
+        view = HomeView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-    }
-    
-    override func loadView() {
-        view = HomeView()
     }
     
     deinit {

@@ -1,13 +1,13 @@
 //
-//  HomeView.swift
+//  CatalogView.swift
 //  Shop
 //
-//  Created by Ilya on 19.01.2022.
+//  Created by Ilya on 21.01.2022.
 //
 
 import UIKit
 
-class HomeView: UIView {
+class CatalogView: UIView {
     
     // MARK: - Public properties
     
@@ -28,9 +28,9 @@ class HomeView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Lifecycle
-    
+
     override func layoutSubviews() {
         collectionView.frame = bounds
     }

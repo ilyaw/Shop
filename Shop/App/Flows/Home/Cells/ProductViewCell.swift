@@ -1,5 +1,5 @@
 //
-//  BestsellersViewCell.swift
+//  ProductViewCell.swift
 //  Shop
 //
 //  Created by Ilya on 21.01.2022.
@@ -8,8 +8,8 @@
 import UIKit
 import Kingfisher
 
-class BestsellersViewCell: UICollectionViewCell {
-    static let reuseId = "BestsellersViewCell"
+class ProductViewCell: UICollectionViewCell {
+    static let reuseId = "ProductViewCell"
     
     // MARK: - Private properties
     
@@ -68,7 +68,6 @@ class BestsellersViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-  
     }
     
     // MARK: - Public methods
@@ -82,10 +81,8 @@ class BestsellersViewCell: UICollectionViewCell {
             addSubview(oldPriceLabel)
             
             NSLayoutConstraint.activate([
-//                oldPriceLabel.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
                 oldPriceLabel.bottomAnchor.constraint(equalTo: priceLabel.topAnchor, constant: 5),
-                oldPriceLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 5),
-//                oldPriceLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor)
+                oldPriceLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 5)
             ])
             
             let oldPrice = (product.price / 100) * (100 + discount)
@@ -99,9 +96,9 @@ class BestsellersViewCell: UICollectionViewCell {
     }
 }
 
-// MARK: - BestsellersViewCell + private extension
+// MARK: - ProductViewCell + private extension
 
-private extension BestsellersViewCell {
+private extension ProductViewCell {
     func setupUI() {
         backgroundColor = .systemBackground
         layer.cornerRadius = 15
@@ -127,8 +124,7 @@ private extension BestsellersViewCell {
             productNameLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 5),
             productNameLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -5),
             
-            priceLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-//            priceLabel.topAnchor.constraint(equalTo: productNameLabel.bottomAnchor, constant: 20),
+            priceLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -5),
             priceLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 5)
         ])
     }
