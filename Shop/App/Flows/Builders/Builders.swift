@@ -9,6 +9,14 @@ import UIKit
 
 class Builders {
     
+    static func loadScreenBuild(router: StartRouter) -> UIViewController {
+        let requestFactory = RequestFactory().makeAuthRequestFatory()
+        let presenter = LoaderScreenPresenter(router: router, requestFactory: requestFactory)
+        let controller = LoaderScreenViewController(presenter: presenter)
+        presenter.input = controller
+        return controller
+    }
+    
     static func authBuild(router: StartRouter) -> UIViewController {
         let requestFactory = RequestFactory().makeAuthRequestFatory()
         let presenter = AuthPresenter(router: router, requestFactory: requestFactory)
@@ -69,12 +77,6 @@ class Builders {
     
     static func productBuild(navigationController: UINavigationController) -> UIViewController {
         let controller = ProductViewController()
-        return controller
-    }
-    
-    static func noConnectionBuild(completion: @escaping VoidClouser) -> UIViewController {
-        let controller = NoConnectionViewController()
-        controller.connectionWasRestored = completion
         return controller
     }
 }
