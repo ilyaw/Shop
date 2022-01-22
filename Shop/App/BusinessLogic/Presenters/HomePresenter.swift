@@ -23,7 +23,10 @@ class HomePresenter: NSObject {
     
     private let router: HomeRouter
     private let requestFactory: HomeRequestFactory
+    private let productViewModelFactory = ProductViewModelFactory()
+    
     private var data: HomeResult?
+    private var productViewModels: [ProductViewModel] = []
     
     // MARK: - Inits
     
@@ -96,9 +99,11 @@ extension HomePresenter: UICollectionViewDataSource {
             return cell
         case 3:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductViewCell.reuseId,
-                                                                for: indexPath) as? ProductViewCell,
-                  let products = data?.bestsellers else { return UICollectionViewCell() }
-            cell.setupCell(product: products[indexPath.row])
+                                                                for: indexPath) as? ProductViewCell else {
+                return UICollectionViewCell()
+            }
+            
+            cell.setupCell(product: productViewModels[indexPath.row])
             return cell
         default: return UICollectionViewCell()
         }
@@ -279,16 +284,19 @@ private extension HomePresenter {
     
     func getData() {
         requestFactory.getHomeData { [weak self] response in
+            guard let self = self else { return }
+            
             switch response.result {
             case .success(let result):
-                self?.data = result
+                self.data = result
+                self.productViewModels = self.productViewModelFactory.constuctViewModels(products: result.bestsellers)
                 
                 DispatchQueue.main.async {
-                    self?.view.collectionView.reloadData()
+                    self.view.collectionView.reloadData()
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self?.view.collectionView.scrollToItem(at: IndexPath(row: 1, section: 0),
+                    self.view.collectionView.scrollToItem(at: IndexPath(row: 1, section: 0),
                                                            at: .centeredHorizontally,
                                                            animated: true)
                 }

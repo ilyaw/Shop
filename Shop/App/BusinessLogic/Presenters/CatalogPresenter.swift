@@ -23,12 +23,16 @@ class CatalogPresenter: NSObject {
     
     private let router: HomeRouter
     private let requestFactory: ProductRequestFactory
-    private var products: [Product]?
-    private var catalogId: Int
+    private let productViewModelFactory = ProductViewModelFactory()
+    private let catalogId: Int
+    
+    private var productViewModels: [ProductViewModel] = []
     
     // MARK: - Inits
     
-    required init(router: HomeRouter, requestFactory: ProductRequestFactory, catalogId: Int) {
+    required init(router: HomeRouter,
+                  requestFactory: ProductRequestFactory,
+                  catalogId: Int) {
         self.router = router
         self.requestFactory = requestFactory
         self.catalogId = catalogId
@@ -71,10 +75,8 @@ extension CatalogPresenter: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        guard let product = products else { return 0 }
-        
         switch section {
-        case 0: return product.count
+        case 0: return productViewModels.count
         default: return 0
         }
     }
@@ -85,15 +87,18 @@ extension CatalogPresenter: UICollectionViewDataSource {
         switch indexPath.section {
         case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductViewCell.reuseId,
-                                                                for: indexPath) as? ProductViewCell,
-                  let products = products else { return UICollectionViewCell() }
+                                                                for: indexPath) as? ProductViewCell else {
+                return UICollectionViewCell()
+            }
             
-            cell.setupCell(product: products[indexPath.row])
+            cell.setupCell(product: productViewModels[indexPath.row])
             return cell
         default: return UICollectionViewCell()
         }
     }
 }
+
+// MARK: - CatalogPresenter + private extension
 
 private extension CatalogPresenter {
     var view: CatalogView {
@@ -135,13 +140,15 @@ private extension CatalogPresenter {
     
     func getData() {
         requestFactory.getCatalog(numberPage: 1, categoryId: catalogId) { [weak self] response in
+            guard let self = self else { return }
+            
             switch response.result {
             case .success(let result):
                 if result.result == 1 {
-                    self?.products = result.products
+                    self.productViewModels = self.productViewModelFactory.constuctViewModels(products: result.products)
                     
                     DispatchQueue.main.async {
-                        self?.view.collectionView.reloadData()
+                        self.view.collectionView.reloadData()
                     }
                 }
             case .failure(let error):

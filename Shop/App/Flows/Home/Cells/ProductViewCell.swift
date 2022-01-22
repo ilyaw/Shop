@@ -72,12 +72,12 @@ class ProductViewCell: UICollectionViewCell {
     
     // MARK: - Public methods
     
-    func setupCell(product: Product) {
-        iconView.kf.setImage(with: URL(string: product.photo))
-        productNameLabel.text = product.name
-        priceLabel.text = "\(product.price) ₽"
+    func setupCell(product: ProductViewModel) {
+        iconView.kf.setImage(with: product.url)
+        productNameLabel.text = product.productName
+        priceLabel.text = product.price
         
-        if let discount = product.discount {
+        if let oldPrice = product.oldPrice {
             addSubview(oldPriceLabel)
             
             NSLayoutConstraint.activate([
@@ -85,14 +85,11 @@ class ProductViewCell: UICollectionViewCell {
                 oldPriceLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 5)
             ])
             
-            let oldPrice = (product.price / 100) * (100 + discount)
-        
-            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: "\(oldPrice)")
+            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: oldPrice)
             attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 1,
                                          range: NSRange(location: 0, length: attributeString.length))
             oldPriceLabel.attributedText = attributeString
         }
-        
     }
 }
 

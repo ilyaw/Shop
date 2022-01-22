@@ -54,6 +54,7 @@
 		095535BD279A107800041776 /* ArticleViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095535BC279A107800041776 /* ArticleViewCell.swift */; };
 		0962F59E2794AE0500A9D954 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0962F59D2794AE0500A9D954 /* SettingsViewController.swift */; };
 		0962F5A02794AE1300A9D954 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0962F59F2794AE1300A9D954 /* SettingsView.swift */; };
+		0967AF43279C9DBF001BC715 /* ProductViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0967AF42279C9DBF001BC715 /* ProductViewModelFactory.swift */; };
 		096CDD8D279B19770097988A /* CatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096CDD8C279B19770097988A /* CatalogView.swift */; };
 		096CDD90279B1F2A0097988A /* ProductViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096CDD8F279B1F2A0097988A /* ProductViewCell.swift */; };
 		096DAA462796FD6E003F5366 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096DAA452796FD6E003F5366 /* Tag.swift */; };
@@ -166,6 +167,7 @@
 		095535BC279A107800041776 /* ArticleViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewCell.swift; sourceTree = "<group>"; };
 		0962F59D2794AE0500A9D954 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0962F59F2794AE1300A9D954 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		0967AF42279C9DBF001BC715 /* ProductViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModelFactory.swift; sourceTree = "<group>"; };
 		096CDD8C279B19770097988A /* CatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogView.swift; sourceTree = "<group>"; };
 		096CDD8F279B1F2A0097988A /* ProductViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewCell.swift; sourceTree = "<group>"; };
 		096DAA452796FD6E003F5366 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -370,6 +372,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		0967AF41279C9D89001BC715 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				0967AF42279C9DBF001BC715 /* ProductViewModelFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
 		099B34EA275FC3B400D8D8D3 /* TestPlanes */ = {
 			isa = PBXGroup;
 			children = (
@@ -540,6 +550,7 @@
 		09D7FD7027590AFC000A98C9 /* BusinessLogic */ = {
 			isa = PBXGroup;
 			children = (
+				0967AF41279C9D89001BC715 /* Factory */,
 				09404BAD278F39B400A925AF /* AppManager.swift */,
 				09404BB4278F4EBD00A925AF /* Routers */,
 				09064C9427866AE000E605A6 /* Presenters */,
@@ -807,6 +818,7 @@
 				09B4F7172795D03F0035CD79 /* UserInfoResult.swift in Sources */,
 				09222F1C27834F8100505598 /* NoConnectionViewController.swift in Sources */,
 				090EDF52278522380099295D /* OneLineTextField.swift in Sources */,
+				0967AF43279C9DBF001BC715 /* ProductViewModelFactory.swift in Sources */,
 				09404BB8278F4F3300A925AF /* HomePresenter.swift in Sources */,
 				09B4F7152794BA4E0035CD79 /* SettingsPresenter.swift in Sources */,
 				0929747927613A5C00ABF4A2 /* CatalogResult.swift in Sources */,
