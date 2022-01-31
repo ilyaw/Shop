@@ -7,7 +7,15 @@
 
 import UIKit
 
-class Builders {
+final class Builders {
+    
+    static func loadScreenBuild(router: StartRouter) -> UIViewController {
+        let requestFactory = RequestFactory().makeAuthRequestFatory()
+        let presenter = LoaderScreenPresenter(router: router, requestFactory: requestFactory)
+        let controller = LoaderScreenViewController(presenter: presenter)
+        presenter.input = controller
+        return controller
+    }
     
     static func authBuild(router: StartRouter) -> UIViewController {
         let requestFactory = RequestFactory().makeAuthRequestFatory()
@@ -26,9 +34,11 @@ class Builders {
     }
     
     static func homeBuild(navigationController: UINavigationController) -> UIViewController {
+        let requestFactory = RequestFactory().makeHomeRequestFactory()
         let router = HomeRouter(navigationController: navigationController)
-        let controller = HomeViewController()
-        controller.presenter = HomePresenter(router: router)
+        let presenter = HomePresenter(router: router, requestFactory: requestFactory)
+        let controller = HomeViewController(presenter: presenter)
+        presenter.input = controller
         return controller
     }
     
@@ -46,31 +56,45 @@ class Builders {
         return controller
     }
     
+    static func catalogBuild(navigationController: UINavigationController, catalogId: Int) -> UIViewController {
+        let requestFactory = RequestFactory().makeProductRequestFactory()
+        let router = HomeRouter(navigationController: navigationController)
+        let presenter = CatalogPresenter(router: router, requestFactory: requestFactory, catalogId: catalogId)
+        let controller = CatalogViewController(presenter: presenter)
+        presenter.input = controller
+        return controller
+    }
+            
+    static func productBuild(navigationController: UINavigationController, productId: Int) -> UIViewController {
+        let productDetailInfoController = productDetailInfoBuild(productId: productId)
+        let mainController = ProductViewController(productDetailInfoController: productDetailInfoController)
+        return mainController
+    }
+    
     static func settingsBuild(signOut: VoidClouser?) -> UIViewController {
         let requestFactory = RequestFactory().makeUserRequestFactory()
         let presenter = SettingsPresenter(requestFactory: requestFactory, signOut: signOut)
         let controller = SettingsViewController(presenter: presenter)
         presenter.input = controller
-        
+
         let navigationController = UINavigationController(rootViewController: controller)
         return navigationController
     }
-    
-    static func catalogBuild(navigationController: UINavigationController) -> UIViewController {
-        let router = HomeRouter(navigationController: navigationController)
-        let controller = CatalogViewController()
-        controller.presenter = CatalogPresenter(router: router)
+}
+
+// MARK: - Builders + private extension
+
+private extension Builders {
+    static func productDetailInfoBuild(productId: Int) -> ProductDetailInfoViewController {
+        let productRequstFactory = RequestFactory().makeProductRequestFactory()
+        let presenter = ProductPresenter(productRequest: productRequstFactory,
+                                         productId: productId)
+        let controller = ProductDetailInfoViewController(presenter: presenter)
+        presenter.input = controller
         return controller
     }
     
-    static func productBuild(navigationController: UINavigationController) -> UIViewController {
-        let controller = ProductViewController()
-        return controller
-    }
-    
-    static func noConnectionBuild(completion: @escaping VoidClouser) -> UIViewController {
-        let controller = NoConnectionViewController()
-        controller.connectionWasRestored = completion
-        return controller
+    static func feedbackBuild(productId: Int) -> UIViewController {
+        return UIViewController()
     }
 }

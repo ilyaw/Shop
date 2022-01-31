@@ -9,6 +9,19 @@ import Foundation
 import Alamofire
 
 class Auth: BaseStoreRequest {
+    private struct CheckValidTokenRequest: RequestRouter {
+        var baseUrl: URL
+        var method: HTTPMethod = .post
+        var path: String = "checkValidToken"
+        
+        let accessToken: String
+        var parameters: Parameters? {
+            return [
+                "accessToken": accessToken
+            ]
+        }
+    }
+    
     private struct Login: RequestRouter {
         let baseUrl: URL
         let method: HTTPMethod = .post
@@ -41,6 +54,13 @@ class Auth: BaseStoreRequest {
 // MARK: AuthRequestFactory
 
 extension Auth: AuthRequestFactory {
+    func checkValidToken(accessToken: String,
+                    completionHandler: @escaping (AFDataResponse<DefaultResult>) -> Void) {
+        let requestModel = CheckValidTokenRequest(baseUrl: url, accessToken: accessToken)
+        self.request(request: requestModel, completionHandler: completionHandler)
+    
+    }
+    
     func login(userName: String,
                password: String,
                completionHandler: @escaping (AFDataResponse<LoginResult>) -> Void) {

@@ -25,7 +25,7 @@ class ProductRequestTests: XCTestCase {
 //    func testGetCatalog() {
 //        
 //        let expressionCatalogStub = CatalogResult(result: 1,products: [
-//            Product(productId: 123, productName: "Ноутбук", productPrice: 45600),
+//            Product(id: 123, name: "Ноутбук", price: 45600),
 //            Product(productId: 456, productName: "Мышка", productPrice: 1000)
 //        ])
 //        
@@ -53,7 +53,7 @@ class ProductRequestTests: XCTestCase {
 //                                                  product: Product(productId: 123,
 //                                                                   productName: "Ноутбук",
 //                                                                   productPrice: 45600,
-//                                                                   productDescription: "Мощный игровой ноутбук"))
+//                                                                   description: "Мощный игровой ноутбук"))
 //        
 //        productRequest.getProductById(productId: 123) { response in
 //            switch response.result {

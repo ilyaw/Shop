@@ -27,6 +27,10 @@ class SignUpViewController: UIViewController {
     
     // MARK: - Lifecycle
     
+    override func loadView() {
+        view = SignUpView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,13 +38,9 @@ class SignUpViewController: UIViewController {
         setupDelegates()
     }
     
-    override func loadView() {
-        view = SignUpView()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+    
         presenter.addObserverForKeyboardNotification()
     }
     

@@ -7,18 +7,54 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, ViewSpecificController {
+    typealias RootView = HomeView
     
-    var presenter: HomePresenterOutput?
+    // MARK: - Private properties
+    
+    private var presenter: HomePresenter
+    
+    // MARK: - Inits
+    
+    init(presenter: HomePresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Lifecycle
+    
+    override func loadView() {
+        view = HomeView()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.title = "Home"        
-        view.backgroundColor = .systemBackground
+        setupUI()
     }
     
     deinit {
         print("deinit HomeViewController")
+    }
+}
+
+// MARK: - HomeViewController + HomePresenterInput
+
+extension HomeViewController: HomePresenterInput {
+    var homeView: HomeView {
+        return view() ?? HomeView()
+    }
+}
+
+// MARK: - HomeViewController + private extension
+
+private extension HomeViewController {
+    func setupUI() {
+        navigationItem.title = "Shop"
+
+        presenter.setupCollectionView()
     }
 }

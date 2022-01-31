@@ -26,7 +26,7 @@ class FeedbackRequestTests: XCTestCase {
 //    func test01AddFeedback() {
 //        let expressionDefaultResultStub = DefaultResult(result: 1, userMessage: "Отзыв успешно отправлен!")
 //        
-//        feedbackRequest.addFeedback(text: "Nice product", userId: 1, productId: 123) { response in
+//        feedbackRequest.addFeedback(text: "Nice product", userId: 1, id: 123) { response in
 //            switch response.result {
 //            case .success(let response):
 //                XCTAssertEqual(response.result, expressionDefaultResultStub.result)
