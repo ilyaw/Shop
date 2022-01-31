@@ -26,8 +26,8 @@ class HomeRouter {
     }
     
     func showDetailProduct(by productId: Int) {
-        let productController = ProductViewController()
-        productController.id = productId
+        let productController = Builders.productBuild(navigationController: navigationController,
+                                                      productId: productId)
         navigationController.pushViewController(productController, animated: true)
     }
 }

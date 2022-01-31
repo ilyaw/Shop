@@ -63,7 +63,10 @@ class CatalogPresenter: NSObject {
 // MARK: - CatalogPresenter + UICollectionViewDelegate
 
 extension CatalogPresenter: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let productId = productViewModels[indexPath.row].id
+        router.showDetailProduct(by: productId)
+    }
 }
 
 // MARK: - CatalogPresenter + UICollectionViewDataSource

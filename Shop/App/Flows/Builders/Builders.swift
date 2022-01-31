@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Builders {
+final class Builders {
     
     static func loadScreenBuild(router: StartRouter) -> UIViewController {
         let requestFactory = RequestFactory().makeAuthRequestFatory()
@@ -56,16 +56,6 @@ class Builders {
         return controller
     }
     
-    static func settingsBuild(signOut: VoidClouser?) -> UIViewController {
-        let requestFactory = RequestFactory().makeUserRequestFactory()
-        let presenter = SettingsPresenter(requestFactory: requestFactory, signOut: signOut)
-        let controller = SettingsViewController(presenter: presenter)
-        presenter.input = controller
-        
-        let navigationController = UINavigationController(rootViewController: controller)
-        return navigationController
-    }
-    
     static func catalogBuild(navigationController: UINavigationController, catalogId: Int) -> UIViewController {
         let requestFactory = RequestFactory().makeProductRequestFactory()
         let router = HomeRouter(navigationController: navigationController)
@@ -74,9 +64,37 @@ class Builders {
         presenter.input = controller
         return controller
     }
+            
+    static func productBuild(navigationController: UINavigationController, productId: Int) -> UIViewController {
+        let productDetailInfoController = productDetailInfoBuild(productId: productId)
+        let mainController = ProductViewController(productDetailInfoController: productDetailInfoController)
+        return mainController
+    }
     
-    static func productBuild(navigationController: UINavigationController) -> UIViewController {
-        let controller = ProductViewController()
+    static func settingsBuild(signOut: VoidClouser?) -> UIViewController {
+        let requestFactory = RequestFactory().makeUserRequestFactory()
+        let presenter = SettingsPresenter(requestFactory: requestFactory, signOut: signOut)
+        let controller = SettingsViewController(presenter: presenter)
+        presenter.input = controller
+
+        let navigationController = UINavigationController(rootViewController: controller)
+        return navigationController
+    }
+}
+
+// MARK: - Builders + private extension
+
+private extension Builders {
+    static func productDetailInfoBuild(productId: Int) -> ProductDetailInfoViewController {
+        let productRequstFactory = RequestFactory().makeProductRequestFactory()
+        let presenter = ProductPresenter(productRequest: productRequstFactory,
+                                         productId: productId)
+        let controller = ProductDetailInfoViewController(presenter: presenter)
+        presenter.input = controller
         return controller
+    }
+    
+    static func feedbackBuild(productId: Int) -> UIViewController {
+        return UIViewController()
     }
 }

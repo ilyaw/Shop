@@ -58,6 +58,7 @@ extension Auth: AuthRequestFactory {
                     completionHandler: @escaping (AFDataResponse<DefaultResult>) -> Void) {
         let requestModel = CheckValidTokenRequest(baseUrl: url, accessToken: accessToken)
         self.request(request: requestModel, completionHandler: completionHandler)
+    
     }
     
     func login(userName: String,

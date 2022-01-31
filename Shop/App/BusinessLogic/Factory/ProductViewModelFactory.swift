@@ -8,9 +8,11 @@
 import Foundation
 
 struct ProductViewModel {
+    let id: Int
     let url: URL?
     let productName: String
     let price: String
+//    let description: String
     let oldPrice: String?
 }
 
@@ -21,6 +23,7 @@ final class ProductViewModelFactory {
     }
     
     private func viewModel(from product: Product) -> ProductViewModel {
+        let id = product.id
         let url = URL(string: product.photo)
         let productName = product.name
         let price = "\(product.price) ₽"
@@ -31,7 +34,8 @@ final class ProductViewModelFactory {
             oldPrice = "\(price)"
         }
         
-        return ProductViewModel(url: url,
+        return ProductViewModel(id: id,
+                                url: url,
                                 productName: productName,
                                 price: price,
                                 oldPrice: oldPrice)
