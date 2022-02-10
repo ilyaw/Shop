@@ -17,14 +17,17 @@ class HomeRouter {
         self.navigationController = navigationController
     }
 
-    func showCatalog() {
-        let catalogController = Builders.catalogBuild(navigationController: navigationController)
+    func showProducts(by categoryId: Int, title: String) {
+        let catalogController = Builders.catalogBuild(navigationController: navigationController,
+                                                      catalogId: categoryId)
+        catalogController.navigationItem.title = title
+        catalogController.navigationItem.largeTitleDisplayMode = .never
         navigationController.pushViewController(catalogController, animated: true)
     }
     
-    func showDetailProduct(by id: Int) {
+    func showDetailProduct(by productId: Int) {
         let productController = ProductViewController()
-        productController.id = id
+        productController.id = productId
         navigationController.pushViewController(productController, animated: true)
     }
 }

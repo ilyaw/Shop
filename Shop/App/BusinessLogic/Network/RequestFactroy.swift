@@ -40,6 +40,11 @@ class RequestFactory {
         return ProductFeedback(errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
     
+    func makeHomeRequestFactory() -> HomeRequestFactory {
+        let errorParser = makeErrorParser()
+        return Home(errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+    }
+    
     func makeErrorParser() -> AbstractErrorParser {
         return ErrorParser()
     }

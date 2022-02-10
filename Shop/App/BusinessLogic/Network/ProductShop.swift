@@ -18,8 +18,8 @@ class ProductShop: BaseStoreRequest {
         let categoryId: Int
         var parameters: Parameters? {
             return [
-                "page_number": numberPage,
-                "id_category": categoryId
+                "pageNumber": numberPage,
+                "categoryId": categoryId
             ]
         }
     }
@@ -32,7 +32,7 @@ class ProductShop: BaseStoreRequest {
         let productId: Int
         var parameters: Parameters? {
             return [
-                "id_product": productId
+                "productId": productId
             ]
         }
     }

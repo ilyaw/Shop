@@ -15,6 +15,6 @@ class ProductViewController: UIViewController {
         super.viewDidLoad()
 
         navigationItem.title = "Product id = \(id ?? -1)"
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .blue
     }
 }

@@ -26,9 +26,11 @@ class Builders {
     }
     
     static func homeBuild(navigationController: UINavigationController) -> UIViewController {
+        let requestFactory = RequestFactory().makeHomeRequestFactory()
         let router = HomeRouter(navigationController: navigationController)
-        let controller = HomeViewController()
-        controller.presenter = HomePresenter(router: router)
+        let presenter = HomePresenter(router: router, requestFactory: requestFactory)
+        let controller = HomeViewController(presenter: presenter)
+        presenter.input = controller
         return controller
     }
     
@@ -56,10 +58,12 @@ class Builders {
         return navigationController
     }
     
-    static func catalogBuild(navigationController: UINavigationController) -> UIViewController {
+    static func catalogBuild(navigationController: UINavigationController, catalogId: Int) -> UIViewController {
+        let requestFactory = RequestFactory().makeProductRequestFactory()
         let router = HomeRouter(navigationController: navigationController)
-        let controller = CatalogViewController()
-        controller.presenter = CatalogPresenter(router: router)
+        let presenter = CatalogPresenter(router: router, requestFactory: requestFactory, catalogId: catalogId)
+        let controller = CatalogViewController(presenter: presenter)
+        presenter.input = controller
         return controller
     }
     
